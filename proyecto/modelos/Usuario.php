@@ -87,7 +87,14 @@
             return $this->query($select, [$email]);
         }
 
-
+        public function validarUsuario($email,$password)
+        {
+            $select = "SELECT COUNT(*) AS C FROM usuario WHERE email=? AND password=?";
+            $params = [$email,$password];
+            $result = $this->query($select,$params);
+            
+            return ($result !== null && $result['C'] > 0);
+        }
 
     }
 ?>

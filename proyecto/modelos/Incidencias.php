@@ -18,6 +18,7 @@
                                 `titulo` VARCHAR(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
                                 `fecha` DATETIME DEFAULT NULL,
                                 `lugar` VARCHAR(45) COLLATE utf8_spanish2_ci DEFAULT NULL,
+                                `descripcion` TEXT COLLATE utf8_spanish2_ci,
                                 `keywords` VARCHAR(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
                                 `idusuario` VARCHAR(100) COLLATE utf8_spanish2_ci DEFAULT NULL,
                                 `estado`VARCHAR(20) COLLATE utf8_spanish2_ci DEFAULT NULL,
@@ -27,13 +28,14 @@
             $this->query($q);
         }
 
-        public function nuevaIncidencia($titulo, $fecha, $lugar, $keywords, $idusuario, $estado)
+        public function nuevaIncidencia($titulo, $fecha, $lugar, $descripcion,$keywords, $idusuario, $estado)
         {
             $table = "incidencias";
             $columns = [
                 'titulo' => $titulo,
                 'fecha' => $fecha,
                 'lugar' => $lugar,
+                'descripcion' => $descripcion,
                 'keywords' => $keywords,
                 'idusuario' => $idusuario,
                 'estado' => $estado

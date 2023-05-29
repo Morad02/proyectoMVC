@@ -21,6 +21,37 @@
 
         }
 
+        public function login()
+        {
+            $datos = [];
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                if(isset($_POST['email']) && isset($_POST['password']) && $this->usuarioModelo->validarUsuario($_POST['email'],$_POST['password']))
+                {
+                    session_start();
+                    $_SESSION['nombre'] = "Admin";
+                    $_SESSION['rol'] = "Administrador";
+
+                }
+
+            }
+            
+            
+            $this->cargarVista('inicio/inicio', $datos);
+        }
+
+        public function logout()
+        {
+            $datos = [];
+            if((session_status() === PHP_SESSION_ACTIVE))
+            {
+                $_SESSION = array();
+                session_destroy();
+            }
+
+            $this->cargarVista('inicio/inicio', $datos);
+        }
+
         public function misIncidencias()
         {
             $datos = [];
