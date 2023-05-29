@@ -1,0 +1,85 @@
+/*Index*/
+
+/* Barra de navegación */
+.navbar{
+    padding-left: 1rem;
+}
+
+.navbar-collapse{
+    align-items: center;
+    justify-content:center;
+}
+
+
+.nav-item{
+    padding-left: 2rem;
+}
+
+@media (max-width: 1010px){
+    .nav-item{
+        padding-left: 1rem;
+    }
+}
+
+/* Titulo Filtros */
+.titulofiltros{
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: #f5f6f7;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.titulosubfiltro{
+    font-size: 1rem;
+}
+
+.form-item-filtro{
+    padding-top: 0.5rem;
+}
+
+.negrita{
+    font-weight: bold;
+}
+
+/*Edicion usuario*/
+.titulousuario{
+    padding-top: 2.5rem;
+    padding-bottom: 2.5rem;
+    background-color: #f5f6f7;
+    text-align: center;
+}
+
+.foto{
+    padding-top: 3rem;
+    padding-bottom: 2.5rem;
+}
+
+.form-item{
+    padding-bottom: 1rem;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+}
+
+/*Botones incidencia*/
+.btn-round {
+    background-color: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.btn-round .fas {
+    font-size: 20px;
+    color: #000; /* Cambia el color del icono si es necesario */
+}
+
+.btn-container
+{
+    text-align: right;
+}
