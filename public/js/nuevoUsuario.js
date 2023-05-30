@@ -18,54 +18,27 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-$(document).ready(function() {
-    $('#submitForm').click(function() {
-      // Validar los campos del formulario
-      if (!validateForm()) {
-        return;
-      }
-  
-      // Realizar la solicitud AJAX para enviar el formulario
-      $.ajax({
-        url: 'ruta_al_servidor',
-        method: 'POST',
-        data: $('#nuevoUsuarioForm').serialize(),
-        success: function(response) {
-          // Mostrar el modal de confirmación
-          $('#confirmModal').modal('show');
-        },
-        error: function(xhr, status, error) {
-          // Manejar el error en caso de que la solicitud falle
-          console.error(error);
-        }
-      });
-    });
 
-    function validateForm() {
-        var form = document.getElementById('nuevoUsuarioForm');
-        var nombre = document.getElementById('nuevoNombre');
-        var apellidos = document.getElementById('nuevoApellidos');
-        var email = document.getElementById('nuevoEmail');
-        var clave1 = document.getElementById('nuevoClave1');
-        var clave2 = document.getElementById('nuevoClave2');
-        var direccion = document.getElementById('nuevoDireccion');
-        var telefono = document.getElementById('nuevoTelefono');
-    
-        form.classList.add('was-validated');
-    
-        if (form.checkValidity() === false) {
-          return false;
-        }
-    
-        if (clave1.value !== clave2.value) {
-          clave1.classList.add('is-invalid');
-          clave2.classList.add('is-invalid');
-          return false;
-        }
-    
-        return true;
+document.addEventListener('DOMContentLoaded', function() {
+    var nuevoUsuarioForm = document.getElementById('nuevoUsuarioForm');
+    var nuevoClave1 = document.getElementById('nuevoClave1');
+    var nuevoClave2 = document.getElementById('nuevoClave2');
+  
+    nuevoUsuarioForm.addEventListener('submit', function(event) {
+      if (!nuevoUsuarioForm.checkValidity() || nuevoClave1.value !== nuevoClave2.value) {
+        event.preventDefault();
+        event.stopPropagation();
+        nuevoUsuarioForm.classList.add('was-validated');
+      } else {
+        $('#confirmModal').modal('show');
       }
     });
+  });
+  
+document.getElementById('confirmSubmit').addEventListener('click', function() {
+    document.getElementById('nuevoUsuarioForm').submit();
+});
+
 /*document.addEventListener('DOMContentLoaded', function() {
     var nuevoUsuarioForm = document.getElementById('nuevoUsuarioForm');
     var nuevoClave1 = document.getElementById('nuevoClave1');

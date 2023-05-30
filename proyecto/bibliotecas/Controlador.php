@@ -7,7 +7,9 @@
         public $incidenciasModelo;
         public $comentariosModelo;
         public $valoracionesModelo;
+        public $request;
 
+        
         public function cargarModelo($md)
         {
             require_once '../proyecto/modelos/'.$md.'.php';

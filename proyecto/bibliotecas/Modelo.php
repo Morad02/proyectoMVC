@@ -13,6 +13,8 @@ class Modelo
         $stmt = $this->db->prepare($select);
     
         if (!$stmt) {
+            echo $select;
+            echo $stmt;
             throw new Exception('Failed to prepare statement: ' . $this->db->error);
         }
     
@@ -36,19 +38,18 @@ class Modelo
     
         if ($stmt->execute()) {
             if ($return_result) {
-                $result_set = $stmt->get_result();
-            
-                if ($result_set === false) {
-                    throw new Exception('Failed to get result set: ' . $stmt->error);
+                if (strtoupper(substr($select, 0, 6)) === "SELECT") {
+                    $result_set = $stmt->get_result();
+                    if ($result_set === false) {
+                        throw new Exception('Failed to get result set: ' . $stmt->error);
+                    }
+                    $result = $result_set->fetch_assoc();
                 }
-            
-                $result = $result_set->fetch_assoc();
             }
             $stmt->close();
         } else {
             throw new Exception('Failed to execute statement: ' . $stmt->error);
         }
-    
         return $result;
     }
 
@@ -94,7 +95,7 @@ class Modelo
 
     public function insert($table, $params = [])
     {
-        $query = $this->buildQuery($table, [], $params, 'INSERT');
+        $query = $this->buildQuery($table, [], $params, 'INSERT INTO');
 
         return $this->query($query['query'], $query['params'], $query['blobs']);
     }
@@ -103,11 +104,15 @@ class Modelo
     {
         $where = [];
         $blobs = [];
+        $columns = [];
+        $placeholders = [];
 
         foreach ($params as $column => $value) {
             if ($this->isBlobColumn($table, $column)) {
                 $blobs[] = $column;
             }
+            $columns[] = $column;
+            $placeholders[] = '?';
         }
 
         foreach ($conditions as $column => $value) {
@@ -117,6 +122,12 @@ class Modelo
         $whereClause = implode(' AND ', $where);
 
         $query = "$queryType $table";
+
+        if ($queryType == 'INSERT INTO') {
+            $query .= ' (' . implode(', ', $columns) . ')';
+            $query .= ' VALUES (' . implode(', ', $placeholders) . ')';
+        }
+
         if (!empty($whereClause)) {
             $query .= " WHERE $whereClause";
         }
@@ -146,9 +157,14 @@ class Modelo
 
         $result = $this->query($query, [$table, $column]);
 
-        $dataType = $result[0]['DATA_TYPE'];
+        if($result != null )
+        {
+            $dataType = $result['DATA_TYPE'];
 
-        return ($dataType == 'mediumblob');
+            return ($dataType == 'mediumblob');
+        }
+
+        return false;            
     }
 
     public function delete($table, $conditions = [])
