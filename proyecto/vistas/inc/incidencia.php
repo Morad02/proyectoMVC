@@ -12,15 +12,15 @@
                     <div class="row justify-content-center">
                         <div class="col-12 col-md-9">
                             <div id="incidencia">
-                                <h2>Título</h2>
+                                <h2><?php echo $datos['incidencia']['titulo']?></h2>
                                 <ul class="list-unstyled">
-                                    <li class="d-inline">Lugar:</li>
-                                    <li class="d-inline">Fecha:</li>
-                                    <li class="d-inline">Creado por:</li>
+                                    <li class="d-inline">Lugar:<?php echo $datos['incidencia']['lugar']?></li>
+                                    <li class="d-inline">Fecha:<?php echo $datos['incidencia']['fecha']?></li>
+                                    <li class="d-inline">Creado por:<?php echo $datos['incidencia']['usuario']?></li>
                                 </ul>
                                 <ul class="list-unstyled">
-                                    <li class="d-inline">Palabras clave:</li>
-                                    <li class="d-inline">Estado:</li>
+                                    <li class="d-inline">Palabras clave:<?php echo $datos['incidencia']['titulo']?></li>
+                                    <li class="d-inline">Estado:<?php echo $datos['incidencia']['estado']?></li>
                                     <li class="d-inline">Valoraciones:</li>
                                 </ul>
                                 <p class="w-100">"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and

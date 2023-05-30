@@ -11,12 +11,23 @@
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTA_URL?>">Ver incidencias</a>
             </li>
+
+            <?php if(isset($datos['email']))
+                 {
+            ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTA_URL?>/nuevaIncidencia">Nueva incidencia</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTA_URL?>/inicio/misIncidencias">Mis incidencias</a>
             </li>
+            <?php
+                 }
+            ?>
+            <?php
+                if(isset($datos['rol']) && $datos['rol'] == 'Administrador')
+                {
+            ?>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTA_URL?>/gestionUsuario">Gestión de usuarios</a>
             </li>
@@ -26,6 +37,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#">Gestión de BBDD</a>
             </li>
+            <?php
+                }
+            ?>
                 
         </ul>
     </div>

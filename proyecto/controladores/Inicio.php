@@ -28,6 +28,7 @@
             {
                 if(isset($_POST['email']) && isset($_POST['password']) && $this->usuarioModelo->validarUsuario($_POST['email'],$_POST['password']))
                 {
+                    $datos['email'] = $_POST['email'];
                     session_start();
                     $_SESSION['nombre'] = "Admin";
                     $_SESSION['rol'] = "Administrador";

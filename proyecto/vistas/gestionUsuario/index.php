@@ -4,7 +4,7 @@
     <div class="col-md-9 mt-4 mx-auto">
         <div class="row">
             <div class="d-flex justify-content-end mt-4 pb-2">
-                <button type="submit" class="btn btn-primary">Añadir usuario</button>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoModal">Añadir usuario</button>
             </div>
         </div>
         <div class="row">
@@ -57,4 +57,5 @@
     </div> 
 </div>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/edicionUsuario.php'?>
+<?php require_once RUTA_PROYECTO.'/vistas/inc/nuevoUsuario.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/footer.php'?>

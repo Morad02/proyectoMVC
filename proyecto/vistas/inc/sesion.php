@@ -1,6 +1,6 @@
 
 <?php 
-    if(!(session_status() === PHP_SESSION_ACTIVE))
+    if(!isset($datos['email']))
     {
 
 ?>
@@ -29,8 +29,8 @@
             <div class="card mt-4">
                 <div class="card-body text-center">
                     <div class="mb-3">
-                        <p class="mb-0"><?php $_SESSION['nombre']?></p>
-                        <p class="text-muted small"><?php $_SESSION['rol']?></p>
+                        <p class="mb-0"><?php echo $datos['nombre']?></p>
+                        <p class="text-muted small"><?php echo $datos['rol']?></p>
                     </div>
                     <img src="<?php echo RUTA_URL?>/img/fperfil.png" alt="Foto de perfil" class="img-fluid mb-3">
                     <div>
