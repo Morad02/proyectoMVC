@@ -36,8 +36,6 @@
                 //echo $_POST['nuevoTelefono'];
                 echo $telefono;
                 $this->usuarioModelo->nuevoUsuario($email,$nombre,$apellidos,$password,$telefono,$direccion,$img,$estado,$rol);
-                
-                $this->
             }
         }
 

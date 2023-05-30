@@ -20,4 +20,4 @@
 </head>
 <body>
     <div class="container-fluid p-0">
-        <img src="https://via.placeholder.com/1200x200" class="hero-image" alt="Imagen de la aplicación">
+        <img src="<?php echo RUTA_URL?>/Imagenes/banner.png" class="hero-image" alt="Imagen de la aplicación">

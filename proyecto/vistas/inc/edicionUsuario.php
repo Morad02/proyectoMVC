@@ -32,7 +32,7 @@
                     <label for="nombre">Nombre:</label>
                   </div>
                   <div class="col-md-4">
-                    <input type="text" class="form-control" id="nombre">
+                    <input type="text" class="form-control" id="nombre" name="nombre">
                   </div>
                 </div>
               </div>
