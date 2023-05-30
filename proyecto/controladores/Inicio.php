@@ -17,6 +17,10 @@
         {
             
             $datos = [];
+            $datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
+            foreach ($datos['incidencias'] as $incidencia){
+                $datos['imagenes'][] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['idincidencia']);
+            }
             $this->cargarVista('inicio/inicio', $datos);
 
         }
@@ -28,7 +32,6 @@
             {
                 if(isset($_POST['email']) && isset($_POST['password']) && $this->usuarioModelo->validarUsuario($_POST['email'],$_POST['password']))
                 {
-                    $datos['email'] = $_POST['email'];
                     session_start();
                     $_SESSION['nombre'] = "Admin";
                     $_SESSION['rol'] = "Administrador";
@@ -57,7 +60,6 @@
         {
             $datos = [];
             $this->cargarVista('inicio/inicio', $datos);
-
         }
 
 
