@@ -53,8 +53,8 @@
                                 <form method="POST" action="<?php echo RUTA_URL.'/gestionUsuario/editar'?>">
                                     <input type="hidden" name="email" value="<?php echo $usuario['email']?>">
                                     <button class="btn btn-primary" type="submit">Modificar</button>
+                                    <button class="btn btn-secondary ms-2">Eliminar</button>
                                 </form>
-                                <button class="btn btn-secondary ms-2">Eliminar</button>
                             </div>
                         </div>
                     </div>

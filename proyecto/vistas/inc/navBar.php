@@ -25,7 +25,7 @@
                  }
             ?>
             <?php
-                if(isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'Administrador')
+                if(isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'admin')
                 {
             ?>
             <li class="nav-item">

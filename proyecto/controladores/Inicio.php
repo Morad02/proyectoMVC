@@ -11,35 +11,40 @@
             $this->valoracionesModelo = $this->cargarModelo('Valoraciones');
             $this->comentariosModelo = $this->cargarModelo('Comentarios');
             $this->request = new Request();
+            $this->datos = [];
+            session_start();
+            if((isset($_SESSION['nombre'])) && (isset($_SESSION['rol'])))
+            {
+                $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
+                $this->datos['sesion']['rol'] = $_SESSION['rol'];
+            }
         }
 
         public function index()
         {
             
-            $datos = [];
+           
             $datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
             foreach ($datos['incidencias'] as $incidencia){
                 $datos['imagenes'][] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['idincidencia']);
             }
-            $this->cargarVista('inicio/inicio', $datos);
+            $this->cargarVista('inicio/inicio', $this->datos);
 
         }
 
         public function login()
         {
-            $datos = [];
             if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['password']))
             {
                 $email = $this->request->get_Email('email');
-                $password = $this->request->get_Password('password');
+                $password = $_POST['password'];
                 if($this->usuarioModelo->validarUsuario($email,$password))
                 {
                     $query = $this->usuarioModelo->obtenerUsuario($email);
-                    session_start();
                     $_SESSION['nombre'] = $query['nombre'];
                     $_SESSION['rol'] = $query['rol'];
-                    $datos['sesion']['nombre'] = $query['nombre'];
-                    $datos['sesion']['rol'] = $query['rol'];
+                    $this->datos['sesion']['nombre'] = $query['nombre'];
+                    $this->datos['sesion']['rol'] = $query['rol'];
                 }
                 else
                 {
@@ -47,26 +52,26 @@
                 }
             }
             
-            
-            $this->cargarVista('inicio/inicio', $datos);
+            $this->cargarVista('inicio/inicio', $this->datos);
         }
 
         public function logout()
         {
-            $datos = [];
+            
             if((session_status() === PHP_SESSION_ACTIVE))
             {
                 $_SESSION = array();
+                unset($this->datos['sesion']);
                 session_destroy();
             }
 
-            $this->cargarVista('inicio/inicio', $datos);
+            $this->cargarVista('inicio/inicio', $this->datos);
         }
 
         public function misIncidencias()
         {
-            $datos = [];
-            $this->cargarVista('inicio/inicio', $datos);
+            
+            $this->cargarVista('inicio/inicio', $this->datos);
         }
 
 

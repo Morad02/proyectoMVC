@@ -58,7 +58,9 @@
             $conditions = [
                 'email' => $email
             ];
-        
+            
+            var_dump($Columns);
+            var_dump($email);
             return $this->update($table, $Columns, $conditions);
         }
 
@@ -89,11 +91,17 @@
 
         public function validarUsuario($email,$password)
         {
-            $select = "SELECT COUNT(*) AS C FROM usuario WHERE email=? AND password=?";
-            $params = [$email,$password];
+            $select = "SELECT password AS P FROM usuario WHERE email=? ";
+            $params = [$email];
             $result = $this->query($select,$params);
             
-            return ($result !== null && $result[0]['C'] > 0);
+            if( $result[0]['P'] !== null)
+            {
+                $hash = $result[0]['P'];
+                return password_verify($password,$hash);
+            }
+            else
+                return false;
         }
 
         public function existeUsuario($email)

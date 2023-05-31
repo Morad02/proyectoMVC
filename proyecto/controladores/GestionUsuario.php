@@ -8,6 +8,12 @@
             $this->usuarioModelo = $this->cargarModelo('Usuario');
             $this->request = new Request();
             $this->datos = [];
+            session_start();
+            if((isset($_SESSION['nombre'])) && (isset($_SESSION['rol'])))
+            {
+                $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
+                $this->datos['sesion']['rol'] = $_SESSION['rol'];
+            }
         }
 
         public function index()
@@ -109,36 +115,31 @@
 
                 }
                                 
-                // $nuevoClave1 = $_POST['nuevoClave1'];
-                // $password = $_POST['nuevoClave2'];
-                $password1 = $this->request->get_Password('nuevoClave1');
-                $password2 = $this->request->get_Password('nuevoClave2');
-                //if ($nuevoClave1 == null)
-                if ($password1 == null)
+                $nuevoClave1 = $_POST['nuevoClave1'];
+                $password = $_POST['nuevoClave2'];
+                if ($nuevoClave1 == null)
                 {
                     $errores['clave1'] = 'Campo obligatorio';
                     $valido = false;
 
                 }
-                //else if($password == null)
-                else if($password2 == null)
+                else if($password == null)
                 {
                     $errores['clave2'] = 'Campo obligatorio';
                     $valido = false;
 
                 }
-                //else if($nuevoClave1 != $password)
-                else if($password1 != $password2)
+                else if($nuevoClave1 != $password)
                 {
                     $errores['clave1'] = 'Las contraseñas no coinciden';
                     $errores['clave2'] = 'Las contraseñas no coinciden';
                     $valido = false;
 
                 }
-                // else
-                // {
-                //     $password = $this->request->get_Password('nuevoClave1');
-                // }
+                 else
+                {
+                     $password = $this->request->get_Password('nuevoClave1');
+                }
                 
                 $img = $this->request->get_Imagen('nuevoFoto');
                     
@@ -148,6 +149,7 @@
                     {
                         $columns = [
                             'nombre' => $nombre,
+                            'email' => $email,
                             'Apellidos' => $apellidos,
                             'password' => $password,
                             'direccion' => $direccion,
@@ -155,7 +157,7 @@
                             'rol' => $rol,
                             'estado' => $estado
                         ];
-                        $this->usuarioModelo->actualizarUsuario($email,$columns);
+                        $this->usuarioModelo->actualizarUsuario($_SESSION['emailEditar'],$columns);
 
                     }
                     else
@@ -205,7 +207,7 @@
                 $errores = []; 
                 $editar = [];
                 $id = $this->request->get_Email('email');
-                
+                $_SESSION['emailEditar'] = $id;
                 $usuario = $this->usuarioModelo->obtenerUsuario($id);
                 
                 var_dump($usuario);
