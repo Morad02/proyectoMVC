@@ -1,4 +1,4 @@
-<?php require_once RUTA_PROYECTO.'/vistas/inc/header.php'//comentario?>
+<?php require_once RUTA_PROYECTO.'/vistas/inc/header.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <div class="row">
     <div class="col-md-9 mt-4 mx-auto">
