@@ -8,6 +8,7 @@
         public $comentariosModelo;
         public $valoracionesModelo;
         public $request;
+        public $datos;
 
         
         public function cargarModelo($md)

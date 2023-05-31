@@ -43,14 +43,17 @@
                                                 <p class="card-text">Rol: <?php echo isset($usuario['rol']) ? $usuario['rol'] : "";?></p>
                                             </div>
                                             <div class="col-md-4 mb-4">
-                                                <p class="card-text">Estado: <?php echo isset($usuario['estadp']) ? $usuario['estado'] : "";?></p>
+                                                <p class="card-text">Estado: <?php echo isset($usuario['estado']) ? $usuario['estado'] : "";?></p>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-end">
-                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Modificar</button>
+                                <form method="POST" action="<?php echo RUTA_URL.'/gestionUsuario/editar'?>">
+                                    <input type="hidden" name="email" value="<?php echo $usuario['email']?>">
+                                    <button class="btn btn-primary" type="submit">Modificar</button>
+                                </form>
                                 <button class="btn btn-secondary ms-2">Eliminar</button>
                             </div>
                         </div>

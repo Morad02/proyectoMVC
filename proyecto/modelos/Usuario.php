@@ -83,8 +83,8 @@
         public function obtenerUsuario($email)
         {
             $select = "SELECT * FROM usuario WHERE email = ?";
-        
-            return $this->query($select, [$email]);
+            $result = $this->query($select, [$email]);
+            return $result[0];
         }
 
         public function validarUsuario($email,$password)
@@ -93,7 +93,7 @@
             $params = [$email,$password];
             $result = $this->query($select,$params);
             
-            return ($result !== null && $result['C'] > 0);
+            return ($result !== null && $result[0]['C'] > 0);
         }
 
         public function existeUsuario($email)

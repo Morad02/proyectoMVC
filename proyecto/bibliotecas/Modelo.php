@@ -142,13 +142,22 @@ class Modelo
     public function update($table, $columns, $conditions = [])
     {
         $params = array_values($columns);
-
-        $query = $this->buildQuery($table, $conditions, $columns, 'UPDATE');
-        $query['query'] .= " SET " . implode(', ', array_map(function ($column) {
+    
+        $query = "UPDATE $table SET " . implode(', ', array_map(function ($column) {
             return "$column = ?";
         }, array_keys($columns)));
-
-        return $this->query($query['query'], $query['params'], $query['blobs']);
+    
+        if (!empty($conditions)) {
+            $where = [];
+            foreach ($conditions as $column => $value) {
+                $where[] = "$column = ?";
+                $params[] = $value;
+            }
+            $whereClause = implode(' AND ', $where);
+            $query .= " WHERE $whereClause";
+        }
+    
+        return $this->query($query, $params);
     }
 
     protected function isBlobColumn($table, $column)

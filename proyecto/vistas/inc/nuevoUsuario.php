@@ -12,7 +12,7 @@
               <label for="foto">Foto</label>
               <div class="row">
                 <div class="col-md-4">
-                  <img id="imagenPrevia" src="<?php echo isset($datos['valido']) && !$datos['valido'] && isset($datos['img']) ? $datos['img'] : RUTA_URL.'/img/usuario.svg'; ?>" alt="Foto de usuario" class="img-fluid w-50 h-50">
+                  <img id="imagenPrevia" src="<?php echo isset($datos['agregar']['valido']) && !$datos['agregar']['valido'] && isset($datos['agregar']['img']) ? $datos['agregar']['img'] : RUTA_URL.'/img/usuario.svg'; ?>" alt="Foto de usuario" class="img-fluid w-50 h-50">
                 </div>
                 <div class="col-md-8">
                   <input type="file" class="form-control-file" id="nuevoFoto" name="nuevoFoto">
@@ -25,7 +25,7 @@
                   <label for="nombre">Nombre:</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="form-control <?php echo (isset($datos['errores']['nombre'])) ? 'is-invalid' : ''; ?>" id="nuevoNombre" name="nuevoNombre" required value="<?php echo isset($datos['nombre']) ? $datos['nombre'] : ''; ?>">
+                  <input type="text" class="form-control <?php echo (isset($datos['agregar']['errores']['nombre'])) ? 'is-invalid' : ''; ?>" id="nuevoNombre" name="nuevoNombre" required value="<?php echo isset($datos['agregar']['nombre']) ? $datos['agregar']['nombre'] : ''; ?>">
                   <div class="invalid-feedback"><?php echo$datos['errores']['nombre'] ?? 'Campo obligatorio'; ?></div>
                 </div>
               </div>
@@ -36,8 +36,8 @@
                   <label for="apellidos">Apellidos:</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="form-control <?php echo (isset($datos['errores']['apellidos'])) ? 'is-invalid' : ''; ?>" id="nuevoApellidos" name="nuevoApellidos" required value="<?php echo isset($datos['valido']) && !$datos['valido'] && isset($datos['apellidos']) ? $datos['apellidos'] : ''; ?>">
-                  <div class="invalid-feedback"><?php echo $datos['errores']['apellidos'] ?? 'Campo obligatorio'; ?></div>
+                  <input type="text" class="form-control <?php echo (isset($datos['agregar']['errores']['apellidos'])) ? 'is-invalid' : ''; ?>" id="nuevoApellidos" name="nuevoApellidos" required value="<?php echo isset($datos['agregar']['apellidos']) ? $datos['agregar']['apellidos'] : ''; ?>">
+                  <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['apellidos'] ?? 'Campo obligatorio'; ?></div>
                 </div>
               </div>
             </div>
@@ -47,7 +47,7 @@
                   <label for="email">Email:</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="email" class="form-control <?php echo (isset($datos['errores']['email'])) ? 'is-invalid' : ''; ?>" id="nuevoEmail" name="nuevoEmail" required value="<?php echo isset($datos['valido']) &&  !$datos['valido'] && isset($datos['email']) ? $datos['email'] : ''; ?>">
+                  <input type="email" class="form-control <?php echo (isset($datos['agregar']['errores']['email'])) ? 'is-invalid' : ''; ?>" id="nuevoEmail" name="nuevoEmail" required value="<?php echo isset($datos['agregar']['email']) ? $datos['agregar']['email'] : ''; ?>">
                   <div class="invalid-feedback"><?php echo $datos['errores']['email'] ?? 'Campo obligatorio'; ?></div>
                 </div>
               </div>
@@ -58,12 +58,12 @@
                   <label for="clave1">Clave:</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="password" class="form-control <?php echo (isset($datos['errores']['clave1'])) ? 'is-invalid' : ''; ?>" id="nuevoClave1" name="nuevoClave1" required>
-                  <div class="invalid-feedback"><?php echo $datos['errores']['clave1'] ?? 'La clave debe tener al menos 6 caracteres'; ?></div>
+                  <input type="password" class="form-control <?php echo (isset($datos['agregar']['errores']['clave1'])) ? 'is-invalid' : ''; ?>" id="nuevoClave1" name="nuevoClave1" required>
+                  <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['clave1'] ?? 'La clave debe tener al menos 6 caracteres'; ?></div>
                 </div>
                 <div class="col-md-4">
                   <input type="password" class="form-control <?php echo (isset($datos['errores']['clave2'])) ? 'is-invalid' : ''; ?>" id="nuevoClave2" name="nuevoClave2" required>
-                  <div class="invalid-feedback"><?php echo $datos['errores']['clave2'] ?? 'Las claves no coinciden'; ?></div>
+                  <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['clave2'] ?? 'Las claves no coinciden'; ?></div>
                 </div>
               </div>
             </div>
@@ -73,8 +73,8 @@
                   <label for="direccion">Dirección:</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="text" class="form-control <?php echo (isset($datos['errores']['direccion'])) ? 'is-invalid' : ''; ?>" id="nuevoDireccion" name="nuevoDireccion" required value="<?php echo isset($datos['valido']) && !$datos['valido'] && isset($datos['direccion']) ? $datos['direccion'] : ''; ?>">
-                  <div class="invalid-feedback"><?php echo$datos['errores']['direccion'] ?? 'Campo obligatorio'; ?></div>
+                  <input type="text" class="form-control <?php echo (isset($datos['agregar']['errores']['direccion'])) ? 'is-invalid' : ''; ?>" id="nuevoDireccion" name="nuevoDireccion" required value="<?php echo isset($datos['agregar']['direccion']) ? $datos['agregar']['direccion'] : ''; ?>">
+                  <div class="invalid-feedback"><?php echo$datos['agregar']['errores']['direccion'] ?? 'Campo obligatorio'; ?></div>
                 </div>
               </div>
             </div>
@@ -84,7 +84,7 @@
                   <label for="telefono">Teléfono:</label>
                 </div>
                 <div class="col-md-4">
-                  <input type="tel" class="form-control <?php echo isset($datos['errores']['telefono']) ? 'is-invalid' : ''; ?>" id="nuevoTelefono" pattern="[0-9]{9}" name="nuevoTelefono" required value="<?php echo isset($datos['valido']) && !$datos['valido'] && isset($datos['telefono']) ? $datos['telefono'] : ''; ?>">
+                  <input type="tel" class="form-control <?php echo isset($datos['agregar']['errores']['telefono']) ? 'is-invalid' : ''; ?>" id="nuevoTelefono" pattern="[0-9]{9}" name="nuevoTelefono" required value="<?php echo isset($datos['agregar']['telefono']) ? $datos['agregar']['telefono'] : ''; ?>">
                   <div class="invalid-feedback"><?php echo $datos['errores']['telefono'] ?? 'Por favor, ingresa un número de teléfono válido (9 dígitos numéricos)'; ?></div>
                 </div>
               </div>
@@ -95,12 +95,12 @@
                   <label for="rol">Rol:</label>
                 </div>
                 <div class="col-md-4">
-                  <select class="form-control <?php echo (isset($datos['errores']['rol'])) ? 'is-invalid' : ''; ?>" id="nuevoRol" name="nuevoRol" required>
+                  <select class="form-control <?php echo (isset($datos['agregar']['errores']['rol'])) ? 'is-invalid' : ''; ?>" id="nuevoRol" name="nuevoRol" required>
                     <option value="">Seleccione un rol</option>
-                    <option value="admin" <?php echo (isset($datos['valido']) && !$datos['valido'] && isset($datos['rol']) && $datos['rol'] == 'admin') ? 'selected' : ''; ?>>Administrador</option>
-                    <option value="user" <?php echo (isset($datos['valido']) && !$datos['valido'] && isset($datos['rol']) && $datos['rol'] == 'user') ? 'selected' : ''; ?>>Colaborador</option>
+                    <option value="admin" <?php echo (isset($datos['agregar']['rol']) && $datos['agregar']['rol'] == 'admin') ? 'selected' : ''; ?>>Administrador</option>
+                    <option value="user" <?php echo (isset($datos['agregar']['rol']) && $datos['agregar']['rol'] == 'user') ? 'selected' : ''; ?>>Colaborador</option>
                   </select>
-                  <div class="invalid-feedback"><?php echo $datos['errores']['rol'] ?? 'Seleccione un rol'; ?></div>
+                  <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['rol'] ?? 'Seleccione un rol'; ?></div>
                 </div>
               </div>
             </div>
@@ -110,15 +110,18 @@
                   <label for="estado">Estado:</label>
                 </div>
                 <div class="col-md-4">
-                  <select class="form-control <?php echo (isset($datos['errores']['estado'])) ? 'is-invalid' : ''; ?>" id="nuevoEstado" name="nuevoEstado" required>
+                  <select class="form-control <?php echo (isset($datos['agregar']['errores']['estado'])) ? 'is-invalid' : ''; ?>" id="nuevoEstado" name="nuevoEstado" required>
                     <option value="">Seleccione un estado</option>
-                    <option value="activo" <?php echo (isset($datos['valido']) && !$datos['valido'] && isset($datos['estado']) && $datos['estado'] == 'activo') ? 'selected' : ''; ?>>Activo</option>
-                    <option value="inactivo" <?php echo (isset($datos['valido']) && !$datos['valido'] && isset($datos['estado']) && $datos['estado'] == 'inactivo') ? 'selected' : ''; ?>>Inactivo</option>
+                    <option value="activo" <?php echo (isset($datos['agregar']['estado']) && $datos['agregar']['estado'] == 'activo') ? 'selected' : ''; ?>>Activo</option>
+                    <option value="inactivo" <?php echo (isset($datos['agregar']['estado']) && $datos['agregar']['estado'] == 'inactivo') ? 'selected' : ''; ?>>Inactivo</option>
                   </select>
-                  <div class="invalid-feedback"><?php echo $datos['errores']['estado'] ?? 'Seleccione un estado'; ?></div>
+                  <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['estado'] ?? 'Seleccione un estado'; ?></div>
                 </div>
               </div>
             </div>
+              <?php if(isset($datos['agregar']['editar']) && $datos['agregar']['editar'])
+                      echo "<input type='hidden' name='guardar' value='guardar'>";
+              ?>
             </form>
           </div>
         </div>

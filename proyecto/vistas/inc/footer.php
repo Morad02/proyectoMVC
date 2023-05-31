@@ -11,7 +11,16 @@
         <script src="<?php echo RUTA_URL?>/js/scripts.js"></script>
         <script src="<?php echo RUTA_URL?>/js/nuevoUsuario.js"></script>
         <?php
-                if (isset($datos['valido']) && !$datos['valido']) {
+                if (isset($datos['agregar']['valido']) && !$datos['agregar']['valido']) {
+                    echo "<script>
+                            $(document).ready(function() {
+                              $('#nuevoModal').modal('show');
+                            });
+                          </script>";
+                }
+        ?>
+        <?php
+                if (isset($datos['agregar']['editar']) && $datos['agregar']['editar']) {
                     echo "<script>
                             $(document).ready(function() {
                               $('#nuevoModal').modal('show');
