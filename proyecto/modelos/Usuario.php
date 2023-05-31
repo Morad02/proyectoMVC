@@ -96,5 +96,15 @@
             return ($result !== null && $result['C'] > 0);
         }
 
+        public function existeUsuario($email)
+        {
+            $select = "SELECT COUNT(*) AS C FROM usuario WHERE email=?";
+            $params = [$email];
+            $result = $this->query($select,$params);
+        
+            return ($result !== null && $result[0]['C'] > 0);
+        }
+
+
     }
 ?>

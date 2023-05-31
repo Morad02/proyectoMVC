@@ -12,7 +12,7 @@
                 <a class="nav-link" href="<?php echo RUTA_URL?>">Ver incidencias</a>
             </li>
 
-            <?php if(isset($datos['email']))
+            <?php if(isset($datos['sesion']))
                  {
             ?>
             <li class="nav-item">
@@ -25,7 +25,7 @@
                  }
             ?>
             <?php
-                if(isset($datos['rol']) && $datos['rol'] == 'Administrador')
+                if(isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'Administrador')
                 {
             ?>
             <li class="nav-item">

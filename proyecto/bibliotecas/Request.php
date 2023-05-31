@@ -43,13 +43,40 @@ class Request
         return null;
     }
 
-    public function get_Imagen($files, $nombre) {
-        if(isset($files[$nombre]) && !empty($files[$nombre]['tmp_name'])) {
-            $rutaTemporal = $files[$nombre]['tmp_name'];
+    public function get_Imagen($nombre) {
+        if(isset($_FILES[$nombre]) && !empty($_FILES[$nombre]['tmp_name'])) {
+            $rutaTemporal = $_FILES[$nombre]['tmp_name'];
             $contenidoImagen = file_get_contents($rutaTemporal);
             return $contenidoImagen;
         }
         return null;
     }
+
+    
+    function imagen_Codificada($datosImagen) {
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+    
+        // Obten el tipo MIME de los datos de la imagen
+        $tipoMime = $finfo->buffer($datosImagen);
+
+        // Codificar los datos de imagen como Base64
+        $datosImagenBase64 = base64_encode($datosImagen);
+
+        // Crear una cadena de datos URI
+        $datosUri = "data:$tipoMime;base64," . $datosImagenBase64;
+
+        return $datosUri;
+    }
+    
+    
+
+    function borrarImagen($rutaImagen) {
+        if (file_exists($rutaImagen)) {
+            return unlink($rutaImagen); // Borra el archivo
+        }
+        return false; // El archivo no existe
+    }
+    
+    
 }
 ?>

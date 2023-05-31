@@ -7,49 +7,62 @@
                 <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoModal">Añadir usuario</button>
             </div>
         </div>
-        <div class="row">
+        <?php
+            if(isset($datos['usuarios']))
+            {
+                foreach($datos['usuarios'] as $usuario)
+                { 
+                    if(isset($usuario['email']))
+                    {
+        ?>
+        <div class="row pt-2">
             <div class="col">
                 <div class="d-flex flex-wrap">
                     <div class="card w-100">
                         <div class="card-body">
-                            <h5 class="card-title">Usuario: Federico</h5>
+                            <h5 class="card-title">Usuario: <?php echo isset($usuario['nombre']) ? $usuario['nombre'] : "";?></h5>
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-2 mb-2 pt-4">
-                                    <img src="/imagenes/usuario.svg" alt="Imagen Usuario" class="img-fluid">
+                                        <img src="<?php echo isset($usuario['foto']) ? $this->request->imagen_Codificada($usuario['foto']) : RUTA_URL.'/img/usuario.svg';?>" alt="Imagen Usuario" class="img-fluid w-50 h-50">
                                     </div>
                                     <div class="col-md-10 mb-10">
-                                    <div class="row">
-                                        <div class="col-md-4 mb-4">
-                                            <p class="card-text">Email: federico@gmail.com</p>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-4">
+                                                <p class="card-text">Email: <?php echo $usuario['email']?></p>
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <p class="card-text">Direccion: <?php echo isset($usuario['direccion']) ? $usuario['direccion'] : "";?></p>
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <p class="card-text">Telefono: <?php echo isset($usuario['telefono']) ? $usuario['telefono'] : "";?></p>
+                                            </div>
                                         </div>
-                                        <div class="col-md-4 mb-4">
-                                            <p class="card-text">Direccion: C/Francisco Nº15</p>
-                                        </div>
-                                        <div class="col-md-4 mb-4">
-                                            <p class="card-text">Telefono: 111222333</p>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-4 mb-4">
-                                            <p class="card-text">Rol: Administrador</p>
-                                        </div>
-                                        <div class="col-md-4 mb-4">
-                                            <p class="card-text">Estado: Activo</p>
+                                        <div class="row">
+                                            <div class="col-md-4 mb-4">
+                                                <p class="card-text">Rol: <?php echo isset($usuario['rol']) ? $usuario['rol'] : "";?></p>
+                                            </div>
+                                            <div class="col-md-4 mb-4">
+                                                <p class="card-text">Estado: <?php echo isset($usuario['estadp']) ? $usuario['estado'] : "";?></p>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="d-flex justify-content-end">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Modificar</button>
-                            <button class="btn btn-secondary ms-2">Eliminar</button>
+                            <div class="d-flex justify-content-end">
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal">Modificar</button>
+                                <button class="btn btn-secondary ms-2">Eliminar</button>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-      </div>
+        <?php
+                    }
+                }
+            }   
+        ?>
     </div>
     <div class="col-md-3">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>

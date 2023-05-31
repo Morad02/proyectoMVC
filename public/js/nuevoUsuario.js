@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 
-document.addEventListener('DOMContentLoaded', function() {
+/*document.addEventListener('DOMContentLoaded', function() {
     var nuevoUsuarioForm = document.getElementById('nuevoUsuarioForm');
     var nuevoClave1 = document.getElementById('nuevoClave1');
     var nuevoClave2 = document.getElementById('nuevoClave2');
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', function() {
         $('#confirmModal').modal('show');
       }
     });
-  });
+  });*/
   
 document.getElementById('confirmSubmit').addEventListener('click', function() {
     document.getElementById('nuevoUsuarioForm').submit();

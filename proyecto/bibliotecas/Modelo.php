@@ -43,7 +43,7 @@ class Modelo
                     if ($result_set === false) {
                         throw new Exception('Failed to get result set: ' . $stmt->error);
                     }
-                    $result = $result_set->fetch_assoc();
+                    $result = $result_set->fetch_all(MYSQLI_ASSOC);
                 }
             }
             $stmt->close();
@@ -73,7 +73,7 @@ class Modelo
         $select = "SELECT DATABASE() AS current_schema";
         $result = $this->query($select);
 
-        return $result['current_schema'];
+        return $result[0]['current_schema'];
     }
 
     public function tableExists($table)
@@ -82,7 +82,7 @@ class Modelo
         $params = [$this->getCurrentSchema(), $table];
         $result = $this->query($select, $params);
 
-        return ($result !== null && $result['C'] > 0);
+        return ($result !== null && $result[0]['C'] > 0);
     }
 
     public function columnCount($tab)
@@ -90,7 +90,7 @@ class Modelo
         $select = "SELECT COUNT(*) AS C FROM information_schema.columns WHERE table_name = ?";
         $result = $this->query($select,[$tab]);
 
-        return $result['C'];
+        return $result[0]['C'];
     }
 
     public function insert($table, $params = [])
@@ -159,7 +159,7 @@ class Modelo
 
         if($result != null )
         {
-            $dataType = $result['DATA_TYPE'];
+            $dataType = $result[0]['DATA_TYPE'];
 
             return ($dataType == 'mediumblob');
         }
