@@ -30,8 +30,8 @@
             $datos = [];
             if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['password']))
             {
-                $email = $this->request->getEmail('email');
-                $password = $this->request->getPassword('password');
+                $email = $this->request->get_Email('email');
+                $password = $this->request->get_Password('password');
                 if($this->usuarioModelo->validarUsuario($email,$password))
                 {
                     $query = $this->usuarioModelo->obtenerUsuario($email);
