@@ -93,7 +93,7 @@
             $params = [$email,$password];
             $result = $this->query($select,$params);
             
-            return ($result !== null && $result['C'] > 0);
+            return ($result !== null && $result[0]['C'] > 0);
         }
 
         public function existeUsuario($email)
