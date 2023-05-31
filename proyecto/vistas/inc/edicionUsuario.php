@@ -95,7 +95,7 @@
                     <label for="rol">Rol:</label>
                   </div>
                   <div class="col-md-4">
-                    <select class="form-control" id="rol" name="rol" <?php if(isset($datos['session'])){if($datos['session']['rol'] != 'admin'){echo 'disabled';}}?>>
+                    <select class="form-control" id="rol" name="rol" <?php if(isset($datos['sesion'])){if($datos['sesion']['rol'] != 'admin'){echo 'disabled';}}?>>
                       <option value="admin">Administrador</option>
                       <option value="user">Colaborador</option>
                       <option value="user">Visitante</option>
@@ -109,7 +109,7 @@
                     <label for="estado">Estado:</label>
                   </div>
                   <div class="col-md-4">
-                    <select class="form-control" id="estado" name="estado" <?php if(isset($datos['session'])){if($datos['session']['rol'] != 'admin'){echo 'disabled';}}?>>
+                    <select class="form-control" id="estado" name="estado" <?php if(isset($datos['sesion'])){if($datos['sesion']['rol'] != 'admin'){echo 'disabled';}}?>>
                       <option value="activo">Activo</option>
                       <option value="inactivo">Inactivo</option>
                     </select>
