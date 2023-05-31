@@ -109,31 +109,36 @@
 
                 }
                                 
-                $nuevoClave1 = $_POST['nuevoClave1'];
-                $password = $_POST['nuevoClave2'];
-                if ($nuevoClave1 == null)
+                // $nuevoClave1 = $_POST['nuevoClave1'];
+                // $password = $_POST['nuevoClave2'];
+                $password1 = $this->request->get_Password('nuevoClave1');
+                $password2 = $this->request->get_Password('nuevoClave2');
+                //if ($nuevoClave1 == null)
+                if ($password1 == null)
                 {
                     $errores['clave1'] = 'Campo obligatorio';
                     $valido = false;
 
                 }
-                else if($password == null)
+                //else if($password == null)
+                else if($password2 == null)
                 {
                     $errores['clave2'] = 'Campo obligatorio';
                     $valido = false;
 
                 }
-                else if($nuevoClave1 != $password)
+                //else if($nuevoClave1 != $password)
+                else if($password1 != $password2)
                 {
                     $errores['clave1'] = 'Las contraseñas no coinciden';
                     $errores['clave2'] = 'Las contraseñas no coinciden';
                     $valido = false;
 
                 }
-                else
-                {
-                    $password = $this->request->get_Password('nuevoClave1');
-                }
+                // else
+                // {
+                //     $password = $this->request->get_Password('nuevoClave1');
+                // }
                 
                 $img = $this->request->get_Imagen('nuevoFoto');
                     

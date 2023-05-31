@@ -10,7 +10,7 @@
             $this->fotosModelo = $this->cargarModelo('Fotos');
             $this->valoracionesModelo = $this->cargarModelo('Valoraciones');
             $this->comentariosModelo = $this->cargarModelo('Comentarios');
-            
+            $this->request = new Request();
         }
 
         public function index()
@@ -28,16 +28,23 @@
         public function login()
         {
             $datos = [];
-            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            if($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['email']) && isset($_POST['password']))
             {
-                if(isset($_POST['email']) && isset($_POST['password']) && $this->usuarioModelo->validarUsuario($_POST['email'],$_POST['password']))
+                $email = $this->request->get_Email('email');
+                $password = $this->request->get_Password('password');
+                if($this->usuarioModelo->validarUsuario($email,$password))
                 {
+                    $query = $this->usuarioModelo->obtenerUsuario($email);
                     session_start();
-                    $_SESSION['nombre'] = "Admin";
-                    $_SESSION['rol'] = "Administrador";
-
+                    $_SESSION['nombre'] = $query['nombre'];
+                    $_SESSION['rol'] = $query['rol'];
+                    $datos['sesion']['nombre'] = $query['nombre'];
+                    $datos['sesion']['rol'] = $query['rol'];
                 }
-
+                else
+                {
+                    echo "El usuario no existe";
+                }
             }
             
             
