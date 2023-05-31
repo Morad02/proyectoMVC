@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-md navbar-light">
     <a class="navbar-brand" href="#">
-        <img src="imagenes/icono.png" width="30" alt="Logo">
+        <img src="<?php echo RUTA_URL?>/Imagenes/icono.png" width="30" alt="Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

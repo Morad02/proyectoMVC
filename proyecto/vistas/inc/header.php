@@ -8,7 +8,7 @@
     <meta name="description" content="Web de incidencias vecinales">
     <meta name="keywords" content="accidente, roturas, altercados">
     <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="imagenes/icono-blanco.svg">
+    <link rel="icon" type="image/x-icon" href="<?php echo RUTA_URL?>/Imagenes/icono-blanco.svg">
     <!-- Boostrap -->
     <link rel="stylesheet"href="<?php echo RUTA_URL?>/bootstrap/bootstrap.min.css">
     <!-- CSS -->
