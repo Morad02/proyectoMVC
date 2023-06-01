@@ -61,7 +61,7 @@
                                 
                 if($valido)
                 {
-                    $fecha = NULL;
+                    $fecha = 'NULL';
                     if(isset($_SESSION['email'])){
                         $idusuario = $_SESSION['email'];
                     }else{
@@ -72,6 +72,12 @@
                     $this->index();
                 }
             }
+        }
+
+        public function editar()
+        {
+            //Falta por implementar
+            
         }
     }
 ?>
