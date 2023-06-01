@@ -23,6 +23,9 @@
         public function index()
         {
             $datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
+            if (empty($datos['incidencias'])) {
+                echo "No se encontraron incidencias";
+            }
             foreach ($datos['incidencias'] as $indice => $incidencia) {
                 $datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['idincidencia']);
             }
