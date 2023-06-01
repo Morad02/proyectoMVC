@@ -43,7 +43,6 @@
                 {
                     $errores['descripcion'] = 'Campo obligatorio';
                     $valido = false;
-
                 }
                     
                 
