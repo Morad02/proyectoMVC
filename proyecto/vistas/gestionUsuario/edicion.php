@@ -90,7 +90,7 @@
                   <label for="rol">Rol:</label>
                 </div>
                 <div class="col-md-4">
-                  <select class="form-control <?php echo (isset($datos['edicion']['errores']['rol'])) ? 'is-invalid' : ''; ?>" id="nuevoRol" name="nuevoRol" required <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "disabled" : ''?>>
+                  <select class="form-control <?php echo (isset($datos['edicion']['errores']['rol']) && $datos['sesion']['rol'] != 'user') ? 'is-invalid' : ''; ?>" id="nuevoRol" name="nuevoRol" required <?php echo (isset($datos['edicion']['valido']) && $datos['edicion']['valido']) || (isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'user') ? "disabled" : ''?>>
                     <option value="">Seleccione un rol</option>
                     <option value="admin" <?php echo (isset($datos['edicion']['rol']) && $datos['edicion']['rol'] == 'admin') ? 'selected' : ''; ?>>Administrador</option>
                     <option value="user" <?php echo (isset($datos['edicion']['rol']) && $datos['edicion']['rol'] == 'user') ? 'selected' : ''; ?>>Colaborador</option>
@@ -105,7 +105,7 @@
                   <label for="estado">Estado:</label>
                 </div>
                 <div class="col-md-4">
-                  <select class="form-control <?php echo (isset($datos['edicion']['errores']['estado'])) ? 'is-invalid' : ''; ?>" id="nuevoEstado" name="nuevoEstado" required <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "disabled" : ''?>>
+                  <select class="form-control <?php echo (isset($datos['edicion']['errores']['estado']) && $datos['sesion']['rol'] != 'user') ? 'is-invalid' : ''; ?>" id="nuevoEstado" name="nuevoEstado" required <?php echo (isset($datos['edicion']['valido']) && $datos['edicion']['valido']) || (isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'user') ? "disabled" : ''?>>
                     <option value="">Seleccione un estado</option>
                     <option value="activo" <?php echo (isset($datos['edicion']['estado']) && $datos['edicion']['estado'] == 'activo') ? 'selected' : ''; ?>>Activo</option>
                     <option value="inactivo" <?php echo (isset($datos['edicion']['estado']) && $datos['edicion']['estado'] == 'inactivo') ? 'selected' : ''; ?>>Inactivo</option>

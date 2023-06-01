@@ -44,8 +44,10 @@
                     $query = $this->usuarioModelo->obtenerUsuario($email);
                     $_SESSION['nombre'] = $query['nombre'];
                     $_SESSION['rol'] = $query['rol'];
+                    $_SESSION['email'] = $query['email'];
                     $this->datos['sesion']['nombre'] = $query['nombre'];
                     $this->datos['sesion']['rol'] = $query['rol'];
+                    $this->datos['sesion']['email'] = $query['email'];
                 }
                 else
                 {

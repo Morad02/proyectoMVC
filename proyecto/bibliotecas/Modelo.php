@@ -181,7 +181,7 @@ class Modelo
         $params = [];
 
         // Construir la consulta SQL de eliminación utilizando la función buildQuery
-        $queryData = $this->buildQuery($table, $conditions, $params, 'DELETE');
+        $queryData = $this->buildQuery($table, $conditions, $params, 'DELETE FROM');
 
         return $this->query($queryData['query'], $queryData['params']);
     }

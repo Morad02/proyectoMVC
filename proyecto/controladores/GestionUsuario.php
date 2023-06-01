@@ -13,6 +13,7 @@
             {
                 $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
                 $this->datos['sesion']['rol'] = $_SESSION['rol'];
+                $this->datos['sesion']['email'] = $_SESSION['email'];
             }
         }
 
@@ -118,7 +119,7 @@
                 {
                     $rol = $_POST['rolConfirm'];
                 }
-                else if ($rol == null)
+                else if ($rol == null && $this->datos['sesion']['rol'] == 'admin')
                 {
                     $errores['rol'] = 'Campo obligatorio';
                     $valido = false;
@@ -130,7 +131,7 @@
                 {
                     $estado = $_POST['estadoConfirm'];
                 }
-                else if ($estado == null)
+                else if ($estado == null && $this->datos['sesion']['rol'] == 'admin')
                 {
                     $errores['estado'] = 'Campo obligatorio';
                     $valido = false;
@@ -172,12 +173,12 @@
                 
                 if($img != null)
                 {
-                    setcookie('imgEdicion', $img);
+                    $_SESSION['imgEdicion'] = $img;
 
                 }
-                else if($img == null && isset($_COOKIE['imgEdicion']))
+                else if($img == null && isset($_SESSION['imgEdicion']))
                 {
-                    $img = $_COOKIE['imgEdicion'];
+                    $img = $_SESSION['imgEdicion'];
                 }
                 
 
@@ -185,6 +186,7 @@
                 {
                     $edicion['valido'] = $valido;
                     $this->datos['edicion'] = $edicion;
+                    $editarUsuario;
 
                     if(isset($_SESSION['usuarioEditar']))
                     {
@@ -196,19 +198,44 @@
                             'telefono' => $telefono,
                             'direccion' => $direccion,
                             'foto' => $img,
-                            'estado' => $estado,
-                            'rol' => $rol
                         ];
+
+                        if($this->datos['sesion']['rol'] == 'admin')
+                        {
+                            $columns['rol'] = $rol;
+                            $columns['estado'] = $estado;
+
+                        }
                         $this->usuarioModelo->actualizarUsuario($_SESSION['usuarioEditar'],$columns);
+
+                        if($this->datos['sesion']['email'] == $_SESSION['usuarioEditar'] && $email != $this->datos['sesion']['email'])
+                        {
+                            $this->datos['sesion']['email'] = $email;
+                        }
+
+                        if($this->datos['sesion']['email'] == $_SESSION['usuarioEditar'] && $nombre != $this->datos['sesion']['nombre'])
+                        {
+                            $this->datos['sesion']['nombre'] = $nombre;
+                        }
+
+                        if($this->datos['sesion']['email'] == $_SESSION['usuarioEditar'] && $rol != $this->datos['sesion']['rol'])
+                        {
+                            $this->datos['sesion']['rol'] = $rol;
+                        }
                         unset($_SESSION['usuarioEditar']);
-                        setcookie('imgEdicion', '', time() - 3600);
+                        
                     }
                     else
                     {
                         $this->usuarioModelo->nuevoUsuario($email,$nombre,$apellidos,$password,$telefono,$direccion,$img,$estado,$rol);
                     }
-                     
+                    
+                    if(isset($_SESSION['imgEdicion']))
+                        unset($_SESSION['imgEdicion']);
+                    
                     $this->index();
+
+
 
                 }
                 else
@@ -228,6 +255,8 @@
                     $edicion['valido'] = $valido;
                     $this->datos['edicion'] = $edicion;
 
+                    var_dump($this->datos);
+                    var_dump($_SESSION['usuarioEditar']);
                     $this->cargarVista('gestionUsuario/edicion', $this->datos);
                 }
                 
@@ -273,10 +302,22 @@
             
         }
 
-        
+        public function eliminar()
+        {
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                $id = $this->request->get_Email('email');
+                
+                if($this->usuarioModelo->existeUsuario($id) && $id != $this->datos['sesion']['email'])
+                {
+                    $this->usuarioModelo->eliminarUsuario($id);
 
-
-    }
+                }
+                
+                $this->index();
+            }
+        }
     
+    }
 
 ?>
