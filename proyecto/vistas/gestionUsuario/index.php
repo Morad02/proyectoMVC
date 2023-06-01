@@ -4,7 +4,10 @@
     <div class="col-md-9 mt-4 mx-auto">
         <div class="row">
             <div class="d-flex justify-content-end mt-4 pb-2">
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#nuevoModal">Añadir usuario</button>
+                <form action="<?php echo RUTA_URL.'/gestionUsuario/agregar'?>" method="POST">
+                    <input type="hidden" name="nuevo" value="nuevo">
+                    <button class="btn btn-primary" type="submit">Añadir usuario</button>
+                </form>
             </div>
         </div>
         <?php
@@ -53,6 +56,9 @@
                                 <form method="POST" action="<?php echo RUTA_URL.'/gestionUsuario/editar'?>">
                                     <input type="hidden" name="email" value="<?php echo $usuario['email']?>">
                                     <button class="btn btn-primary" type="submit">Modificar</button>
+                                </form>
+                                <form method="POST" action="<?php echo RUTA_URL.'/gestionUsuario/eliminar'?>">
+                                    <input type="hidden" name="email" value="<?php echo $usuario['email']?>">
                                     <button class="btn btn-secondary ms-2">Eliminar</button>
                                 </form>
                             </div>
@@ -70,8 +76,26 @@
     <div class="col-md-3">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
         <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
-    </div> 
+    </div>
+    <div id="successAlert" class="alert alert-success fixed-bottom mb-0" role="alert" style="display: none;">
+        ¡Éxito! El formulario ha sido enviado correctamente.
+  </div> 
+  <?php
+    if(isset($datos['edicion']['valido']) && isset($_POST['confirmado']) && $datos['edicion']['valido'])
+    {
+
+  ?>
+  <script>
+    // Mostrar el alerta de éxito
+    document.getElementById('successAlert').style.display = 'block';
+
+    // Desaparecer después de 5 segundos
+    setTimeout(function() {
+      document.getElementById('successAlert').style.display = 'none';
+    }, 5000);
+  </script>
+    <?php
+        }
+    ?>   
 </div>
-<?php require_once RUTA_PROYECTO.'/vistas/inc/edicionUsuario.php'?>
-<?php require_once RUTA_PROYECTO.'/vistas/inc/nuevoUsuario.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/footer.php'?>

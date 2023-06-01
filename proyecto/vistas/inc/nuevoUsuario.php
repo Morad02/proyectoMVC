@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-dialog-centered modal-xl">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title">Nuevo usuario </h5>
+        <h5 class="modal-title"><?php echo isset($datos['agregar']['editar']) || isset($_POST['guardar']) ?  "Edición " : "Nuevo ";?>usuario </h5>
         <button class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">

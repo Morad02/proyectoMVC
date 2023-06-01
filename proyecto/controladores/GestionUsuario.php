@@ -28,11 +28,14 @@
         public function agregar()
         {
             $valido = true;
-            $existe = false;
             $errores = []; 
-            $agregar = [];
-            
-            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            $edicion = [];
+            $this->datos['action'] = RUTA_URL.'/gestionUsuario/agregar';
+            if (isset($_POST['nuevo']))
+            {
+                $this->cargarVista('gestionUsuario/edicion', $this->datos);
+            }
+            else if($_SERVER['REQUEST_METHOD'] === 'POST')
             {
                 
 
@@ -67,9 +70,19 @@
                     $valido = false;
 
                 }
-                else if(!isset($_POST['guardar']) && $this->usuarioModelo->existeUsuario($email) != 0)
+                else if(isset($_SESSION['usuarioEditar']) && $email != $_SESSION['usuarioEditar'])
                 {
-                    $errores['email'] = 'El email ya existe';
+                    
+                    if($this->usuarioModelo->existeUsuario($email) != 0)
+                    {
+                        $errores['email'] = 'El email ya existe1';
+                        $valido = false;
+                    }
+
+                }
+                else if($this->usuarioModelo->existeUsuario($email) != 0 && !isset($_SESSION['usuarioEditar']))
+                {
+                    $errores['email'] = 'El email ya existe2';
                     $valido = false;
 
                 }
@@ -100,7 +113,12 @@
                     
                 
                 $rol = $this->request->get_Dato('nuevoRol');
-                if ($rol == null)
+                
+                if($rol == null && isset($_POST['rolConfirm']))
+                {
+                    $rol = $_POST['rolConfirm'];
+                }
+                else if ($rol == null)
                 {
                     $errores['rol'] = 'Campo obligatorio';
                     $valido = false;
@@ -108,23 +126,31 @@
                 }
                 
                 $estado = $this->request->get_Dato('nuevoEstado');
-                if ($estado == null)
+                if($estado == null && isset($_POST['estadoConfirm']))
+                {
+                    $estado = $_POST['estadoConfirm'];
+                }
+                else if ($estado == null)
                 {
                     $errores['estado'] = 'Campo obligatorio';
                     $valido = false;
 
                 }
+                
                                 
-                $nuevoClave1 = $_POST['nuevoClave1'];
-                $password = $_POST['nuevoClave2'];
+                $nuevoClave1 = isset($_POST['nuevoClave1']) ? $_POST['nuevoClave1'] : null;
+                $password = isset($_POST['nuevoClave2']) ? $_POST['nuevoClave2'] : null;
+                
                 if ($nuevoClave1 == null)
                 {
                     $errores['clave1'] = 'Campo obligatorio';
+                    $errores['clave2'] = 'Campo obligatorio';
                     $valido = false;
 
                 }
                 else if($password == null)
                 {
+                    $errores['clave1'] = 'Campo obligatorio';
                     $errores['clave2'] = 'Campo obligatorio';
                     $valido = false;
 
@@ -138,93 +164,113 @@
                 }
                  else
                 {
-                     $password = $this->request->get_Password('nuevoClave1');
+                    $edicion['password'] = $password;
+                    $password = $this->request->get_Password('nuevoClave1');
                 }
                 
                 $img = $this->request->get_Imagen('nuevoFoto');
-                    
-                if($valido)
+                
+                if($img != null)
                 {
-                    if(isset($_POST['guardar']))
-                    {
-                        $columns = [
-                            'nombre' => $nombre,
-                            'email' => $email,
-                            'Apellidos' => $apellidos,
-                            'password' => $password,
-                            'direccion' => $direccion,
-                            'telefono' => $telefono,
-                            'rol' => $rol,
-                            'estado' => $estado
-                        ];
-                        $this->usuarioModelo->actualizarUsuario($_SESSION['emailEditar'],$columns);
+                    setcookie('imgEdicion', $img);
 
+                }
+                else if($img == null && isset($_COOKIE['imgEdicion']))
+                {
+                    $img = $_COOKIE['imgEdicion'];
+                }
+                
+
+                if($valido && isset($_POST['confirmado']))
+                {
+                    $edicion['valido'] = $valido;
+                    $this->datos['edicion'] = $edicion;
+
+                    if(isset($_SESSION['usuarioEditar']))
+                    {
+                        $columns  = [
+                            'nombre' => $nombre,
+                            'email' => $email, 
+                            'apellidos' => $apellidos,
+                            'password' => $password,
+                            'telefono' => $telefono,
+                            'direccion' => $direccion,
+                            'foto' => $img,
+                            'estado' => $estado,
+                            'rol' => $rol
+                        ];
+                        $this->usuarioModelo->actualizarUsuario($_SESSION['usuarioEditar'],$columns);
+                        unset($_SESSION['usuarioEditar']);
+                        setcookie('imgEdicion', '', time() - 3600);
                     }
                     else
                     {
                         $this->usuarioModelo->nuevoUsuario($email,$nombre,$apellidos,$password,$telefono,$direccion,$img,$estado,$rol);
-
                     }
                      
-                    //$this->index();
+                    $this->index();
+
                 }
                 else
                 {
-                    if(isset($_POST['guardar']))
-                    {
-                        echo "Estoy para guardar el usuario y no todo ha ido bien";
-                        $agregar['editar'] = true;
-
-                    }
+                    
                     $imgCod = $this->request->imagen_Codificada($img);
 
-                    $agregar['nombre'] = $nombre;
-                    $agregar['apellidos'] = $apellidos;
-                    $agregar['email'] = $email;
-                    $agregar['direccion'] = $direccion;
-                    $agregar['telefono'] = $telefono;
-                    $agregar['rol'] = $rol;
-                    $agregar['estado'] = $estado;
-                    $agregar['img'] = $imgCod;
-                    $agregar['errores'] = $errores;
-                    $agregar['valido'] = $valido;
-                    $this->datos['agregar'] = $agregar;
-                
+                    $edicion['nombre'] = $nombre;
+                    $edicion['apellidos'] = $apellidos;
+                    $edicion['email'] = $email;
+                    $edicion['direccion'] = $direccion;
+                    $edicion['telefono'] = $telefono;
+                    $edicion['rol'] = $rol;
+                    $edicion['estado'] = $estado;
+                    $edicion['img'] = $imgCod;
+                    $edicion['errores'] = $errores;
+                    $edicion['valido'] = $valido;
+                    $this->datos['edicion'] = $edicion;
+
+                    $this->cargarVista('gestionUsuario/edicion', $this->datos);
                 }
                 
                 
-                $this->index();
-                
-                
             }
+
+            
         }
 
 
         public function editar()
         {
+            $errores = []; 
+            $editar = [];
+            $this->datos['action'] = RUTA_URL . '/gestionUsuario/agregar';
             if($_SERVER['REQUEST_METHOD'] === 'POST')
             {
-                $errores = []; 
-                $editar = [];
-                $id = $this->request->get_Email('email');
-                $_SESSION['emailEditar'] = $id;
-                $usuario = $this->usuarioModelo->obtenerUsuario($id);
+                if(isset($_POST['email']))
+                {
+                    $id = $this->request->get_Email('email');
+                    $usuario = $this->usuarioModelo->obtenerUsuario($id);
+                    
+                    $_SESSION['usuarioEditar'] = $usuario['email'];
+                    
+                    $editar['nombre'] = $usuario['nombre'];
+                    $editar['apellidos'] = $usuario['apellidos'];
+                    $editar['email'] = $usuario['email'];
+                    $editar['direccion'] = $usuario['direccion'];
+                    $editar['telefono'] = $usuario['telefono'];
+                    $editar['rol'] = $usuario['rol'];
+                    $editar['estado'] = $usuario['estado'];
+                    $editar['img'] = $usuario['foto'];
+                    $editar['errores'] = $errores;
+                    $editar['valido'] = false;
+                    
+                    $this->datos['edicion'] = $editar;
+
+                    $this->cargarVista('gestionUsuario/edicion', $this->datos);
+
+                }
                 
-                var_dump($usuario);
-                $editar['nombre'] = $usuario['nombre'];
-                $editar['apellidos'] = $usuario['apellidos'];
-                $editar['email'] = $usuario['email'];
-                $editar['direccion'] = $usuario['direccion'];
-                $editar['telefono'] = $usuario['telefono'];
-                $editar['rol'] = $usuario['rol'];
-                $editar['estado'] = $usuario['estado'];
-                $editar['img'] = $usuario['foto'];
-                $editar['errores'] = $errores;
-                $editar['editar'] = true;
-                $this->datos['agregar'] = $editar;
             }
             
-            $this->index();
         }
 
         

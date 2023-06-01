@@ -28,5 +28,14 @@
                           </script>";
                 }
         ?>
+        <?php
+                if (isset($_POST['nuevo'])) {
+                    echo "<script>
+                            $(document).ready(function() {
+                              $('#nuevoModal').modal('show');
+                            });
+                          </script>";
+                }
+        ?>
     </body>
 </html>
