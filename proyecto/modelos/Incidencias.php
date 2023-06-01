@@ -39,8 +39,7 @@
                 'keywords' => $keywords,
                 'idusuario' => $idusuario,
                 'estado' => $estado
-            ];
-        
+            ];        
             return $this->insert($table, $columns);
         }
 

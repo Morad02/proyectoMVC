@@ -96,6 +96,7 @@ class Modelo
     public function insert($table, $params = [])
     {
         $query = $this->buildQuery($table, [], $params, 'INSERT INTO');
+        //var_dump($query);
 
         return $this->query($query['query'], $query['params'], $query['blobs']);
     }
