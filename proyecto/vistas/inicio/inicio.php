@@ -4,36 +4,26 @@
     <div class="col-md-9">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/filtrar.php'?>
         <div class="row">
+        <?php
+            if(isset($datos['incidencias']))
+            {
+                foreach($datos['incidencias'] as $incidencia)
+                { 
+        ?>
             <div class="col-md-4 mb-4">
                 <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
+                    <img src="<?php echo $datos['incidencia']['imagenes'][0]?>" class="card-img-top" alt="Imagen Incidencia">
                     <div class="card-body">
-                        <h5 class="card-title">Producto 1</h5>
-                        <p class="card-text">Descripción del producto 1.</p>
+                        <h5 class="card-title"><?php echo $datos['incidencia']['titulo']?></h5>
+                        <p class="card-text"><?php echo $datos['incidencia']['valoracion']?></p>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mi-modal">Ver más detalle</button>
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Producto 1</h5>
-                        <p class="card-text">Descripción del producto 1.</p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mi-modal">Ver más detalle</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
-                    <div class="card-body">
-                        <h5 class="card-title">Producto 1</h5>
-                        <p class="card-text">Descripción del producto 1.</p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mi-modal">Ver más detalle</button>
-                    </div>
-                </div>
-            </div>
+        <?php
+                }
+            }
+        ?>    
         </div>
     </div>
     <div class="col-md-3">

@@ -1,6 +1,6 @@
 <?php
 
-    class NuevaIncidencia extends Controlador
+    class GestionIncidencia extends Controlador
     {
         public function __construct() 
         {

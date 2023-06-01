@@ -7,6 +7,10 @@
                     <span aria-hidden="true"></span>
                 </button>
             </div>
+            <?php
+            if(isset($datos['incidencia']))
+            {
+            ?>
             <div class="modal-body">
                 <div class="container-fluid">
                     <div class="row justify-content-center">
@@ -23,16 +27,7 @@
                                     <li class="d-inline">Estado:<?php echo $datos['incidencia']['estado']?></li>
                                     <li class="d-inline">Valoraciones:</li>
                                 </ul>
-                                <p class="w-100">"But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and
-                                    I will give you a complete account of the system, and expound the actual teachings of the great explorer of
-                                    the truth, the master-builder of human happiness. No one rejects, dislikes, or avoids pleasure itself,
-                                    because it is pleasure, but because those who do not know how to pursue pleasure rationally encounter
-                                    consequences that are extremely painful. Nor again is there anyone who loves or pursues or desires to obtain
-                                    pain of itself, because it is pain, but because occasionally circumstances occur in which toil and pain can
-                                    procure him some great pleasure. To take a trivial example, which of us ever undertakes laborious physical
-                                    exercise, except to obtain some advantage from it? But who has any right to find fault with a man who chooses
-                                    to enjoy a pleasure that has no annoying consequences, or one who avoids a pain that produces no resultant
-                                    pleasure?</p>
+                                <p class="w-100"><?php echo $datos['incidencia']['valoracion']?></p>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-4">
@@ -46,6 +41,10 @@
                                         </div>
                                     </div>
                                 </div>
+                                <?php
+                                    if(isset($datos['incidencia']['comentarios']))
+                                    {
+                                ?>
                                 <div class="row">
                                     <table class="table">
                                         <thead>
@@ -55,17 +54,23 @@
                                         </tr>
                                         </thead>
                                         <tbody>
+                                        <?php    
+                                            foreach($datos['incidencia']['comentarios'] as $comentario)
+                                            { 
+                                        ?>
                                         <tr>
-                                            <td>John Doe<br>Mayo 17, 2023</td>
-                                            <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</td>
+                                            <td><?php echo $comentario['nombre']?><br><?php echo $comentario['fecha']?></td>
+                                            <td><?php echo $comentario['texto']?></td>
                                         </tr>
-                                        <tr>
-                                            <td>Jane Smith<br>Mayo 16, 2023</td>
-                                            <td>Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</td>
-                                        </tr>
+                                        <?php
+                                            }
+                                        ?>
                                         </tbody>
                                     </table>
                                 </div>
+                                <?php
+                                    }   
+                                ?>
                                 <div id="nuevo-comentario-container">
                                     <div id="nuevo-comentario" class="collapse">
                                         <textarea class="form-control" placeholder="Escribe tu comentario..."></textarea>
@@ -96,6 +101,9 @@
                     </button>
                 </div>
             </div>
+            <?php
+            }   
+            ?>
         </div>
     </div>
 </div>

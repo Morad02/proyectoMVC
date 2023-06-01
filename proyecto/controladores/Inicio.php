@@ -22,11 +22,9 @@
 
         public function index()
         {
-            
-           
             $datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
-            foreach ($datos['incidencias'] as $incidencia){
-                $datos['imagenes'][] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['idincidencia']);
+            foreach ($datos['incidencias'] as $indice => $incidencia) {
+                $datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['idincidencia']);
             }
             $this->cargarVista('inicio/inicio', $this->datos);
 
