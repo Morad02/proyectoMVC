@@ -2,7 +2,7 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <div class="row">
     <div class="col-md-6 mt-4 mx-auto">
-        <form id="nuevaIncidencia" action="<?php echo RUTA_URL?>/nuevaIncidencia/agregar" method="POST"  enctype="multipart/formdata">
+        <form id="nuevaIncidencia" action="<?php echo RUTA_URL?>/GestionIncidencia/agregar" method="POST"  enctype="multipart/formdata">
           <div class="form-group">
             <label for="inputTitulo">Título</label>
             <input type="text" class="form-control" id="inputTitulo" name="titulo" placeholder="Ingrese el título">

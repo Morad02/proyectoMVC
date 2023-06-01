@@ -22,12 +22,12 @@
 
         public function index()
         {
-            $datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
-            if (empty($datos['incidencias'])) {
+            $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
+            if (empty($this->datos['incidencias'])) {
                 echo "No se encontraron incidencias";
             }
-            foreach ($datos['incidencias'] as $indice => $incidencia) {
-                $datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['idincidencia']);
+            foreach ($this->datos['incidencias'] as $indice => $incidencia) {
+                $this->datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['id']);
             }
             $this->cargarVista('inicio/inicio', $this->datos);
 
@@ -44,6 +44,7 @@
                     $query = $this->usuarioModelo->obtenerUsuario($email);
                     $_SESSION['nombre'] = $query['nombre'];
                     $_SESSION['rol'] = $query['rol'];
+                    $_SESSION['email'] = $query['email'];
                     $this->datos['sesion']['nombre'] = $query['nombre'];
                     $this->datos['sesion']['rol'] = $query['rol'];
                 }

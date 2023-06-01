@@ -27,7 +27,7 @@
                                     <li class="d-inline">Estado:<?php echo $datos['incidencia']['estado']?></li>
                                     <li class="d-inline">Valoraciones:</li>
                                 </ul>
-                                <p class="w-100"><?php echo $datos['incidencia']['valoracion']?></p>
+                                <p class="w-100"><?php echo $datos['incidencia']['descripcion']?></p>
                                 <div class="container">
                                     <div class="row">
                                         <div class="col-md-4">

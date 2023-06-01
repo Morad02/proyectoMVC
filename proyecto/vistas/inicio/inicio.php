@@ -12,11 +12,24 @@
         ?>
             <div class="col-md-4 mb-4">
                 <div class="card">
-                    <img src="<?php echo $datos['incidencia']['imagenes'][0]?>" class="card-img-top" alt="Imagen Incidencia">
+                <?php
+                    if(isset($incidencia['imagenes'][0]))
+                    {
+                ?>
+                        <img src="<?php echo $incidencia['imagenes'][0]?>" class="card-img-top" alt="Imagen Incidencia">
+                <?php
+                    }else{
+                ?>
+                    <img src="https://via.placeholder.com/300x200" class="card-img-top" alt="...">
+                <?php
+                    }
+                ?>
                     <div class="card-body">
-                        <h5 class="card-title"><?php echo $datos['incidencia']['titulo']?></h5>
-                        <p class="card-text"><?php echo $datos['incidencia']['valoracion']?></p>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mi-modal">Ver más detalle</button>
+                        <h5 class="card-title"><?php echo $incidencia['titulo']?></h5>
+                        <p class="card-text"><?php echo $incidencia['descripcion']?></p>
+                        <div class="d-flex justify-content-center">
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mi-modal">Ver más detalle</button>
+                        </div>
                     </div>
                 </div>
             </div>

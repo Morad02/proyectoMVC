@@ -40,6 +40,8 @@
                 'idusuario' => $idusuario,
                 'estado' => $estado
             ];
+
+            var_dump($columns);
         
             return $this->insert($table, $columns);
         }

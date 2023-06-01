@@ -35,7 +35,7 @@
                     <img src="<?php echo RUTA_URL?>/img/usuario.svg" alt="Foto de perfil" class="img-fluid mb-3">
                     <div>
                         <button class="btn btn-primary">Editar usuario</button>
-                        <a href="<?php echo RUTA_URL?>/inico/logout" class="btn btn-danger" role="button">Cerrar sesión</a>
+                        <a href="<?php echo RUTA_URL?>/inicio/logout" class="btn btn-danger" role="button">Cerrar sesión</a>
                     </div>
                 </div>
             </div>
