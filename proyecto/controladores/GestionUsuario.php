@@ -255,8 +255,6 @@
                     $edicion['valido'] = $valido;
                     $this->datos['edicion'] = $edicion;
 
-                    var_dump($this->datos);
-                    var_dump($_SESSION['usuarioEditar']);
                     $this->cargarVista('gestionUsuario/edicion', $this->datos);
                 }
                 

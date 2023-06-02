@@ -54,18 +54,25 @@ class Request
 
     
     function imagen_Codificada($datosImagen) {
-        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        if($datosImagen != null)
+        {
+            $finfo = new finfo(FILEINFO_MIME_TYPE);
     
-        // Obten el tipo MIME de los datos de la imagen
-        $tipoMime = $finfo->buffer($datosImagen);
+            // Obten el tipo MIME de los datos de la imagen
+            $tipoMime = $finfo->buffer($datosImagen);
+            
+            // Codificar los datos de imagen como Base64
+            $datosImagenBase64 = base64_encode($datosImagen);
+            
+            // Crear una cadena de datos URI
+            $datosUri = "data:$tipoMime;base64," . $datosImagenBase64;
+            
+            return $datosUri;
 
-        // Codificar los datos de imagen como Base64
-        $datosImagenBase64 = base64_encode($datosImagen);
+        }
 
-        // Crear una cadena de datos URI
-        $datosUri = "data:$tipoMime;base64," . $datosImagenBase64;
-
-        return $datosUri;
+        return '';
+        
     }
     
     

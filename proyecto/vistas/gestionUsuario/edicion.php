@@ -7,7 +7,7 @@
               <label for="foto">Foto</label>
               <div class="row">
                 <div class="col-md-4">
-                  <img id="imagenPrevia" src="<?php echo isset($datos['edicion']['valido']) && !$datos['edicion']['valido'] && isset($datos['edicion']['img']) ? $datos['edicion']['img'] : RUTA_URL.'/img/usuario.svg'; ?>" alt="Foto de usuario" class="img-fluid w-50 h-50">
+                  <img id="imagenPrevia" src="<?php isset($datos['edicion']['img']) ? $datos['edicion']['img'] : RUTA_URL.'/img/usuario.svg'; ?>" alt="Foto de usuario" class="img-fluid w-50 h-50">
                 </div>
                 <div class="col-md-8">
                   <input type="file" class="form-control-file" id="nuevoFoto" name="nuevoFoto" <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "disabled" : ''?>>
