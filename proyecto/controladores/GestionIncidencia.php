@@ -57,19 +57,21 @@
                     
                 
                 $palabras = $this->request->get_Dato('keywords');
+                if ($palabras == null)
+                {
+                    $errores['palabras'] = 'Campo obligatorio';
+                    $valido = false;
+                }
                 
                 
                                 
                 if($valido)
                 {
-                    $fecha = 'NULL';
-                    if(isset($_SESSION['email'])){
-                        $idusuario = $_SESSION['email'];
-                    }else{
-                        $idusuario = "admin@admin.com";
-                    }
-                    $estado = "Activo";
-                    $this->incidenciasModelo->nuevaIncidencia($titulo, $fecha, $lugar, $descripcion,$palabras, $idusuario, $estado); 
+                    
+                
+                    $idusuario = $this->datos['sesion']['email'];
+                    $estado = "Pendiente";
+                    $this->incidenciasModelo->nuevaIncidencia($titulo, $lugar, $descripcion,$palabras, $idusuario, $estado); 
                     $this->index();
                 }
                 else
@@ -80,8 +82,7 @@
                         'lugar' => $lugar,
                         'palabras' => $palabras,
                         'errores' => $errores,
-                        'valido' => $valido,
-                        ''
+                        'valido' => $valido
                     ];
 
                     $this->datos['agregar'] = $agregar;
