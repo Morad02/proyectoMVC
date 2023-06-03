@@ -25,7 +25,7 @@
           </div>
           <div class="form-group">
             <label for="inputImagenes">Imágenes</label>
-            <input type="file" class="form-control" id="inputImagenes" name="imagenes" multiple accept="image/*">
+            <input type="file" class="form-control" id="inputImagenes" name="imagenes[]" multiple accept="image/*">
           </div>
           <div class="form-group border">
             <label class="m-2">Imágenes seleccionadas:</label>

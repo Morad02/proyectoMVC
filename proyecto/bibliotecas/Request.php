@@ -58,19 +58,24 @@ class Request
 
     public function get_imagenes($nombre) {
         $imagenesBase64 = [];
-    
-        if(isset($_FILES[$nombre]) && is_array($_FILES[$nombre]['tmp_name'])) {
+        if(isset($_FILES[$nombre])) {
+            // Comprobar si se subió una sola imagen o varias
+            // Normalmente, $_FILES[$nombre]['tmp_name'] siempre será un array incluso si se sube una sola imagen
+            // debido al atributo "multiple" en el input del archivo.
             foreach ($_FILES[$nombre]['tmp_name'] as $rutaTemporal) {
+                // Verificar si la ruta temporal no está vacía
                 if(!empty($rutaTemporal)) {
+                    // Leer el contenido de la imagen
                     $contenidoImagen = file_get_contents($rutaTemporal);
-                    // Codificación en base64
+                    // Codificar en base64
                     $imagenBase64 = base64_encode($contenidoImagen);
+                    // Agregar a la lista de imágenes
                     $imagenesBase64[] = $imagenBase64;
                 }
             }
             return $imagenesBase64;
         }
-    
+        // Si $_FILES[$nombre] no está configurado, devolver nulo
         return null;
     }
     

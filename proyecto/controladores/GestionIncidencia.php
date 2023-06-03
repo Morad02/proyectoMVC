@@ -65,7 +65,7 @@
                 }
 
                 $imagenes = $this->request->get_imagenes('imagenes');
-                var_dump($imagenes);
+                
 
                 if($imagenes != null)
                 {
@@ -86,12 +86,13 @@
                     $estado = "Pendiente";
                     $this->incidenciasModelo->nuevaIncidencia($titulo, $lugar, $descripcion,$palabras, $idusuario, $estado);
                     $id = $this->incidenciasModelo->lastId();
-                    
                     foreach($imagenes as $imagen)
                     {
+                       
                         $this->fotosModelo->insertarFoto($imagen, $id);
 
                     }
+                    unsset($_SESSION['imagenesEdicion']);
                     $this->index();
                 }
                 else

@@ -32,9 +32,9 @@ class Modelo
             }
         
             $stmt->bind_param($types, ...$values);
+            var_dump($values);
         }
         
-        //var_dump($values);
         $result = null;
     
         if ($stmt->execute()) {
@@ -171,7 +171,6 @@ class Modelo
         if($result != null )
         {
             $dataType = $result[0]['DATA_TYPE'];
-
             return ($dataType == 'mediumblob');
         }
 
