@@ -2,21 +2,17 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <?php $incidencia = $datos['incidencia'];?>
 <div class="row">
-    <div class="col-md-9 mt-4 mx-auto border ml-4">
-        <!-- <div class="col-12 col-md-9"> -->
-        <div id="Incidencia">
-            <h2 class="text-center"><?php echo $incidencia['titulo']?></h2>
-            <ul class="list-unstyled">
-                <li class="d-inline">Lugar:<?php echo $incidencia['lugar']?></li>
-                <li class="d-inline">Fecha:<?php echo $incidencia['fecha']?></li>
-                <li class="d-inline">Creado por:<?php echo $incidencia['idusuario']?></li>
+    <div class="col-md-9">
+        <div id="container ml-5">
+            <h2 class="titulousuario"><?php echo $incidencia['titulo']?></h2>
+            <ul class="left-column">
+                <li>Lugar: <?php echo $incidencia['lugar']?></li>
+                <li>Fecha: <?php echo $incidencia['fecha']?></li>
+                <li>Creado por: <?php echo $incidencia['idusuario']?></li>
+                <li>Palabras clave: <?php echo $incidencia['keywords']?></li>
+                <li>Estado: <?php echo $incidencia['estado']?></li>
             </ul>
-            <ul class="list-unstyled">
-                <li class="d-inline">Palabras clave:<?php echo $incidencia['keywords']?></li>
-                <li class="d-inline">Estado:<?php echo $incidencia['estado']?></li>
-                <li class="d-inline">Valoraciones:</li>
-            </ul>
-            <p class="w-80"><?php echo $incidencia['descripcion']?></p>
+            <p><?php echo $incidencia['descripcion']?></p>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
@@ -35,27 +31,29 @@
                 {
             ?>
             <div class="row">
-                <table class="table">
-                    <thead>
-                    <tr>
-                        <th>Nombre y fecha</th>
-                        <th>Comentario</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <?php   
-                        foreach($incidencia['comentarios'] as $comentario)
-                        {
-                    ?>
-                    <tr>
-                        <td><?php echo $comentario['idusuario']?><br><?php echo $comentario['fecha']?></td>
-                        <td><?php echo $comentario['comentario']?></td>
-                    </tr>
-                    <?php
-                        }
-                    ?>
-                    </tbody>
-                </table>
+                <div class="container ml-5 mt-5">
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Nombre y fecha</th>
+                            <th>Comentario</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <?php   
+                            foreach($incidencia['comentarios'] as $comentario)
+                            {
+                        ?>
+                        <tr>
+                            <td><?php echo $comentario['idusuario']?><br><?php echo $comentario['fecha']?></td>
+                            <td><?php echo $comentario['comentario']?></td>
+                        </tr>
+                        <?php
+                            }
+                        ?>
+                        </tbody>
+                    </table>
+                </div>
             </div>
             <?php
                 }   
@@ -67,7 +65,6 @@
                 </div>
             </div>
         </div>
-        <!-- </div>  -->
         <div class="btn-container">
             <button class="btn btn-round" type="button">
                 <i class="fas fa-plus"></i>

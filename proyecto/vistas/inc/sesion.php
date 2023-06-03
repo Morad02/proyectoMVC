@@ -4,7 +4,7 @@
     {
 
 ?>
-        <div class="card mt-4">
+        <div class="card">
             <div class="card-body">
                 <h5 class="card-title">Iniciar sesión</h5>
                 <form action="<?php echo RUTA_URL?>/inicio/login" method="POST">
@@ -26,7 +26,7 @@
     else
     {
 ?>
-            <div class="card mt-4">
+            <div class="card">
                 <div class="card-body text-center">
                     <div class="mb-3">
                         <p class="mb-0"><?php echo $datos['sesion']['nombre']?></p>

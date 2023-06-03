@@ -19,7 +19,9 @@
     <title><?php echo NOMBRE_PAGINA?></title>
 </head>
 <body>
-    <div class="container-fluid p-0">
-        <a href="<?php echo RUTA_URL ?>/"> <!-- Reemplaza RUTA_URL con la URL de tu página principal -->
-            <img src="<?php echo RUTA_URL ?>/Imagenes/banner.png" class="hero-image" alt="Imagen de la aplicación">
-        </a>
+    <div class="container-fluid">
+        <div class="w100">
+            <a href="<?php echo RUTA_URL ?>/"> <!-- Reemplaza RUTA_URL con la URL de tu página principal -->
+                <img src="<?php echo RUTA_URL ?>/Imagenes/banner.png" class="hero-image" alt="Imagen de la aplicación">
+            </a>
+        </div>
