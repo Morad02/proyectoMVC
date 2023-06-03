@@ -14,7 +14,7 @@
         {
             if (isset($_POST['idIncidencia'])){
                 $this->datos['incidencia'] = $this->IncidenciaModelo->obtenerIncidencia($_POST['idIncidencia']);
-                $this->datos['comentarios'] = $this->ComentariosModelo->getComentarios($_POST['idIncidencia']);
+                $this->datos['incidencia']['comentarios'] = $this->ComentariosModelo->getComentarios($_POST['idIncidencia']);
                 //$this->datos['fotos'] = $this->FotosModelo->getFotos($_POST['idIncidencia']);
                 $this->cargarVista('incidencia/index', $this->datos);
             }
