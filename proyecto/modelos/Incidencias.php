@@ -28,8 +28,9 @@
             $this->query($q);
         }
 
-        public function nuevaIncidencia($titulo, $fecha, $lugar, $descripcion,$keywords, $idusuario, $estado)
+        public function nuevaIncidencia($titulo,$lugar, $descripcion,$keywords, $idusuario, $estado)
         {
+            $fecha = date('Y-m-d H:i:s');
             $table = "incidencias";
             $columns = [
                 'titulo' => $titulo,

@@ -41,14 +41,6 @@ document.getElementById('inputImagenes').addEventListener('change', function(eve
     reader.readAsDataURL(file);
 }
 });
-    var form = document.getElementById('nuevaIncidencia');
-    form.addEventListener('submit', function(event) {
-    event.preventDefault();
+  
 
-    var modal = new bootstrap.Modal(document.getElementById('confirmModal'));
-    modal.show();
-});
-
-    document.getElementById('confirmSubmit').addEventListener('click', function() {
-    form.submit();
-});
+    

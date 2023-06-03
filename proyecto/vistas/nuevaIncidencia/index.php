@@ -2,22 +2,26 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <div class="row">
     <div class="col-md-6 mt-4 mx-auto">
-        <form id="nuevaIncidencia" action="<?php echo RUTA_URL?>/GestionIncidencia/agregar" method="POST"  enctype="multipart/formdata">
+        <form id="nuevaIncidencia" action="<?php echo RUTA_URL?>/GestionIncidencia/agregar" method="POST"  enctype="multipart/form-data">
           <div class="form-group">
             <label for="inputTitulo">Título</label>
-            <input type="text" class="form-control" id="inputTitulo" name="titulo" placeholder="Ingrese el título">
+            <input type="text" class="form-control <?php echo (isset($datos['agregar']['errores']['titulo'])) ? 'is-invalid' : ''; ?>" id="inputTitulo" name="titulo" placeholder="Ingrese el título" value="<?php echo isset($datos['agregar']['titulo']) ? $datos['agregar']['titulo'] : ''; ?>" <?php echo isset($datos['agregar']['valido']) && $datos['agregar']['valido'] ? "readonly" : ''?>>
+            <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['titulo']?></div>
           </div>
           <div class="form-group">
             <label for="inputDescripcion">Descripción</label>
-            <textarea class="form-control" id="inputDescripcion" name="descripcion" rows="3" placeholder="Ingrese la descripción"></textarea>
+            <textarea class="form-control <?php echo (isset($datos['agregar']['errores']['descripcion'])) ? 'is-invalid' : ''; ?>" id="inputDescripcion" name="descripcion" rows="3" placeholder="Ingrese la descripción" value="<?php echo isset($datos['agregar']['descripcion']) ? $datos['agregar']['descripcion'] : ''; ?>" <?php echo isset($datos['agregar']['valido']) && $datos['agregar']['valido'] ? "readonly" : ''?>></textarea>
+            <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['descripcion']?></div>
           </div>
           <div class="form-group">
             <label for="inputLugar">Lugar</label>
-            <input type="text" class="form-control" id="inputLugar" name="lugar" placeholder="Ingrese el lugar">
+            <input type="text" class="form-control <?php echo (isset($datos['agregar']['errores']['lugar'])) ? 'is-invalid' : ''; ?>" id="inputLugar" name="lugar" placeholder="Ingrese el lugar" value="<?php echo isset($datos['agregar']['lugar']) ? $datos['agregar']['lugar'] : ''; ?>" <?php echo isset($datos['agregar']['valido']) && $datos['agregar']['valido'] ? "readonly" : ''?>>
+            <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['lugar']?></div>
           </div>
           <div class="form-group">
             <label for="inputPalabrasClave">Palabras clave</label>
-            <input type="text" class="form-control" id="inputPalabrasClave" name="keywords" placeholder="Ingrese las palabras clave">
+            <input type="text" class="form-control <?php echo (isset($datos['agregar']['errores']['palabras'])) ? 'is-invalid' : ''; ?>" id="inputPalabrasClave" name="keywords" placeholder="Ingrese las palabras clave" value="<?php echo isset($datos['agregar']['palabras']) ? $datos['agregar']['palabras'] : ''; ?>" <?php echo isset($datos['agregar']['valido']) && $datos['agregar']['valido'] ? "readonly" : ''?>>
+            <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['palabras']?></div>
           </div>
           <div class="form-group">
             <label for="inputImagenes">Imágenes</label>
@@ -27,30 +31,27 @@
             <label class="m-2">Imágenes seleccionadas:</label>
             <div id="previewImagenes" class="d-flex flex-wrap"></div>
           </div>
+          <?php
+            if(isset($datos['agregar']['valido'] ) && $datos['agregar']['valido'] )
+            {
+          ?>
+          <input type="hidden" name="confirmado" value="confirmado">
+          <button type="submit" class="btn btn-primary" id="confirmSubmit">Confirmar</button>
+          <?php
+            }
+            else
+            {
+          ?>
           <button type="submit" class="btn btn-primary">Enviar</button>
+          <?php
+            }
+          ?>
         </form>
   </div>
-  <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="confirmModalLabel">Confirmación</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-          ¿Estás seguro de que quiere crear la incidencia?
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-          <button type="button" class="btn btn-primary" id="confirmSubmit">Enviar</button>
-        </div>
-      </div>
-    </div>
-    </div>
-    <div class="col-md-3">
-        <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
-        <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
-    </div>
+  <div class="col-md-3">
+      <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
+      <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
+  </div>
 </div>
 <script src="<?php echo RUTA_URL?>/js/nIncidencia.js"></script>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/footer.php'?>
