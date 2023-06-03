@@ -5,6 +5,7 @@
         public function __construct() 
         {
             $this->incidenciasModelo = $this->cargarModelo('Incidencias');
+            $this->fotosModelo = $this->cargarModelo('Fotos');
             $this->request = new Request();
             $this->datos = [];
             
@@ -62,16 +63,27 @@
                     $errores['palabras'] = 'Campo obligatorio';
                     $valido = false;
                 }
+
+                $imagenes = $this->request->get_Imagenes('imagenes');
+
+                if($imagenes != )
                 
                 
                                 
-                if($valido)
+                if($valido && isset($_POST['confirmado']))
                 {
                     
                 
                     $idusuario = $this->datos['sesion']['email'];
                     $estado = "Pendiente";
-                    $this->incidenciasModelo->nuevaIncidencia($titulo, $lugar, $descripcion,$palabras, $idusuario, $estado); 
+                    $this->incidenciasModelo->nuevaIncidencia($titulo, $lugar, $descripcion,$palabras, $idusuario, $estado);
+                    $id = $this->incidenciasModelo->lastId();
+                    
+                    foreach($imagenes as $imagen)
+                    {
+                        $this->fotosModelo->insertarFoto($imagen, $id);
+
+                    }
                     $this->index();
                 }
                 else
