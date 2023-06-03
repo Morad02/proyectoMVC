@@ -64,9 +64,17 @@
                     $valido = false;
                 }
 
-                $imagenes = $this->request->get_Imagenes('imagenes');
+                $imagenes = $this->request->get_imagenes('imagenes');
+                var_dump($imagenes);
 
-                if($imagenes != )
+                if($imagenes != null)
+                {
+                    $_SESSION['imagenesEdicion'] = $imagenes;
+                }
+                else if($imagenes == null && isset($_SESSION['imagenesEdicion']))
+                {
+                    $imagenes = $_SESSION['imagenesEdicion'];
+                }
                 
                 
                                 
