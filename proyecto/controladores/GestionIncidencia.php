@@ -65,6 +65,7 @@
                 }
 
                 $imagenes = $this->request->get_imagenes('imagenes');
+                var_dump($imagenes);
 
                 if($imagenes != null)
                 {
