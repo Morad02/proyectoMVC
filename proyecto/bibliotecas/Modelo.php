@@ -11,7 +11,7 @@ class Modelo
     public function query($select, $params = [], $blobs = [], $return_result = true)
     {
         $stmt = $this->db->prepare($select);
-    
+        
         if (!$stmt) {
             echo $select;
             echo $stmt;

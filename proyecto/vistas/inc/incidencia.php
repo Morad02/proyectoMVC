@@ -1,8 +1,5 @@
-<div class="modal" id="mi-modal">
-    <div class="modal-dialog modal-dialog-centered modal-xl">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Incidencia</h5>
+
+
                 <button class="btn-close" data-bs-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true"></span>
                 </button>
@@ -102,7 +99,7 @@
                 </div>
             </div>
             <?php
-            }   
+            }  
             ?>
         </div>
     </div>

@@ -41,7 +41,7 @@
                 'estado' => $estado,
                 'rol' => $rol
             ];
-        
+            
             return $this->insert($table, $params);
         }
 
@@ -59,8 +59,6 @@
                 'email' => $email
             ];
             
-            var_dump($Columns);
-            var_dump($email);
             return $this->update($table, $Columns, $conditions);
         }
 

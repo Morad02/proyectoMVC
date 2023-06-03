@@ -47,42 +47,32 @@ class Request
         if(isset($_FILES[$nombre]) && !empty($_FILES[$nombre]['tmp_name'])) {
             $rutaTemporal = $_FILES[$nombre]['tmp_name'];
             $contenidoImagen = file_get_contents($rutaTemporal);
-            return $contenidoImagen;
+            // Codificación en base64
+            $imagenBase64 = base64_encode($contenidoImagen);
+            return $imagenBase64;
         }
         return null;
     }
-
     
-    function imagen_Codificada($datosImagen) {
-        if($datosImagen != null)
-        {
-            $finfo = new finfo(FILEINFO_MIME_TYPE);
-    
-            // Obten el tipo MIME de los datos de la imagen
-            $tipoMime = $finfo->buffer($datosImagen);
-            
-            // Codificar los datos de imagen como Base64
-            $datosImagenBase64 = base64_encode($datosImagen);
-            
-            // Crear una cadena de datos URI
-            $datosUri = "data:$tipoMime;base64," . $datosImagenBase64;
-            
-            return $datosUri;
 
+
+    public function get_imagenes($nombre) {
+        $imagenesBase64 = [];
+    
+        if(isset($_FILES[$nombre]) && is_array($_FILES[$nombre]['tmp_name'])) {
+            foreach ($_FILES[$nombre]['tmp_name'] as $rutaTemporal) {
+                if(!empty($rutaTemporal)) {
+                    $contenidoImagen = file_get_contents($rutaTemporal);
+                    // Codificación en base64
+                    $imagenBase64 = base64_encode($contenidoImagen);
+                    $imagenesBase64[] = $imagenBase64;
+                }
+            }
         }
-
-        return '';
-        
+    
+        return $imagenesBase64;
     }
     
-    
-
-    function borrarImagen($rutaImagen) {
-        if (file_exists($rutaImagen)) {
-            return unlink($rutaImagen); // Borra el archivo
-        }
-        return false; // El archivo no existe
-    }
     
     
 }

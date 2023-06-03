@@ -169,16 +169,16 @@
                     $password = $this->request->get_Password('nuevoClave1');
                 }
                 
-                $img = $this->request->get_Imagen('nuevoFoto');
+                $foto = $this->request->get_Imagen('nuevoFoto');
                 
-                if($img != null)
+                if($foto != null)
                 {
-                    $_SESSION['imgEdicion'] = $img;
+                    $_SESSION['imgEdicion'] = $foto;
 
                 }
-                else if($img == null && isset($_SESSION['imgEdicion']))
+                else if($foto == null && isset($_SESSION['imgEdicion']))
                 {
-                    $img = $_SESSION['imgEdicion'];
+                    $foto = $_SESSION['imgEdicion'];
                 }
                 
 
@@ -197,7 +197,7 @@
                             'password' => $password,
                             'telefono' => $telefono,
                             'direccion' => $direccion,
-                            'foto' => $img,
+                            'foto' => $foto,
                         ];
 
                         if($this->datos['sesion']['rol'] == 'admin')
@@ -206,28 +206,34 @@
                             $columns['estado'] = $estado;
 
                         }
+
+
                         $this->usuarioModelo->actualizarUsuario($_SESSION['usuarioEditar'],$columns);
 
                         if($this->datos['sesion']['email'] == $_SESSION['usuarioEditar'] && $email != $this->datos['sesion']['email'])
                         {
                             $this->datos['sesion']['email'] = $email;
+                            $_SESSION['email'] = $email;
                         }
 
                         if($this->datos['sesion']['email'] == $_SESSION['usuarioEditar'] && $nombre != $this->datos['sesion']['nombre'])
                         {
                             $this->datos['sesion']['nombre'] = $nombre;
+                            $_SESSION['nombre'] = $nombre;
                         }
 
                         if($this->datos['sesion']['email'] == $_SESSION['usuarioEditar'] && $rol != $this->datos['sesion']['rol'])
                         {
                             $this->datos['sesion']['rol'] = $rol;
+                            $_SESSION['rol'] = $rol;
                         }
                         unset($_SESSION['usuarioEditar']);
                         
                     }
                     else
                     {
-                        $this->usuarioModelo->nuevoUsuario($email,$nombre,$apellidos,$password,$telefono,$direccion,$img,$estado,$rol);
+                        
+                        $this->usuarioModelo->nuevoUsuario($email,$nombre,$apellidos,$password,$telefono,$direccion,$foto,$estado,$rol);
                     }
                     
                     if(isset($_SESSION['imgEdicion']))
@@ -241,7 +247,6 @@
                 else
                 {
                     
-                    $imgCod = $this->request->imagen_Codificada($img);
 
                     $edicion['nombre'] = $nombre;
                     $edicion['apellidos'] = $apellidos;
@@ -250,7 +255,7 @@
                     $edicion['telefono'] = $telefono;
                     $edicion['rol'] = $rol;
                     $edicion['estado'] = $estado;
-                    $edicion['img'] = $imgCod;
+                    $edicion['img'] = $foto;
                     $edicion['errores'] = $errores;
                     $edicion['valido'] = $valido;
                     $this->datos['edicion'] = $edicion;

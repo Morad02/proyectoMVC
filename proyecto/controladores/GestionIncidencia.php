@@ -13,6 +13,7 @@
             {
                 $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
                 $this->datos['sesion']['rol'] = $_SESSION['rol'];
+                $this->datos['sesion']['email'] = $_SESSION['email'];
             }
             
         }
@@ -57,7 +58,7 @@
                 
                 $palabras = $this->request->get_Dato('keywords');
                 
-                $img = $this->request->imagen_Codificada('imagenes');
+                
                                 
                 if($valido)
                 {
@@ -68,10 +69,27 @@
                         $idusuario = "admin@admin.com";
                     }
                     $estado = "Activo";
-+                   $this->incidenciasModelo->nuevaIncidencia($titulo, $fecha, $lugar, $descripcion,$palabras, $idusuario, $estado); 
+                    $this->incidenciasModelo->nuevaIncidencia($titulo, $fecha, $lugar, $descripcion,$palabras, $idusuario, $estado); 
                     $this->index();
                 }
+                else
+                {
+                    $agregar = [
+                        'titulo' => $titulo,
+                        'descripcion' => $descripcion,
+                        'lugar' => $lugar,
+                        'palabras' => $palabras,
+                        'errores' => $errores,
+                        'valido' => $valido,
+                        ''
+                    ];
+
+                    $this->datos['agregar'] = $agregar;
+
+                    $this->cargarVista('nuevaIncidencia/index', $this->datos);
+                }
             }
+            
         }
 
         public function editar()
