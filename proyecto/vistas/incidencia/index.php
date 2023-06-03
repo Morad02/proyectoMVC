@@ -2,7 +2,7 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <?php $incidencia = $datos['incidencia'];?>
 <div class="row">
-    <div class="col-md-9 mt-4 mx-auto">
+    <div class="col-md-9 mt-4 mx-auto border ml-4">
         <!-- <div class="col-12 col-md-9"> -->
         <div id="Incidencia">
             <h2 class="text-center"><?php echo $incidencia['titulo']?></h2>
@@ -16,7 +16,7 @@
                 <li class="d-inline">Estado:<?php echo $incidencia['estado']?></li>
                 <li class="d-inline">Valoraciones:</li>
             </ul>
-            <p class="w-100"><?php echo $incidencia['descripcion']?></p>
+            <p class="w-80"><?php echo $incidencia['descripcion']?></p>
             <div class="container">
                 <div class="row">
                     <div class="col-md-4">
