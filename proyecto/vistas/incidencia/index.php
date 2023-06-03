@@ -2,21 +2,23 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <div class="row">
     <div class="col-md-9 mt-4 mx-auto">
-        <h5>>Incidencia</h5>
+        <?php $incidencia = $datos['incidencia'][0];?>
+
+        <h5>Incidencia</h5>
         <div class="col-12 col-md-9">
-            <div id="incidencia">
-                <h2><?php echo $datos['incidencia']['titulo']?></h2>
+            <div id="Incidencia">
+                <h2><?php echo $incidencia['titulo']?></h2>
                 <ul class="list-unstyled">
-                    <li class="d-inline">Lugar:<?php echo $datos['incidencia']['lugar']?></li>
-                    <li class="d-inline">Fecha:<?php echo $datos['incidencia']['fecha']?></li>
-                    <li class="d-inline">Creado por:<?php echo $datos['incidencia']['usuario']?></li>
+                    <li class="d-inline">Lugar:<?php echo $incidencia['lugar']?></li>
+                    <li class="d-inline">Fecha:<?php echo $incidencia['fecha']?></li>
+                    <li class="d-inline">Creado por:<?php echo $incidencia['idusuario']?></li>
                 </ul>
                 <ul class="list-unstyled">
-                    <li class="d-inline">Palabras clave:<?php echo $datos['incidencia']['titulo']?></li>
-                    <li class="d-inline">Estado:<?php echo $datos['incidencia']['estado']?></li>
+                    <li class="d-inline">Palabras clave:<?php echo $incidencia['keywords']?></li>
+                    <li class="d-inline">Estado:<?php echo $incidencia['estado']?></li>
                     <li class="d-inline">Valoraciones:</li>
                 </ul>
-                <p class="w-100"><?php echo $datos['incidencia']['descripcion']?></p>
+                <p class="w-100"><?php echo $incidencia['descripcion']?></p>
                 <div class="container">
                     <div class="row">
                         <div class="col-md-4">
@@ -31,7 +33,7 @@
                     </div>
                 </div>
                 <?php
-                    if(isset($datos['incidencia']['comentarios']))
+                    if(isset($incidencia['comentarios']))
                     {
                 ?>
                 <div class="row">
@@ -44,7 +46,7 @@
                         </thead>
                         <tbody>
                         <?php    
-                            foreach($datos['incidencia']['comentarios'] as $comentario)
+                            foreach($incidencia['comentarios'] as $comentario)
                             { 
                         ?>
                         <tr>
