@@ -10,7 +10,7 @@
           </div>
           <div class="form-group">
             <label for="inputDescripcion">Descripción</label>
-            <textarea class="form-control <?php echo (isset($datos['agregar']['errores']['descripcion'])) ? 'is-invalid' : ''; ?>" id="inputDescripcion" name="descripcion" rows="3" placeholder="Ingrese la descripción" value="<?php echo isset($datos['agregar']['descripcion']) ? $datos['agregar']['descripcion'] : ''; ?>" <?php echo isset($datos['agregar']['valido']) && $datos['agregar']['valido'] ? "readonly" : ''?>></textarea>
+            <textarea class="form-control <?php echo (isset($datos['agregar']['errores']['descripcion'])) ? 'is-invalid' : ''; ?>" id="inputDescripcion" name="descripcion" rows="3" placeholder="Ingrese la descripción"  <?php echo isset($datos['agregar']['valido']) && $datos['agregar']['valido'] ? "readonly" : ''?>><?php echo isset($datos['agregar']['descripcion']) ? $datos['agregar']['descripcion'] : ''; ?></textarea>
             <div class="invalid-feedback"><?php echo $datos['agregar']['errores']['descripcion']?></div>
           </div>
           <div class="form-group">

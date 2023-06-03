@@ -41,12 +41,16 @@
 
         }
 
+<<<<<<< HEAD
+        
+=======
         public function getComentarios($idIncidencia)
         {
             $select = "SELECT * FROM comentarios WHERE idincidencia = ?";
             $result = $this->query($select, [$idIncidencia]);
             return $result;
         }
+>>>>>>> ec0fc958e427e17ff747d8ed8e57ebba7ac0e45d
 
 
     }

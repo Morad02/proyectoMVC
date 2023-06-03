@@ -68,9 +68,10 @@ class Request
                     $imagenesBase64[] = $imagenBase64;
                 }
             }
+            return $imagenesBase64;
         }
     
-        return $imagenesBase64;
+        return null;
     }
     
     
