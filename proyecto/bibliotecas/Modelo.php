@@ -33,7 +33,8 @@ class Modelo
         
             $stmt->bind_param($types, ...$values);
         }
-    
+        
+        //var_dump($values);
         $result = null;
     
         if ($stmt->execute()) {
@@ -185,6 +186,11 @@ class Modelo
         $queryData = $this->buildQuery($table, $conditions, $params, 'DELETE FROM');
 
         return $this->query($queryData['query'], $queryData['params']);
+    }
+
+    public function lastId()
+    {
+        return $this->db->insert_id;
     }
 
 
