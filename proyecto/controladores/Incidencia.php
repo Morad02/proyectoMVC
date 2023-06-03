@@ -4,6 +4,8 @@
         public function __construct() 
         {
             $this->IncidenciaModelo = $this->cargarModelo('Incidencias');
+            $this->ComentariosModelo = $this->cargarModelo('Comentarios');
+            $this->FotosModelo = $this->cargarModelo('Fotos');
             $this->request = new Request();
             $this->datos = [];
         }
@@ -12,6 +14,8 @@
         {
             if (isset($_POST['idIncidencia'])){
                 $this->datos['incidencia'] = $this->IncidenciaModelo->obtenerIncidencia($_POST['idIncidencia']);
+                $this->datos['comentarios'] = $this->ComentariosModelo->getComentarios($_POST['idIncidencia']);
+                //$this->datos['fotos'] = $this->FotosModelo->getFotos($_POST['idIncidencia']);
                 $this->cargarVista('incidencia/index', $this->datos);
             }
         }

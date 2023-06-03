@@ -1,13 +1,11 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/header.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
+<?php $incidencia = $datos['incidencia'];?>
 <div class="row">
     <div class="col-md-9 mt-4 mx-auto">
-        <?php $incidencia = $datos['incidencia'][0];?>
-
-        <h5>Incidencia</h5>
         <div class="col-12 col-md-9">
-            <div id="Incidencia">
-                <h2><?php echo $incidencia['titulo']?></h2>
+            <div id="Incidencia" class="pl-10">
+                <h2 class="text-center"><?php echo $incidencia['titulo']?></h2>
                 <ul class="list-unstyled">
                     <li class="d-inline">Lugar:<?php echo $incidencia['lugar']?></li>
                     <li class="d-inline">Fecha:<?php echo $incidencia['fecha']?></li>

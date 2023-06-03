@@ -74,9 +74,13 @@
         public function obtenerIncidencia($id)
         {
             $select = "SELECT * FROM incidencias WHERE id = ?";
+<<<<<<< HEAD
         
             $result = $this->query($select, [$id]);
 
+=======
+            $result = $this->query($select, [$id]);
+>>>>>>> ec0fc958e427e17ff747d8ed8e57ebba7ac0e45d
             return $result[0];
         }
 
