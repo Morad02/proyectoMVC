@@ -46,7 +46,7 @@
         public function obtenerFoto($id)
         {
             $table = 'fotos';
-            $select = "SELECT * FROM $table WHERE id = ?";
+            $select = "SELECT fotografia FROM $table WHERE id = ?";
             $params = [$id];
 
             return $this->query($select, $params);
@@ -55,7 +55,7 @@
         public function obtenerFotosIncidencia($idincidencia)
         {
             $table = 'fotos';
-            $select = "SELECT * FROM $table WHERE idincidencia = ?";
+            $select = "SELECT fotografia FROM $table WHERE idincidencia = ?";
             $params = [$idincidencia];
 
             return $this->query($select, $params);

@@ -14,15 +14,19 @@
             <p><?php echo $incidencia['descripcion']?></p>
             <div class="container">
                 <div class="row">
+                    <?php
+                        if(isset($incidencia['imagenes']))
+                        {
+                            foreach($incidencia['imagenes'] as $imagen)
+                            {
+                    ?>
                     <div class="col-md-4">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT9Bhikh1PD4-vSH8nE4ScdnuBCw3DRyOpg90hU98rPFgue2BzgYcJvoIAbwveioIDIws0&usqp=CAU" alt="Imagen 1" class="img-fluid">
+                        <img src="<?php echo 'data:image/jpeg;base64,' . $imagen['fotografia'] ?>" alt="Imagen incidencia" class="img-fluid">
                     </div>
-                    <div class="col-md-4">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSjMk4aZQSEMidEG9Ymq1GScdG762GVFdc6pw&usqp=CAU" alt="Imagen 2" class="img-fluid">
-                    </div>
-                    <div class="col-md-4">
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT7EqB2Kp6EX4N_Q6knJLt3u_NjWRR2JHxXxA&usqp=CAU" alt="Imagen 3" class="img-fluid">
-                    </div>
+                    <?php
+                            }
+                        }
+                    ?>
                 </div>
             </div>
             <?php
