@@ -53,6 +53,18 @@
             return ($result[0]['count'] > 0);
         }
 
+        public function obtenerVotos($idIncidencia,$voto)
+        {
+            $table = "valoraciones";
+            $select = "SELECT COUNT(*) AS count FROM $table WHERE idincidencia = ? AND valoraciones = ?";
+            $params = [$idIncidencia,$voto];
+
+            $result = $this->query($select, $params);
+
+            return $result[0]['count'];
+        }
+        
+
 
     }
 ?>
