@@ -67,13 +67,19 @@
                 </div>
             </div>
         </div>
-        <div class="btn-container">
-            <button class="btn btn-round" type="button">
-                <i class="fas fa-plus"></i>
-            </button>
-            <button class="btn btn-round" type="button">
-                <i class="fas fa-minus"></i>
-            </button>
+        <div class="btn-container d-flex align-items-center justify-content-end">
+            <div class="d-flex align-items-center">
+                <button class="btn btn-round" type="button">
+                    <i class="fas fa-thumbs-up"></i>
+                </button>
+                <p><?php echo $incidencia['valoracionesPos']?></p>
+            </div>
+            <div class="d-flex align-items-center">
+                <button class="btn btn-round" type="button">
+                    <i class="fas fa-thumbs-down"></i>
+                </button>
+                <p><?php echo $incidencia['valoracionesNeg']?></p>
+            </div>
             <button class="btn btn-round" type="button" data-toggle="collapse" data-target="#nuevo-comentario">
                 <i class="fas fa-comment"></i>
             </button>
