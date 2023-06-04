@@ -92,7 +92,8 @@
                         $this->fotosModelo->insertarFoto($imagen, $id);
 
                     }
-                    unsset($_SESSION['imagenesEdicion']);
+                    if(isset($_SESSION['imagenesEdicion']))
+                        unset($_SESSION['imagenesEdicion']);
                     $this->index();
                 }
                 else
@@ -103,6 +104,7 @@
                         'lugar' => $lugar,
                         'palabras' => $palabras,
                         'errores' => $errores,
+                        'imagenes' => $imagenes,
                         'valido' => $valido
                     ];
 

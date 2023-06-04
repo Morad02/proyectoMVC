@@ -2,7 +2,7 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <?php $incidencia = $datos['incidencia'];?>
 <div class="row">
-    <div class="col-md-9 mt-4 mx-auto border ml-4">
+    <div class="col-md-8 mt-4 mx-auto ml-4">
         <!-- <div class="col-12 col-md-9"> -->
         <div id="Incidencia">
             <h2 class="text-center"><?php echo $incidencia['titulo']?></h2>

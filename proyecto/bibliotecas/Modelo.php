@@ -24,15 +24,32 @@ class Modelo
         
             foreach ($params as $key => $param) {
                 if (in_array($key, $blobs)) {
+                    $values[] = '';
                     $types .= 'b';
                 } else {
+                    $values[] = $param;
                     $types .= $this->getMysqliType($param);
                 }
-                $values[] = $param;
+                
             }
         
             $stmt->bind_param($types, ...$values);
-            var_dump($values);
+            //var_dump($values);
+            foreach ($blobs as $blobParam) {
+                $blobData = $params[$blobParam];
+                $segmentSize = 4096; // Tamaño de cada segmento del Blob
+                $blobLength = strlen($blobData);
+                $segmentOffset = 0;
+        
+                $paramIndex = array_search($blobParam, array_keys($params)); // Obtener el índice del parámetro Blob en bind_param
+        
+                while ($segmentOffset < $blobLength) {
+                    $segment = substr($blobData, $segmentOffset, $segmentSize);
+                    $stmt->send_long_data($paramIndex, $segment);
+        
+                    $segmentOffset += $segmentSize;
+                }
+            }
         }
         
         $result = null;

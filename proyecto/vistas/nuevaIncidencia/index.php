@@ -29,7 +29,21 @@
           </div>
           <div class="form-group border">
             <label class="m-2">Imágenes seleccionadas:</label>
-            <div id="previewImagenes" class="d-flex flex-wrap"></div>
+            <div id="previewImagenes" class="d-flex flex-wrap">
+              <?php
+                if(isset($datos['agregar']['imagenes']))
+                {
+                  foreach ($datos['agregar']['imagenes'] as $imagen)
+                  {
+              ?>
+              <div>
+                <img src="<?php echo 'data:image/jpeg;base64,' . $imagen ?>" alt="Imagen incidencia" class="img-thumbnail">
+              </div>
+              <?php
+                  }
+                }
+              ?>
+            </div>
           </div>
           <?php
             if(isset($datos['agregar']['valido'] ) && $datos['agregar']['valido'] )

@@ -83,3 +83,26 @@
 {
     text-align: right;
 }
+
+#previewImagenes {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#previewImagenes > div {
+  width: 150px;
+  margin: 10px;
+  text-align: center;
+}
+
+#previewImagenes img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+}
+
+#previewImagenes p {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
