@@ -38,7 +38,6 @@
                 'idincidencia' => $idIncidencia,
                 'valoraciones' => $valoracion
             ];
-
             return $this->insert($table, $params);
         }
 
