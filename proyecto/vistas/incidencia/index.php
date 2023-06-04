@@ -2,17 +2,16 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <?php $incidencia = $datos['incidencia'];?>
 <div class="row">
-    <div class="col-md-8 mt-4 mx-auto ml-4">
-        <!-- <div class="col-12 col-md-9"> -->
+    <div class="col-md-8 mt-5 mx-auto pl-5">
         <div id="Incidencia">
-            <h2 class="text-center"><?php echo $incidencia['titulo']?></h2>
+            <h2 class="titulousuario"><?php echo $incidencia['titulo']?></h2>
             <ul class="list-unstyled">
-                <li class="d-inline">Lugar:<?php echo $incidencia['lugar']?></li>
-                <li class="d-inline">Fecha:<?php echo $incidencia['fecha']?></li>
-                <li class="d-inline">Creado por:<?php echo $incidencia['idusuario']?></li>
+                <li class="pt-2">Lugar: <?php echo $incidencia['lugar']?></li>
+                <li class="pt-2">Fecha: <?php echo $incidencia['fecha']?></li>
+                <li class="pt-2">Creado por: <?php echo $incidencia['idusuario']?></li>
+                <li class="pt-2">Descripción: <?php echo $incidencia['descripcion']?></li>
             </ul>
-            <p><?php echo $incidencia['descripcion']?></p>
-            <div class="container">
+            <div class="container mt-5">
                 <div class="row">
                     <?php
                         if(isset($incidencia['imagenes']))
