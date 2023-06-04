@@ -134,5 +134,13 @@
             //$this->cargarVista('editarIncidencia/index', $this->datos);
             
         }
+
+        public function eliminarIncidencia()
+        {
+            if(isset($_POST['idIncidencia'])){
+                $this->incidenciasModelo->eliminarIncidencia($_POST['idIncidencia']);
+                $this->cargarVista('inicio/inicio', $this->datos);
+            }
+        }
     }
 ?>

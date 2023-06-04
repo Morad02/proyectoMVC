@@ -113,9 +113,12 @@
                     <i class="fas fa-edit"></i>
                 </button>
             </form>
-            <button class="btn btn-round" type="button">
-                <i class="fas fa-trash"></i>
-            </button>
+            <form method="POST" action="<?php echo RUTA_URL.'/gestionIncidencia/eliminarIncidencia'?>">
+                <input type="hidden" name="idIncidencia" value="<?php echo $incidencia['id']?>">
+                <button class="btn btn-round" type="submit">
+                    <i class="fas fa-trash"></i>
+                </button>
+            </form>
         </div>
     </div>
     <div class="col-md-3">
