@@ -32,27 +32,35 @@
         }
 
         public function votar()
-        {   
-            if (isset($_POST['idIncidencia']) && isset($_POST['voto']))
-            {
-                if(!isset($this->datos['sesion']['email']))
-                {
-                    if(isset($_COOKIE['idIncidencia']) && $_COOKIE['idIncidencia'] == $_POST['idIncidencia'])
-                    {
-                        $idUsuario = NULL;
-                    }else{
+        {
+            if (isset($_POST['idIncidencia']) && isset($_POST['voto'])) {
+                if (!isset($this->datos['sesion']['email'])) {
+
+                    $idIncidenciasVotadas = isset($_COOKIE['idIncidencias']) ? unserialize($_COOKIE['idIncidencias']) : array();
+
+                    if (!in_array($_POST['idIncidencia'], $idIncidenciasVotadas)) {                
                         $idUsuario = 0;
-                        setcookie('idIncidencia',$_POST['idIncidencia'],time()+3600*24*365);
+                        $idIncidenciasVotadas[] = $_POST['idIncidencia'];
+                        setcookie('idIncidencias', serialize($idIncidenciasVotadas), time() + (3600 * 24 * 365));
+
+                        $this->valoracionesModelo->votar($idUsuario, $_POST['idIncidencia'], $_POST['voto']);
+                        $this->getIncidencia();
+                    } else {
+                        // El usuario ya ha votado esta idIncidencia
                     }
-                }else{
+                } else {
                     $idUsuario = $this->datos['sesion']['email'];
-                }
-                if(!$this->valoracionesModelo->haVotado($idUsuario,$_POST['idIncidencia']) && $idUsuario != NULL){
-                    $this->valoracionesModelo->votar($idUsuario,$_POST['idIncidencia'],$_POST['voto']);
-                    $this->getIncidencia();
+
+                    if (!$this->valoracionesModelo->haVotado($idUsuario, $_POST['idIncidencia'])) {
+                        $this->valoracionesModelo->votar($idUsuario, $_POST['idIncidencia'], $_POST['voto']);
+                        $this->getIncidencia();
+                    } else {
+                        // El usuario ya ha votado esta idIncidencia
+                    }
                 }
             }
         }
+
 
         public function comentar()
         {
