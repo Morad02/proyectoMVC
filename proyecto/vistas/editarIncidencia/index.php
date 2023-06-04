@@ -76,17 +76,17 @@
                 </div>
             </div>
             <?php
-            if(isset($datos['agregar']['valido'] ) && $datos['agregar']['valido'] )
+            if(isset($datos['edicion']['valido'] ) && $datos['agregar']['edicion'] )
             {
             ?>
-            <input type="hidden" name="confirmado" value="confirmado">
+            <input type="hidden" name="confirmado" value="<?php echo $datos['edicion']['idIncidencia']?>">
             <button type="submit" class="btn btn-primary" id="confirmSubmit">Confirmar</button>
             <?php
               }
               else
               {
             ?>
-            <input type="hidden" name="editando" value="">
+            <input type="hidden" name="editando" value="<?php echo $datos['edicion']['idIncidencia']?>">
             <button type="submit" class="btn btn-primary">Enviar</button>
             <?php
               }

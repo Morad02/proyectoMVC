@@ -93,7 +93,7 @@
                 <i class="fas fa-comment"></i>
             </button>
             <form method="POST" action="<?php echo RUTA_URL.'/gestionIncidencia/editar'?>">
-                <input type="hidden" name="editar" value="<?php echo $incidencia['idIncidencia']?>">
+                <input type="hidden" name="editar" value="<?php echo $incidencia['id']?>">
                 <button class="btn btn-round" type="submit" id="edit-button">
                     <i class="fas fa-edit"></i>
                 </button>
