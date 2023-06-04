@@ -31,12 +31,11 @@
         {
             $table = "comentarios";
             $params = [
-                'idusuario' => $idUsuario,
-                'idincidencia' => $idIncidencia,
+                'idusuario' => $idusuario,
+                'idincidencia' => $idincidencia,
                 'comentario' => $comentario,
                 'fecha' => date('Y-m-d H:i:s')
-             ];
-
+            ];
             return $this->insert($table, $params);
 
         }
@@ -46,6 +45,12 @@
             $select = "SELECT * FROM comentarios WHERE idincidencia = ?";
             $result = $this->query($select, [$idIncidencia]);
             return $result;
+        }
+
+        public function eliminarComentarios($idIncidencia, $idComentario)
+        {
+            $delete = "DELETE FROM comentarios WHERE idincidencia = ? AND id = ?";
+            $this->query($delete, [$idIncidencia, $idComentario]);
         }
 
 

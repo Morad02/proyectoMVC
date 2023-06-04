@@ -40,6 +40,7 @@
                             <tr>
                                 <th>Nombre y fecha</th>
                                 <th>Comentario</th>
+                                <th>Eliminar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -50,6 +51,17 @@
                             <tr>
                                 <td><?php echo $comentario['idusuario']?><br><?php echo $comentario['fecha']?></td>
                                 <td><?php echo $comentario['comentario']?></td>
+                                <?php if(isset($datos['sesion'])){
+                                        if($comentario['idusuario'] == $datos['sesion']['email'] || $datos['sesion']['email'] == "admin@admin.com"){?>
+                                            <td>
+                                                <form action="<?php echo RUTA_URL.'/Incidencia/eliminarComentario'?>" method="POST">
+                                                    <input type="hidden" name="idIncidencia" value="<?php echo $incidencia['id']; ?>">
+                                                    <input type="hidden" name="idComentario" value="<?php echo $comentario['id']; ?>">
+                                                    <button class="btn btn-danger" type="submit"><i class="fas fa-trash"></i></button>
+                                                </form>
+                                            </td>
+                                <?php   }
+                                    } ?>
                             </tr>
                             <?php
                             }
@@ -63,8 +75,11 @@
             ?>
             <div id="nuevo-comentario-container">
                 <div id="nuevo-comentario" class="collapse">
-                    <textarea class="form-control" placeholder="Escribe tu comentario..."></textarea>
-                    <button class="btn btn-primary mt-2" type="button">Enviar</button>
+                    <form action="<?php echo RUTA_URL.'/Incidencia/comentar'?>" method="POST">
+                        <input type="hidden" name="idIncidencia" value="<?php echo $incidencia['id']; ?>">
+                        <textarea class="form-control" name="comentario" placeholder="Escribe tu comentario..."></textarea>
+                        <button class="btn btn-primary mt-2" type="submit">Enviar</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -62,7 +62,24 @@
 
         public function comentar()
         {
+            if (isset($_POST['idIncidencia']) && isset($_POST['comentario'])) {
+                if (!isset($this->datos['sesion']['email'])) {
+                    $idUsuario = "visitante@visitante.com";
+                } else {
+                    $idUsuario = $this->datos['sesion']['email'];
+                }
+                $comentario = $this->request->get_Dato('comentario');
+                $this->comentariosModelo->comentar($idUsuario, $_POST['idIncidencia'], $comentario);
+                $this->getIncidencia();
+            }
+        }
 
+        public function eliminarComentario()
+        {
+            if (isset($_POST['idIncidencia']) && isset($_POST['idComentario'])) {
+                $this->comentariosModelo->eliminarComentarios($_POST['idIncidencia'], $_POST['idComentario']);
+                $this->getIncidencia();
+            }
         }
     
     }
