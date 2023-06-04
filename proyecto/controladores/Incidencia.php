@@ -9,6 +9,13 @@
             $this->valoracionesModelo = $this->cargarModelo('Valoraciones');
             $this->request = new Request();
             $this->datos = [];
+            session_start();
+            if((isset($_SESSION['nombre'])) && (isset($_SESSION['rol'])))
+            {
+                $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
+                $this->datos['sesion']['rol'] = $_SESSION['rol'];
+                $this->datos['sesion']['email'] = $_SESSION['email'];
+            }
         }
 
         public function getIncidencia()
@@ -20,6 +27,14 @@
                 $this->datos['incidencia']['valoracionesPos'] = $this->valoracionesModelo->obtenerVotos($_POST['idIncidencia'],1);
                 $this->datos['incidencia']['valoracionesNeg'] = $this->valoracionesModelo->obtenerVotos($_POST['idIncidencia'],-1);
                 $this->cargarVista('incidencia/index', $this->datos);
+            }
+        }
+
+        public function votar()
+        {   
+            if (isset($_POST['idIncidencia']) && isset($_POST['voto'])){
+                $this->valoracionesModelo->votar($this->datos['sesion']['email'],$_POST['idincidencia'],$_POST['voto']);
+                $this->getIncidencia();
             }
         }
     

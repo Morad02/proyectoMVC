@@ -20,7 +20,8 @@
                             {
                     ?>
                     <div class="col-md-4">
-                        <img src="<?php echo 'data:image/jpeg;base64,' . $imagen['fotografia'] ?>" alt="Imagen incidencia" class="img-fluid">
+                        <img src="<?php echo 'data:image/jpeg;base64,' . $imagen['fotografia'] ?>"
+                            alt="Imagen incidencia" class="img-fluid">
                     </div>
                     <?php
                             }
@@ -36,21 +37,21 @@
                 <div class="container ml-5 mt-5">
                     <table class="table">
                         <thead>
-                        <tr>
-                            <th>Nombre y fecha</th>
-                            <th>Comentario</th>
-                        </tr>
+                            <tr>
+                                <th>Nombre y fecha</th>
+                                <th>Comentario</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        <?php   
+                            <?php   
                             foreach($incidencia['comentarios'] as $comentario)
                             {
                         ?>
-                        <tr>
-                            <td><?php echo $comentario['idusuario']?><br><?php echo $comentario['fecha']?></td>
-                            <td><?php echo $comentario['comentario']?></td>
-                        </tr>
-                        <?php
+                            <tr>
+                                <td><?php echo $comentario['idusuario']?><br><?php echo $comentario['fecha']?></td>
+                                <td><?php echo $comentario['comentario']?></td>
+                            </tr>
+                            <?php
                             }
                         ?>
                         </tbody>
@@ -69,9 +70,13 @@
         </div>
         <div class="btn-container d-flex align-items-center justify-content-end">
             <div class="d-flex align-items-center">
-                <button class="btn btn-round" type="button">
-                    <i class="fas fa-thumbs-up"></i>
-                </button>
+                <form action="<?php echo RUTA_URL.'/Incidencia/votar'?>" method="POST">
+                    <input type="hidden" name="idIncidencia" value="<?php echo $incidencia['id']; ?>">
+                    <input type="hidden" name="voto" value="1">
+                    <button class="btn btn-round" type="submit">
+                        <i class="fas fa-thumbs-up"></i>
+                    </button>
+                </form>
                 <p><?php echo $incidencia['valoracionesPos']?></p>
             </div>
             <div class="d-flex align-items-center">
@@ -89,7 +94,7 @@
             <button class="btn btn-round" type="button">
                 <i class="fas fa-trash"></i>
             </button>
-        </div>       
+        </div>
     </div>
     <div class="col-md-3">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
