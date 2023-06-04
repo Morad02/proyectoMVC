@@ -46,6 +46,8 @@
 .titulousuario{
     padding-top: 2.5rem;
     padding-bottom: 2.5rem;
+    padding-right: 0;
+    max-width: max-content;
     background-color: #f5f6f7;
     text-align: center;
 }
@@ -76,7 +78,7 @@
 
 .btn-round .fas {
     font-size: 20px;
-    color: #000; /* Cambia el color del icono si es necesario */
+    color: #000; 
 }
 
 .btn-container
