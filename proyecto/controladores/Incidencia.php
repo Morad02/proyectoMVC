@@ -34,7 +34,7 @@
         public function votar()
         {   
             if (isset($_POST['idIncidencia']) && isset($_POST['voto'])){
-                $this->valoracionesModelo->votar($this->datos['sesion']['email'],$_POST['idincidencia'],$_POST['voto']);
+                $this->valoracionesModelo->votar($this->datos['sesion']['email'],$_POST['idIncidencia'],$_POST['voto']);
                 $this->getIncidencia();
             }
         }
