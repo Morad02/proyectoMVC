@@ -118,7 +118,20 @@
 
         public function editar()
         {
-            $this->cargarVista('editarIncidencia/index', $this->datos);
+            $valido = true;
+            $errores = []; 
+            if(isset($_POST['editar']))
+            {
+                $valido = FALSE;
+                $id = $this->request->get_Dato('editar');
+                $incidencia = $this->incidenciasModelo->getIncidencia($id);
+                $this->datos['incidencia'] = $incidencia;
+                $this->cargarVista('editarIncidencia/index', $this->datos);
+            }
+            
+            
+
+            //$this->cargarVista('editarIncidencia/index', $this->datos);
             
         }
     }
