@@ -94,7 +94,9 @@
                     }
                     if(isset($_SESSION['imagenesEdicion']))
                         unset($_SESSION['imagenesEdicion']);
-                    $this->index();
+                    
+                    $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
+                    $this->cargarVista('inicio/inicio', $this->datos);
                 }
                 else
                 {
@@ -109,7 +111,6 @@
                     ];
 
                     $this->datos['agregar'] = $agregar;
-
                     $this->cargarVista('nuevaIncidencia/index', $this->datos);
                 }
             }
@@ -139,6 +140,7 @@
         {
             if(isset($_POST['idIncidencia'])){
                 $this->incidenciasModelo->eliminarIncidencia($_POST['idIncidencia']);
+                $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
                 $this->cargarVista('inicio/inicio', $this->datos);
             }
         }
