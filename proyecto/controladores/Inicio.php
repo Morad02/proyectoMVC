@@ -55,7 +55,7 @@
                 }
             }
             
-            $this->cargarVista('inicio/inicio', $this->datos);
+            $this->index();
         }
 
         public function logout()
@@ -68,7 +68,7 @@
                 session_destroy();
             }
 
-            $this->cargarVista('inicio/inicio', $this->datos);
+            $this->index();
         }
 
         public function misIncidencias()

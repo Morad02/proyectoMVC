@@ -38,12 +38,11 @@
                     $idIncidenciasVotadas = isset($_COOKIE['idIncidencias']) ? unserialize($_COOKIE['idIncidencias']) : array();
 
                     if (!in_array($_POST['idIncidencia'], $idIncidenciasVotadas)) {                
-                        $idUsuario = 0;
+                        $idUsuario = "visitante@visitante.com";
                         $idIncidenciasVotadas[] = $_POST['idIncidencia'];
                         setcookie('idIncidencias', serialize($idIncidenciasVotadas), time() + (3600 * 24 * 365));
 
                         $this->valoracionesModelo->votar($idUsuario, $_POST['idIncidencia'], $_POST['voto']);
-                        $this->getIncidencia();
                     } else {
                         // El usuario ya ha votado esta idIncidencia
                     }
@@ -52,11 +51,11 @@
 
                     if (!$this->valoracionesModelo->haVotado($idUsuario, $_POST['idIncidencia'])) {
                         $this->valoracionesModelo->votar($idUsuario, $_POST['idIncidencia'], $_POST['voto']);
-                        $this->getIncidencia();
                     } else {
                         // El usuario ya ha votado esta idIncidencia
                     }
                 }
+                $this->getIncidencia();
             }
         }
 
