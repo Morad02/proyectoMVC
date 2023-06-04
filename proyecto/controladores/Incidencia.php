@@ -33,10 +33,30 @@
 
         public function votar()
         {   
-            if (isset($_POST['idIncidencia']) && isset($_POST['voto'])){
-                $this->valoracionesModelo->votar($this->datos['sesion']['email'],$_POST['idIncidencia'],$_POST['voto']);
-                $this->getIncidencia();
+            if (isset($_POST['idIncidencia']) && isset($_POST['voto']))
+            {
+                if(!isset($this->datos['sesion']['email']))
+                {
+                    if(isset($_COOKIE['idIncidencia']) && $_COOKIE['idIncidencia'] == $_POST['idIncidencia'])
+                    {
+                        $idUsuario = NULL;
+                    }else{
+                        $idUsuario = 0;
+                        setcookie('idIncidencia',$_POST['idIncidencia'],time()+3600*24*365);
+                    }
+                }else{
+                    $idUsuario = $this->datos['sesion']['email'];
+                }
+                if(!$this->valoracionesModelo->haVotado($idUsuario,$_POST['idIncidencia']) && $idUsuario != NULL){
+                    $this->valoracionesModelo->votar($idUsuario,$_POST['idIncidencia'],$_POST['voto']);
+                    $this->getIncidencia();
+                }
             }
+        }
+
+        public function comentar()
+        {
+
         }
     
     }

@@ -80,9 +80,13 @@
                 <p><?php echo $incidencia['valoracionesPos']?></p>
             </div>
             <div class="d-flex align-items-center">
-                <button class="btn btn-round" type="button">
-                    <i class="fas fa-thumbs-down"></i>
-                </button>
+                <form action="<?php echo RUTA_URL.'/Incidencia/votar'?>" method="POST">
+                    <input type="hidden" name="idIncidencia" value="<?php echo $incidencia['id']; ?>">
+                    <input type="hidden" name="voto" value="-1">
+                    <button class="btn btn-round" type="submit">
+                        <i class="fas fa-thumbs-down"></i>
+                    </button>
+                </form>
                 <p><?php echo $incidencia['valoracionesNeg']?></p>
             </div>
             <button class="btn btn-round" type="button" data-toggle="collapse" data-target="#nuevo-comentario">
