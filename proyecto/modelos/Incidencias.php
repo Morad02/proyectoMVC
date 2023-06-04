@@ -80,6 +80,15 @@
             return $result[0];
         }
 
+        public function existeIncidencia($id)
+        {
+            $select = "SELECT * FROM incidencias WHERE id = ?";
+        
+            $result = $this->query($select, [$id]);
+
+            return count($result) > 0;
+        }
+
 
     }
 ?>

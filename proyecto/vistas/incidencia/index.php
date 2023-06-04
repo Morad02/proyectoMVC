@@ -83,9 +83,12 @@
             <button class="btn btn-round" type="button" data-toggle="collapse" data-target="#nuevo-comentario">
                 <i class="fas fa-comment"></i>
             </button>
-            <button class="btn btn-round" type="button" id="edit-button">
-                <i class="fas fa-edit"></i>
-            </button>
+            <form method="POST" action="<?php echo RUTA_URL.'/gestionIncidencia/editar'?>">
+                <input type="hidden" name="editar" value="<?php echo $incidencia['idIncidencia']?>">
+                <button class="btn btn-round" type="submit" id="edit-button">
+                    <i class="fas fa-edit"></i>
+                </button>
+            </form>
             <button class="btn btn-round" type="button">
                 <i class="fas fa-trash"></i>
             </button>

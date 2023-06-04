@@ -118,7 +118,7 @@
 
         public function editar()
         {
-            //Falta por implementar
+            $this->cargarVista('editarIncidencia/index', $this->datos);
             
         }
     }
