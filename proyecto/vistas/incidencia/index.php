@@ -1,17 +1,20 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/header.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <?php $incidencia = $datos['incidencia'];?>
-<!-- DatosIncidencia -->
-<div class="row">
+<div class="row container-fluid">
     <div class="col-md-8 mt-5 mx-auto pl-5">
         <div id="Incidencia">
-            <h2 class="titulousuario"><?php echo $incidencia['titulo']?></h2>
-            <ul class="list-unstyled">
-                <li class="pt-2">Lugar: <?php echo $incidencia['lugar']?></li>
-                <li class="pt-2">Fecha: <?php echo $incidencia['fecha']?></li>
-                <li class="pt-2">Creado por: <?php echo $incidencia['idusuario']?></li>
-                <li class="pt-2">Descripción: <?php echo $incidencia['descripcion']?></li>
-            </ul>
+            <div class="row w-100">
+                <h2 class="w-100 text-center h2 py-5" style="background-color: #f5f6f7;"><?php echo $incidencia['titulo']?></h2>
+            </div>
+            <div class="row">
+                <ul class="list-unstyled">
+                    <li class="pt-2">Lugar: <?php echo $incidencia['lugar']?></li>
+                    <li class="pt-2">Fecha: <?php echo $incidencia['fecha']?></li>
+                    <li class="pt-2">Creado por: <?php echo $incidencia['idusuario']?></li>
+                    <li class="pt-2">Descripción: <?php echo $incidencia['descripcion']?></li>
+                </ul>
+            </div>
             <div class="container mt-5">
                 <div class="row">
                     <?php

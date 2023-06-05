@@ -8,6 +8,7 @@
             $this->comentariosModelo = $this->cargarModelo('Comentarios');
             $this->valoracionesModelo = $this->cargarModelo('Valoraciones');
             $this->fotosModelo = $this->cargarModelo('Fotos');
+            $this->controladorInicio = $this->cargarControladorInicio();
             $this->request = new Request();
             $this->datos = [];
             
@@ -97,8 +98,7 @@
                     if(isset($_SESSION['imagenesEdicion']))
                         unset($_SESSION['imagenesEdicion']);
                     
-                    $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
-                    $this->cargarVista('inicio/inicio', $this->datos);
+                    $this->controladorInicio->index();
                 }
                 else
                 {
@@ -242,8 +242,7 @@
         {
             if(isset($_POST['idIncidencia'])){
                 $this->incidenciasModelo->eliminarIncidencia($_POST['idIncidencia']);
-                $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
-                $this->cargarVista('inicio/inicio', $this->datos);
+                $this->controladorInicio->index();
             }
         }
 

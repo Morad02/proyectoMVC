@@ -27,9 +27,6 @@
                     <div class="card-body">
                         <h5 class="card-title"><?php echo $incidencia['titulo']?></h5>
                         <p class="card-text"><?php echo $incidencia['descripcion']?></p>
-                        <!-- <div class="d-flex justify-content-center">
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#mi-modal">Ver más detalle</button>
-                        </div> -->
                         <form action="<?php echo RUTA_URL.'/Incidencia/getIncidencia'?>" method="POST">
                             <input type="hidden" name="idIncidencia" value="<?php echo $incidencia['id']?>">
                             <div class="d-flex justify-content-center">

@@ -14,16 +14,16 @@
         {
             $url = $this->getURL();
             
-            session_start();
-
-            
+            if((session_status() !== PHP_SESSION_ACTIVE)){
+                session_start();
+            }
             if( isset($url[0])&& file_exists('../proyecto/controladores/' . ucfirst($url[0]) . '.php'))
             {
                 if($url[0] != 'Incidencia' && isset($_SESSION['rol']))
                 {
                     if($_SESSION['rol'] == 'admin')
                         $this->controladorDefecto = ucwords($url[0]);
-                    else if($_SESSION['rol'] == 'user' && $url[0] == 'gestionIncidencia' || $url[0] == 'nuevaIncidencia')
+                    else if($_SESSION['rol'] == 'user' && $url[0] != 'log') //Falta añadir el diferente a la gestion bbdd
                         $this->controladorDefecto = ucwords($url[0]);
                 } 
                 else if($url[0] == 'Incidencia')

@@ -20,6 +20,12 @@
 
         }
 
+        public function cargarControladorInicio()
+        {
+            require_once '../proyecto/controladores/Inicio.php';
+            return new Inicio();
+        }
+
         public function cargarVista($vs, $datos = [])
         {
             if(file_exists('../proyecto/vistas/'.$vs.'.php'))
