@@ -11,7 +11,6 @@
             $this->request = new Request();
             $this->datos = [];
             
-            session_start();
             if((isset($_SESSION['nombre'])) && (isset($_SESSION['rol'])))
             {
                 $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
@@ -92,6 +91,7 @@
                     {
                        
                         $this->fotosModelo->insertarFoto($imagen, $id);
+
 
                     }
                     if(isset($_SESSION['imagenesEdicion']))

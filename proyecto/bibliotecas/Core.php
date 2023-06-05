@@ -14,9 +14,20 @@
         {
             $url = $this->getURL();
             
+            session_start();
+
+            
             if( isset($url[0])&& file_exists('../proyecto/controladores/' . ucfirst($url[0]) . '.php'))
             {
-                $this->controladorDefecto = ucwords($url[0]);
+                if($url[0] != 'Incidencia' && isset($_SESSION['rol']))
+                {
+                    if($_SESSION['rol'] == 'admin')
+                        $this->controladorDefecto = ucwords($url[0]);
+                    else if($_SESSION['rol'] == 'user' && $url[0] == 'gestionIncidencia')
+                        $this->controladorDefecto = ucwords($url[0]);
+                } 
+                else if($url[0] == 'Incidencia')
+                    $this->controladorDefecto = ucwords($url[0]);
                 
                 unset($url[0]);
             }
