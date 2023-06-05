@@ -80,6 +80,13 @@
             return $result[0];
         }
 
+        public function obtenerIncidenciasUsuario($idUsuario)
+        {
+            $select = "SELECT * FROM incidencias WHERE email = ?";
+        
+            return $this->query($select, [$idUsuario]);
+        }
+
         public function existeIncidencia($id)
         {
             $select = "SELECT * FROM incidencias WHERE id = ?";

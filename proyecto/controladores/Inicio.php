@@ -95,7 +95,15 @@
 
         public function misIncidencias()
         {
-            
+            if(isset($_SESSION['email'])){
+                $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidenciasUsuario($_SESSION['email']);
+                if (empty($this->datos['incidencias'])) {
+                    echo "No se encontraron incidencias";
+                }
+                foreach ($this->datos['incidencias'] as $indice => $incidencia) {
+                    $this->datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['id']);
+                }
+            }
             $this->cargarVista('inicio/inicio', $this->datos);
         }
 
