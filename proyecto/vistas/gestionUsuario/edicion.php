@@ -146,4 +146,5 @@
         <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
     </div> 
 </div>
+<?php require_once RUTA_PROYECTO.'/vistas/inc/alert.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/footer.php'?>

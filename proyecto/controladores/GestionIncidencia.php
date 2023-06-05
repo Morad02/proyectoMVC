@@ -103,6 +103,7 @@
                     
                     $descripcion = "El usuario {$_SESSION['email']} ha creado una incidencia";
                     $this->logModelo->nuevoLog($descripcion);
+                    $this->datos['exito'] = "Incidencia creada con éxito";
                     $this->controladorInicio->index();
                 }
                 else
@@ -208,6 +209,7 @@
                     $this->incidenciasModelo->actualizarIncidencia($id, $columns);
                     $descripcion = "El usuario {$_SESSION['email']} ha modificado una incidencia";
                     $this->logModelo->nuevoLog($descripcion);
+                    $this->datos['exito'] = "Incidencia modificada con éxito";
                     
                     $this->datos['incidencia'] = $this->incidenciasModelo->obtenerIncidencia($id);
                     $this->datos['incidencia']['comentarios'] = $this->comentariosModelo->getComentarios($id);
@@ -250,7 +252,13 @@
             if(isset($_POST['idIncidencia'])){
                 $this->incidenciasModelo->eliminarIncidencia($_POST['idIncidencia']);
                 $descripcion = "El usuario {$_SESSION['email']} ha eliminado una incidencia";
-                    $this->logModelo->nuevoLog($descripcion);
+                $this->logModelo->nuevoLog($descripcion);
+                $this->datos['exito'] = "Incidencia eliminada con éxito";
+                $this->controladorInicio->index();
+            }
+            else
+            {
+                $this->datos['error'] = "Incidencia no eliminada";
                 $this->controladorInicio->index();
             }
         }
@@ -262,8 +270,13 @@
                 $this->fotosModelo->eliminarFoto($_POST['borrarImagen']);
                 $descripcion = "El usuario {$_SESSION['email']} ha eliminado una foto";
                 $this->logModelo->nuevoLog($descripcion);
+                $this->datos['exito'] = "Foto eliminada con éxito";
                 $_SESSION['editando'] = $_POST['idIncidencia'];
                 $this->editar();
+            }
+            else{
+                $this->datos['error'] = "Foto no eliminada";
+                $this->controladorInicio->index();
             }
         }
 
@@ -283,7 +296,7 @@
                         $this->fotosModelo->insertarFoto($imagen, $id);
                         $descripcion = "El usuario {$_SESSION['email']} ha insertado una incidencia";
                         $this->logModelo->nuevoLog($descripcion);
-
+                        $this->datos['exito'] = "Foto subida con éxito";
                     }
                 }
 

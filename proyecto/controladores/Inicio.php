@@ -87,6 +87,7 @@
                 $_SESSION = array();
                 unset($this->datos['sesion']);
                 session_destroy();
+                $this->datos['exito'] = "Cierre de sesión exitoso";
             }
 
             $this->index();
