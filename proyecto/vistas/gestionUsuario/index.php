@@ -76,27 +76,7 @@
     <div class="col-md-3">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
         <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
-    </div>
-    <div id="successAlert" class="alert alert-success fixed-bottom mb-0" role="alert" style="display: none;">
-        ¡Éxito! El formulario ha sido enviado correctamente.
-  </div> 
-  <?php
-    if(isset($datos['edicion']['valido']) && isset($_POST['confirmado']) && $datos['edicion']['valido'])
-    {
-
-  ?>
-  <script>
-    // Mostrar el alerta de éxito
-    document.getElementById('successAlert').style.display = 'block';
-
-    // Desaparecer después de 5 segundos
-    setTimeout(function() {
-      document.getElementById('successAlert').style.display = 'none';
-    }, 5000);
-  </script>
-    <?php
-        }
-    ?>   
+    </div>  
 </div>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/alert.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/footer.php'?>
