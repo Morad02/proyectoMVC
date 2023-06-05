@@ -8,6 +8,7 @@
             $this->usuarioModelo = $this->cargarModelo('Usuario');
             $this->request = new Request();
             $this->datos = [];
+            $this->logModelo = $this->cargarModelo('Logs');
             if((isset($_SESSION['nombre'])) && (isset($_SESSION['rol'])))
             {
                 $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
@@ -208,8 +209,8 @@
 
 
                         $this->usuarioModelo->actualizarUsuario($_SESSION['usuarioEditar'],$columns);
-                        $descricpion = "El usuario ".$_SESSION['usuarioEditar']." ha sido editado por el administrador {$this->datos['sesion']['email']}";
-                        $this->logModelo->nuevoLog($descricpion);
+                        $descripcion = "El usuario ".$_SESSION['usuarioEditar']." ha sido editado por el administrador {$this->datos['sesion']['email']}";
+                        $this->logModelo->nuevoLog($descripcion);
 
                         if($this->datos['sesion']['email'] == $_SESSION['usuarioEditar'] && $email != $this->datos['sesion']['email'])
                         {
@@ -317,6 +318,8 @@
                 if($this->usuarioModelo->existeUsuario($id) && $id != $this->datos['sesion']['email'])
                 {
                     $this->usuarioModelo->eliminarUsuario($id);
+                    $descripcion = "El administrador {$this->datos['sesion']['email']} ha eliminado al usuario $id";
+                    $this->logModelo->nuevoLog($descripcion);
 
                 }
                 
