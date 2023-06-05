@@ -6,31 +6,41 @@
             <h5>Estado de la incidencia:</h5>
             <div class="form-group m-3">
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="estado" id="pendiente" value="pendiente" checked>
+                <input class="form-check-input" type="radio" name="estado" id="pendiente" value="Pendiente" 
+                <?php echo (isset($datos['edicion']['estado']) && $datos['edicion']['estado'] == 'Pendiente') ? 'selected ' : ''; ?>
+                 <?php echo (isset($datos['edicion']['valido']) && $datos['edicion']['valido']) || (isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'user') ? "disabled" : ''?>>
                 <label class="form-check-label" for="pendiente">
                   Pendiente
                 </label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="estado" id="comprobada" value="comprobada">
+                <input class="form-check-input" type="radio" name="estado" id="comprobada" value="Comprobada"
+                <?php echo (isset($datos['edicion']['estado']) && $datos['edicion']['estado'] == 'Comprobada') ? 'selected ' : ''; ?>
+                <?php echo (isset($datos['edicion']['valido']) && $datos['edicion']['valido']) || (isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'user') ? "disabled" : ''?>>
                 <label class="form-check-label" for="comprobada">
                   Comprobada
                 </label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="estado" id="tramitada" value="tramitada">
+                <input class="form-check-input" type="radio" name="estado" id="tramitada" value="Tramitada"
+                <?php echo (isset($datos['edicion']['estado']) && $datos['edicion']['estado'] == 'Tramitada') ? 'selected ' : ''; ?>
+                <?php echo (isset($datos['edicion']['valido']) && $datos['edicion']['valido']) || (isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'user') ? "disabled" : ''?>>
                 <label class="form-check-label" for="tramitada">
                   Tramitada
                 </label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="estado" id="irresoluble" value="irresoluble">
+                <input class="form-check-input" type="radio" name="estado" id="irresoluble" value="Irresoluble"
+                <?php echo (isset($datos['edicion']['estado']) && $datos['edicion']['estado'] == 'Irresoluble') ? 'selected ' : ''; ?>
+                <?php echo (isset($datos['edicion']['valido']) && $datos['edicion']['valido']) || (isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'user') ? "disabled" : ''?>>
                 <label class="form-check-label" for="irresoluble">
                   Irresoluble
                 </label>
               </div>
               <div class="form-check form-check-inline">
-                <input class="form-check-input" type="radio" name="estado" id="resuelta" value="resuelta">
+                <input class="form-check-input" type="radio" name="estado" id="resuelta" value="Resuelta"
+                <?php echo (isset($datos['edicion']['estado']) && $datos['edicion']['estado'] == 'Resuelta') ? 'selected ' : ''; ?>
+                <?php echo (isset($datos['edicion']['valido']) && $datos['edicion']['valido']) || (isset($datos['sesion']['rol']) && $datos['sesion']['rol'] == 'user') ? "disabled" : ''?>>
                 <label class="form-check-label" for="resuelta">
                   Resuelta
                 </label>
@@ -41,27 +51,34 @@
                 <div class="m-3">
                     <div class="form-group">
                       <label for="inputTitulo">Título</label>
-                      <input type="text" class="form-control" id="inputTitulo" name="titulo" value="">
+                      <input type="text" class="form-control <?php echo (isset($datos['edicion']['errores']['titulo'])) ? 'is-invalid' : ''; ?>" id="inputTitulo" name="titulo"
+                        value="<?php echo isset($datos['edicion']['titulo']) ? $datos['edicion']['titulo'] : ''; ?>" <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "readonly" : ''?>>
+                      <div class="invalid-feedback"><?php echo $datos['edicion']['errores']['titulo']?></div>
                     </div>
                     <div class="form-group">
                       <label for="inputDescripcion">Descripción</label>
-                      <textarea class="form-control" id="inputDescripcion" rows="3" name="descripcion"></textarea>
+                      <textarea class="form-control <?php echo (isset($datos['edicion']['errores']['descripcion'])) ? 'is-invalid' : ''; ?>" id="inputDescripcion" rows="3" name="descripcion"><?php echo isset($datos['edicion']['descripcion']) ? $datos['edicion']['descripcion'] : ''; ?></textarea>
+                      <div class="invalid-feedback"><?php echo $datos['edicion']['errores']['descripcion']?></div>
                     </div>
                     <div class="form-group">
                       <label for="inputLugar">Lugar</label>
-                      <input type="text" class="form-control" id="inputLugar" name="lugar" value="">
+                      <input type="text" class="form-control <?php echo (isset($datos['edicion']['errores']['lugar'])) ? 'is-invalid' : ''; ?>" id="inputLugar" name="lugar"
+                        value="<?php echo isset($datos['edicion']['lugar']) ? $datos['edicion']['lugar'] : ''; ?>" <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "readonly" : ''?>>
+                      <div class="invalid-feedback"><?php echo $datos['edicion']['errores']['lugar']?></div>  
                     </div>
                     <div class="form-group">
                       <label for="inputPalabrasClave">Palabras clave</label>
-                      <input type="text" class="form-control" id="inputPalabrasClave" name="palabras" value="">
+                      <input type="text" class="form-control <?php echo (isset($datos['edicion']['errores']['palabras'])) ? 'is-invalid' : ''; ?>" id="inputPalabrasClave" name="palabras"
+                        value="<?php echo isset($datos['edicion']['palabras']) ? $datos['edicion']['palabras'] : ''; ?>" <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "readonly" : ''?>>
+                      <div class="invalid-feedback"><?php echo $datos['edicion']['errores']['palabras']?></div>
                     </div>
                     <div class="form-group">
                         <label class="m-2">Imágenes:</label>
                         <div id="previewImagenes" class="d-flex flex-wrap border">
                           <?php
-                            if(isset($datos['agregar']['imagenes']))
+                            if(isset($datos['edicion']['imagenes']))
                             {
-                              foreach ($datos['agregar']['imagenes'] as $imagen)
+                              foreach ($datos['edicion']['imagenes'] as $imagen)
                               {
                           ?>
                           <div>
@@ -76,7 +93,7 @@
                 </div>
             </div>
             <?php
-            if(isset($datos['edicion']['valido'] ) && $datos['agregar']['edicion'] )
+            if(isset($datos['edicion']['valido'] ) && $datos['edicion']['valido'] )
             {
             ?>
             <input type="hidden" name="confirmado" value="<?php echo $datos['edicion']['idIncidencia']?>">

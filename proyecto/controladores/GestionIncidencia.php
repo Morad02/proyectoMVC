@@ -119,18 +119,20 @@
 
         public function editar()
         {
-            $valido = true;
+            $valido = True;
             $errores = []; 
             if(isset($_POST['editar']))
             {
                 $valido = FALSE;
                 $id = $this->request->get_Dato('editar');
-                $incidencia = $this->incidenciasModelo->getIncidencia($id);
-                $this->datos['incidencia'] = $incidencia;
+                $incidencia = $this->incidenciasModelo->obtenerIncidencia($id);
+                $this->datos['edicion'] = $incidencia;
+                $this->datos['edicion']['valido'] = $valido;
+                $this->datos['edicion']['imagenes'] = $this->fotosModelo->getFotos($id);
                 $this->cargarVista('editarIncidencia/index', $this->datos);
             }
             
-            
+
 
             //$this->cargarVista('editarIncidencia/index', $this->datos);
             
