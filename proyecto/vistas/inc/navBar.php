@@ -16,7 +16,7 @@
                  {
             ?>
             <li class="nav-item">
-                <a class="nav-link" href="<?php echo RUTA_URL?>/nuevaIncidencia">Nueva incidencia</a>
+                <a class="nav-link" href="<?php echo RUTA_URL?>/gestionIncidencia">Nueva incidencia</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="<?php echo RUTA_URL?>/inicio/misIncidencias">Mis incidencias</a>
