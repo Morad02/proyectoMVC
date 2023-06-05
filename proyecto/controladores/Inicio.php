@@ -10,6 +10,7 @@
             $this->fotosModelo = $this->cargarModelo('Fotos');
             $this->valoracionesModelo = $this->cargarModelo('Valoraciones');
             $this->comentariosModelo = $this->cargarModelo('Comentarios');
+            $this->logModelo = $this->cargarModelo('Logs');
             $this->request = new Request();
             $this->datos = [];
             
@@ -48,10 +49,13 @@
                     $this->datos['sesion']['nombre'] = $query['nombre'];
                     $this->datos['sesion']['rol'] = $query['rol'];
                     $this->datos['sesion']['email'] = $query['email'];
+                    $descripcion = "El usuario {$_SESSION['email']} ha iniciado sesión";
+                    $this->logModelo->nuevoLog($descripcion);
                 }
                 else
                 {
-                    echo "El usuario no existe";
+                    $descripcion = "Un usuario anónimo ha intentado iniciar sesión";
+                    $this->logModelo->nuevoLog($descripcion);
                 }
             }
             
@@ -63,6 +67,8 @@
             
             if((session_status() === PHP_SESSION_ACTIVE))
             {
+                $descripcion = "El usuario {$_SESSION['email']} ha cerrado sesión";
+                $this->logModelo->nuevoLog($descripcion);
                 $_SESSION = array();
                 unset($this->datos['sesion']);
                 session_destroy();
