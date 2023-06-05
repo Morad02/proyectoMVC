@@ -68,4 +68,5 @@
   </div>
 </div>
 <script src="<?php echo RUTA_URL?>/js/nIncidencia.js"></script>
+<?php require_once RUTA_PROYECTO.'/vistas/inc/alert.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/footer.php'?>

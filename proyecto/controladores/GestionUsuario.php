@@ -211,6 +211,7 @@
                         $this->usuarioModelo->actualizarUsuario($_SESSION['usuarioEditar'],$columns);
                         $descripcion = "El usuario ".$_SESSION['usuarioEditar']." ha sido editado por el administrador {$this->datos['sesion']['email']}";
                         $this->logModelo->nuevoLog($descripcion);
+                        $this->datos['exito'] = "Usuario modificado con éxito";
 
                         if($this->datos['sesion']['email'] == $_SESSION['usuarioEditar'] && $email != $this->datos['sesion']['email'])
                         {
@@ -238,6 +239,7 @@
                         $this->usuarioModelo->nuevoUsuario($email,$nombre,$apellidos,$password,$telefono,$direccion,$foto,$estado,$rol);
                         $descripcion = "El administrador {$this->datos['sesion']['email']} ha creado un nuevo usuario llamado $email";
                         $this->logModelo->nuevoLog($descripcion);
+                        $this->datos['exito'] = "Usuario creado con éxito";
                     }
                     
                     if(isset($_SESSION['imgEdicion']))
@@ -320,7 +322,11 @@
                     $this->usuarioModelo->eliminarUsuario($id);
                     $descripcion = "El administrador {$this->datos['sesion']['email']} ha eliminado al usuario $id";
                     $this->logModelo->nuevoLog($descripcion);
-
+                    $this->datos['exito'] = "Usuario eliminado con éxito";
+                }
+                else
+                {
+                    $this->datos['error'] = "No se ha podido eliminar el usuario";
                 }
                 
                 $this->index();

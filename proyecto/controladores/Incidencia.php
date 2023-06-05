@@ -46,9 +46,10 @@
                         $this->valoracionesModelo->votar($idUsuario, $_POST['idIncidencia'], $_POST['voto']);
                         $descripcion = "El usuario $idUsuario ha añadido una valoración";
                         $this->logModelo->nuevoLog($descripcion);
+                        $this->datos['exito'] = "Valoración realizada con éxito";
 
                     } else {
-                        // El usuario ya ha votado esta idIncidencia
+                        $this->datos['error'] = "Valoración ya realizada";
                     }
                 } else {
                     $idUsuario = $this->datos['sesion']['email'];
@@ -57,8 +58,9 @@
                         $this->valoracionesModelo->votar($idUsuario, $_POST['idIncidencia'], $_POST['voto']);
                         $descripcion = "El usuario $idUsuario ha añadido una valoración";
                         $this->logModelo->nuevoLog($descripcion);
+                        $this->datos['exito'] = "Valoración realizada con éxito";
                     } else {
-                        // El usuario ya ha votado esta idIncidencia
+                        $this->datos['error'] = "Valoración ya realizada";
                     }
                 }
                 $this->getIncidencia();
@@ -78,6 +80,11 @@
                 $this->comentariosModelo->comentar($idUsuario, $_POST['idIncidencia'], $comentario);
                 $descripcion = "El usuario $idUsuario ha comentado";
                 $this->logModelo->nuevoLog($descripcion);
+                $this->datos['exito'] = "Comentario realizado con éxito";
+                $this->getIncidencia();
+            }
+            else {
+                $this->datos['error'] = "No se ha podido realizar el comentario";
                 $this->getIncidencia();
             }
         }
@@ -88,6 +95,11 @@
                 $this->comentariosModelo->eliminarComentarios($_POST['idIncidencia'], $_POST['idComentario']);
                 $descripcion = "El usuario {$this->datos['sesion']['email']} ha eliminado un comentario";
                 $this->logModelo->nuevoLog($descripcion);
+                $this->datos['exito'] = "Comentario eliminado con éxito";
+                $this->getIncidencia();
+            }
+            else {
+                $this->datos['error'] = "No se ha podido eliminar el comentario";
                 $this->getIncidencia();
             }
         }
