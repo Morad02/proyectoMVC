@@ -8,6 +8,7 @@
             $this->comentariosModelo = $this->cargarModelo('Comentarios');
             $this->valoracionesModelo = $this->cargarModelo('Valoraciones');
             $this->fotosModelo = $this->cargarModelo('Fotos');
+            $this->logModelo = $this->cargarModelo('Logs');
             $this->controladorInicio = $this->cargarControladorInicio();
             $this->request = new Request();
             $this->datos = [];
@@ -92,12 +93,16 @@
                     {
                        
                         $this->fotosModelo->insertarFoto($imagen, $id);
+                        $des = "El usuario ".$_SESSION['email']." ha insertado una foto";
+                        $this->logModelo->nuevoLog($des);
 
 
                     }
                     if(isset($_SESSION['imagenesEdicion']))
                         unset($_SESSION['imagenesEdicion']);
                     
+                    $descripcion = "El usuario {$_SESSION['email']} ha creado una incidencia";
+                    $this->logModelo->nuevoLog($descripcion);
                     $this->controladorInicio->index();
                 }
                 else
@@ -201,6 +206,8 @@
                     ]; 
 
                     $this->incidenciasModelo->actualizarIncidencia($id, $columns);
+                    $descripcion = "El usuario {$_SESSION['email']} ha modificado una incidencia";
+                    $this->logModelo->nuevoLog($descripcion);
                     
                     $this->datos['incidencia'] = $this->incidenciasModelo->obtenerIncidencia($id);
                     $this->datos['incidencia']['comentarios'] = $this->comentariosModelo->getComentarios($id);
@@ -242,6 +249,8 @@
         {
             if(isset($_POST['idIncidencia'])){
                 $this->incidenciasModelo->eliminarIncidencia($_POST['idIncidencia']);
+                $descripcion = "El usuario {$_SESSION['email']} ha eliminado una incidencia";
+                    $this->logModelo->nuevoLog($descripcion);
                 $this->controladorInicio->index();
             }
         }
@@ -251,6 +260,8 @@
             if(isset($_POST['borrarImagen']) && isset($_POST['idIncidencia']))
             {
                 $this->fotosModelo->eliminarFoto($_POST['borrarImagen']);
+                $descripcion = "El usuario {$_SESSION['email']} ha eliminado una foto";
+                $this->logModelo->nuevoLog($descripcion);
                 $_SESSION['editando'] = $_POST['idIncidencia'];
                 $this->editar();
             }
@@ -270,6 +281,8 @@
                     {
                        
                         $this->fotosModelo->insertarFoto($imagen, $id);
+                        $descripcion = "El usuario {$_SESSION['email']} ha insertado una incidencia";
+                        $this->logModelo->nuevoLog($descripcion);
 
                     }
                 }

@@ -25,7 +25,7 @@
             $table = "log";
             $columns = [
                 'fecha' => date('Y-m-d H:i:s'),
-                'descripcion' => $descripcion
+                'descripcion' => "INFO: ".$descripcion
             ];        
             return $this->insert($table, $columns);
         }
