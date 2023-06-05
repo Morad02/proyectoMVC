@@ -19,6 +19,19 @@
                 $this->datos['sesion']['rol'] = $_SESSION['rol'];
                 $this->datos['sesion']['email'] = $_SESSION['email'];
             }
+
+            $top = $this->incidenciasModelo->top();
+
+            if(isset($top))
+            {
+                foreach($top as $indice)
+                {
+                    $user = $this->usuarioModelo->obtenerUsuario($indice['idusuario']);
+                    $this->datos['aniaden'][$indice['idusuario']]['nombre'] = $user['nombre'];
+                    $this->datos['aniaden'][$indice['idusuario']]['apellidos'] = $user['apellidos'];
+                    $this->datos['aniaden'][$indice['idusuario']]['total_incidentes'] = $indice['total_incidentes'];
+                }
+            }
             
         }
 
