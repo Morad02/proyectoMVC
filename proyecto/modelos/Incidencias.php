@@ -82,7 +82,7 @@
 
         public function obtenerIncidenciasUsuario($idUsuario)
         {
-            $select = "SELECT * FROM incidencias WHERE email = ?";
+            $select = "SELECT * FROM incidencias WHERE idusuario = ?";
         
             return $this->query($select, [$idUsuario]);
         }
