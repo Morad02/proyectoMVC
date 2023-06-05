@@ -18,6 +18,7 @@
 
         public function index()
         {
+            $this->datos['log'] = $this->logModelo->obtenerLogs();
             
             $this->cargarVista('log/index', $this->datos);
 

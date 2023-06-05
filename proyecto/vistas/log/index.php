@@ -9,18 +9,20 @@
           <col>
         </colgroup>
         <tbody>
+          <?php
+            if(isset($datos['log']))
+            {
+              foreach($datos['log'] as $log)
+              {
+          ?>
         <tr>
-          <td>2023-05-24 12:34:56</td>
-          <td>Usuario registrado exitosamente</td>
+          <td><?php echo $log['fecha']?></td>
+          <td><?php echo $log['descripcion']?></td>
         </tr>
-        <tr>
-          <td>2023-05-24 12:37:22</td>
-          <td>Error al iniciar la aplicación</td>
-        </tr>
-        <tr>
-          <td>2023-05-24 12:40:45</td>
-          <td>Actualización del sistema completada</td>
-        </tr>
+          <?php
+              }
+            }
+          ?>
         </tbody>
       </table>
     </div>

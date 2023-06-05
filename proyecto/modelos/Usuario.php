@@ -25,6 +25,7 @@
                                 PRIMARY KEY(`email`));";
             
             $this->query($q,[],[],false);
+            
         }
 
         public function nuevoUsuario($email, $nombre, $apellidos, $password, $telefono, $direccion, $foto, $estado, $rol)
