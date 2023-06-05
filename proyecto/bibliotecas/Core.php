@@ -23,7 +23,7 @@
                 {
                     if($_SESSION['rol'] == 'admin')
                         $this->controladorDefecto = ucwords($url[0]);
-                    else if($_SESSION['rol'] == 'user' && $url[0] != 'log') //Falta añadir el diferente a la gestion bbdd
+                    else if($_SESSION['rol'] == 'user' && $url[0] != 'log' && $url[0] != 'gestionUsuario') //Falta añadir el diferente a la gestion bbdd
                         $this->controladorDefecto = ucwords($url[0]);
                 } 
                 else if($url[0] == 'Incidencia')

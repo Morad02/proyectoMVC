@@ -8,35 +8,6 @@
                 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
                 <script src="<?php echo RUTA_URL?>/bootstrap/bootstrap.bundle.min.js"></script>
                 <script src="<?php echo RUTA_URL?>/js/nuevoUsuario.js"></script>
-                <script src="<?php echo RUTA_URL?>/js/scripts.js"></script>
-                <script src="<?php echo RUTA_URL?>/js/nuevoUsuario.js"></script>
-                <?php
-                        if (isset($datos['agregar']['valido']) && !$datos['agregar']['valido']) {
-                            echo "<script>
-                                    $(document).ready(function() {
-                                      $('#nuevoModal').modal('show');
-                                    });
-                                  </script>";
-                        }
-                ?>
-                <?php
-                        if (isset($datos['agregar']['editar']) && $datos['agregar']['editar']) {
-                            echo "<script>
-                                    $(document).ready(function() {
-                                      $('#nuevoModal').modal('show');
-                                    });
-                                  </script>";
-                        }
-                ?>
-                <?php
-                        if (isset($_POST['nuevo'])) {
-                            echo "<script>
-                                    $(document).ready(function() {
-                                      $('#nuevoModal').modal('show');
-                                    });
-                                  </script>";
-                        }
-                ?>
         </div>
     </body>
 </html>
