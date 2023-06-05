@@ -1,6 +1,7 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/header.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <?php $incidencia = $datos['incidencia'];?>
+<!-- DatosIncidencia -->
 <div class="row">
     <div class="col-md-8 mt-5 mx-auto pl-5">
         <div id="Incidencia">
