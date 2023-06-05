@@ -13,7 +13,7 @@
         {
             $q = "CREATE TABLE IF NOT EXISTS `fotos`(
                                 `id` INT(11) NOT NULL AUTO_INCREMENT,
-                                `fotografi` MEDIUMBLOB,
+                                `fotografia` MEDIUMBLOB,
                                 `idincidencia` INT(11) NOT NULL,
                                 PRIMARY KEY(`id`),
                                 KEY `fk_fotos_1_idx`(`idincidencia`),
@@ -55,7 +55,7 @@
         public function obtenerFotosIncidencia($idincidencia)
         {
             $table = 'fotos';
-            $select = "SELECT fotografia FROM $table WHERE idincidencia = ?";
+            $select = "SELECT * FROM $table WHERE idincidencia = ?";
             $params = [$idincidencia];
 
             return $this->query($select, $params);

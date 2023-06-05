@@ -5,6 +5,8 @@
         public function __construct() 
         {
             $this->incidenciasModelo = $this->cargarModelo('Incidencias');
+            $this->comentariosModelo = $this->cargarModelo('Comentarios');
+            $this->valoracionesModelo = $this->cargarModelo('Valoraciones');
             $this->fotosModelo = $this->cargarModelo('Fotos');
             $this->request = new Request();
             $this->datos = [];
@@ -119,23 +121,121 @@
 
         public function editar()
         {
-            $valido = True;
+            $valido = true;
             $errores = []; 
-            if(isset($_POST['editar']))
+            
+            if(isset($_POST['editar']) || isset($_SESSION['editando']))
             {
                 $valido = FALSE;
-                $id = $this->request->get_Dato('editar');
+                if(isset($_POST['editar']))
+                    $id = $this->request->get_Dato('editar');
+                else
+                {
+                    $id = $_SESSION['editando'];
+                    unset($_SESSION['editando']);
+
+                }
+                    
                 $incidencia = $this->incidenciasModelo->obtenerIncidencia($id);
                 $this->datos['edicion'] = $incidencia;
                 $this->datos['edicion']['valido'] = $valido;
-                $this->datos['edicion']['imagenes'] = $this->fotosModelo->getFotos($id);
+                $this->datos['edicion']['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($id);
+                $this->datos['edicion']['idIncidencia'] = $id;
                 $this->cargarVista('editarIncidencia/index', $this->datos);
             }
-            
+            else if (isset($_POST['editando']))
+            {
+                
+                $titulo = $this->request->get_Dato('titulo');
+                if ($titulo == null)
+                {
+                    $errores['titulo'] = 'Campo obligatorio';
+                    $valido = false;
+                }
+
+                $descripcion= $this->request->get_Dato('descripcion');
+                if ($descripcion == null)
+                {
+                    $errores['descripcion'] = 'Campo obligatorio';
+                    $valido = false;
+                }
+
+                $lugar = $this->request->get_Dato('lugar');
+                if ($lugar == null)
+                {
+                    $errores['lugar'] = 'Campo obligatorio';
+                    $valido = false;
+
+                }
+
+                $keywords = $this->request->get_Dato('keywords');
+                if ($keywords == null)
+                {
+                    $errores['keywords'] = 'Campo obligatorio';
+                    $valido = false;
+                }
+
+                $estado = $this->request->get_Dato('estado');
+                $estado2 = $this->request->get_Dato('estado2');
+                if ($estado == null && $estado2 != null)
+                {
+                    $estado = $estado2;
+                }
+                else if($estado == null && $estado2 == null)
+                {
+                    $errores['estado'] = 'Campo obligatorio';
+                    $valido = false;
+                }
 
 
-            //$this->cargarVista('editarIncidencia/index', $this->datos);
-            
+                if($valido && isset($_POST['confirmado']))
+                {
+                    $id = $this->request->get_Dato('confirmado');
+
+                    $columns = [
+                        'titulo' => $titulo,
+                        'descripcion' => $descripcion,
+                        'lugar' => $lugar,
+                        'keywords' => $keywords,
+                        'estado' => $estado
+                    ]; 
+
+                    $this->incidenciasModelo->actualizarIncidencia($id, $columns);
+                    
+                    $this->datos['incidencia'] = $this->incidenciasModelo->obtenerIncidencia($id);
+                    $this->datos['incidencia']['comentarios'] = $this->comentariosModelo->getComentarios($id);
+                    $this->datos['incidencia']['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($id);
+                    $this->datos['incidencia']['valoracionesPos'] = $this->valoracionesModelo->obtenerVotos($id,1);
+                    $this->datos['incidencia']['valoracionesNeg'] = $this->valoracionesModelo->obtenerVotos($id,-1);
+                    
+                    $this->cargarVista('incidencia/index', $this->datos);
+
+                }
+                else{
+                    $id = $this->request->get_Dato('editando');
+                    $imagenes = $this->fotosModelo->obtenerFotosIncidencia($id);
+                    $edicion = [
+                        'idIncidencia' => $id,
+                        'titulo' => $titulo,
+                        'descripcion' => $descripcion,
+                        'lugar' => $lugar,
+                        'keywords' => $keywords,
+                        'estado' => $estado,
+                        'errores' => $errores,
+                        'valido' => $valido,
+                        'imagenes' => $imagenes
+                    ];
+
+                    
+
+                    $this->datos['edicion'] = $edicion;
+
+                    $this->cargarVista('editarIncidencia/index', $this->datos); 
+                }
+
+            }            
+
+
         }
 
         public function eliminarIncidencia()
@@ -144,6 +244,39 @@
                 $this->incidenciasModelo->eliminarIncidencia($_POST['idIncidencia']);
                 $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
                 $this->cargarVista('inicio/inicio', $this->datos);
+            }
+        }
+
+        public function eliminarFoto()
+        {
+            if(isset($_POST['borrarImagen']) && isset($_POST['idIncidencia']))
+            {
+                $this->fotosModelo->eliminarFoto($_POST['borrarImagen']);
+                $_SESSION['editando'] = $_POST['idIncidencia'];
+                $this->editar();
+            }
+        }
+
+        public function subirFotos()
+        {
+            if(isset($_POST['subir']))
+            {
+                $id = $this->request->get_Dato('subir');
+
+                $imagenes = $this->request->get_imagenes('imagenes');
+
+                if($imagenes != null)
+                {
+                    foreach($imagenes as $imagen)
+                    {
+                       
+                        $this->fotosModelo->insertarFoto($imagen, $id);
+
+                    }
+                }
+
+                $_SESSION['editando'] = $id;
+                $this->editar();
             }
         }
     }

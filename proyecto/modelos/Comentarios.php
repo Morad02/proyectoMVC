@@ -53,6 +53,12 @@
             $this->query($delete, [$idIncidencia, $idComentario]);
         }
 
+        public function top()
+        {
+            $select = "SELECT idusuario COUNT(*) AS numComentarios FROM comentarios GROUP BY idusuario ORDER BY numComentarios DESC LIMIT 3";
+            $result = $this->query($select);
+            return $result;
+        }
 
     }
 ?>

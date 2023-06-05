@@ -89,6 +89,14 @@
             return count($result) > 0;
         }
 
+        public function top()
+        {
+            $select = "SELECT idusuario, COUNT(*) AS total_incidentes FROM incidencias GROUP BY idusuario ORDER BY total_incidentes DESC LIMIT 3";
+
+            return $this->query($select);
+
+        }
+
 
     }
 ?>
