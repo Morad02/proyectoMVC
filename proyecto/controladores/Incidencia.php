@@ -19,7 +19,7 @@
                 $this->datos['sesion']['email'] = $_SESSION['email'];
             }
 
-            $top = $this->incidenciasModelo->top();
+            $top = $this->incidenciaModelo->top();
 
             if(isset($top))
             {
