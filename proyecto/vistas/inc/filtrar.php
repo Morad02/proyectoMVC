@@ -1,4 +1,4 @@
-<div class="row justify-content-center">
+<!-- <div class="row justify-content-center">
     <div class="col-md-6">
         <form class="form-inline d-flex justify-content-center align-items-center">
             <div class="input-group">
@@ -14,7 +14,7 @@
             </div>
         </form>
     </div>
-</div>
+</div> -->
 <div class="row mt-3">
     <div class="col">
         <div class="collapse" id="opcionesFiltro">

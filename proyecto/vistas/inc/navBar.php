@@ -2,6 +2,9 @@
     <a class="navbar-brand" href="<?php echo RUTA_URL ?>/">
         <img src="<?php echo RUTA_URL?>/Imagenes/icono.png" width="30" alt="Logo">
     </a>
+    <button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#opcionesFiltro">
+        <i class="fas fa-search"></i>
+    </button>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
