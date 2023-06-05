@@ -103,6 +103,7 @@
                 foreach ($this->datos['incidencias'] as $indice => $incidencia) {
                     $this->datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['id']);
                 }
+                $this->datos['misIncidencias']=True;
             }
             $this->cargarVista('inicio/inicio', $this->datos);
         }

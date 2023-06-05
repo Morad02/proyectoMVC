@@ -1,20 +1,3 @@
-<!-- <div class="row justify-content-center">
-    <div class="col-md-6">
-        <form class="form-inline d-flex justify-content-center align-items-center">
-            <div class="input-group">
-                <input type="text" class="form-control" placeholder="Buscar">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-secondary" type="submit">
-                        <i class="fas fa-search"></i>
-                    </button>
-                    <button class="btn btn-primary ml-2" type="button" data-toggle="collapse" data-target="#opcionesFiltro">
-                        <i class="fas fa-filter"></i>
-                    </button>
-                </div>
-            </div>
-        </form>
-    </div>
-</div> -->
 <div class="row mt-3">
     <div class="col">
         <div class="collapse" id="opcionesFiltro">
@@ -35,17 +18,11 @@
                             <label class="form-check-label" for="positivosnetos">Número de positivos netos (de más a menos)</label>
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-4 align-items-center g-2">
                         <h4 class="card-title titulosubfiltro">Incidencias que contengan:</h4>
-                        <div class="form-group form-item-filtro">
-                            <div class="row align-items-center g-2">
-                                <div class="col-md-2">
-                                    <label for="lugar">Lugar:</label>
-                                </div>
-                                <div class="col-md-8 offset-md-1">
-                                    <input type="text" class="form-control" id="lugar">
-                                </div>
-                            </div>
+                        <label for="lugar">Lugar:</label>
+                         <div class="col-md-8">
+                            <input type="text" class="form-control" id="lugar">
                         </div>
                     </div>
                 </div>
@@ -75,20 +52,17 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 pt-3 align-items-center g-2">
-                        <label for="n_incidencias" class="negrita">Incidencias por página:</label>
-                        <div class="col-md-8">
-                            <select class="form-control" id="n_incidencias">
-                                <option value="tres">3 ítems</option>
-                                <option value="seis">6 ítems</option>
-                                <option value="nueve">9 ítems</option>
-                                <option value="doce">12 ítems</option>
-                                <option value="quince">15 ítems</option>
-                                <option value="dieciocho">18 ítems</option>
-                            </select>
-                        </div>
+                    <div class="col-md-4 pt-5">
+                        <input type="text" class="form-control" name="buscar" placeholder="Buscar...">
                     </div>
                 </div>
+                <?php
+                    if(isset($datos['misIncidencias'])){
+                ?>
+                        <input type="hidden" name="misIncidencias" value="true">
+                <?php    
+                    }
+                ?>
                 <div class="d-flex justify-content-center mt-4">
                     <button type="submit" class="btn btn-primary">Aplicar filtros</button>
                 </div>
