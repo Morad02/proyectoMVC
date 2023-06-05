@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="<?php echo RUTA_URL ?>/">
         <img src="<?php echo RUTA_URL?>/Imagenes/icono.png" width="30" alt="Logo">
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggler"
