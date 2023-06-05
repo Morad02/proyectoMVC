@@ -62,6 +62,23 @@
 
             return $result[0]['count'];
         }
+
+        public function incidenciasMasPositivas()
+        {
+            $select = "SELECT idincidencia, COUNT(*) AS count FROM valoraciones WHERE valoraciones = 1 GROUP BY idincidencia ORDER BY count DESC";
+            $result = $this->query($select);
+
+            return $result;
+        }
+
+        public function incidenciasMasnetosPositivos()
+        {
+            $select = "SELECT idincidencia, SUM(valoraciones) AS sum FROM valoraciones GROUP BY idincidencia ORDER BY sum DESC";
+            $result = $this->query($select);
+        
+            return $result;
+        }
+
         
 
 
