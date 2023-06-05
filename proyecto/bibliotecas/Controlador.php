@@ -7,6 +7,7 @@
         public $incidenciasModelo;
         public $comentariosModelo;
         public $valoracionesModelo;
+        public $logModelo;
         public $request;
         public $datos;
 

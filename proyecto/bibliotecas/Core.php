@@ -23,7 +23,7 @@
                 {
                     if($_SESSION['rol'] == 'admin')
                         $this->controladorDefecto = ucwords($url[0]);
-                    else if($_SESSION['rol'] == 'user' && $url[0] == 'gestionIncidencia')
+                    else if($_SESSION['rol'] == 'user' && $url[0] == 'gestionIncidencia' || $url[0] == 'nuevaIncidencia')
                         $this->controladorDefecto = ucwords($url[0]);
                 } 
                 else if($url[0] == 'Incidencia')

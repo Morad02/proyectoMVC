@@ -1,6 +1,6 @@
 <?php
 
-    class Log extends Modelo 
+    class Logs extends Modelo 
     {
         function __construct()
         {
@@ -17,6 +17,7 @@
                                 `fecha` DATETIME DEFAULT NULL,
                                 `descripcion` TEXT COLLATE utf8_spanish2_ci,
                                 KEY(`id`));";
+            $this->query($q,[],[],false);
         }
 
         public function nuevoLog($descripcion)
@@ -27,6 +28,13 @@
                 'descripcion' => $descripcion
             ];        
             return $this->insert($table, $columns);
+        }
+
+        public function obtenerLogs()
+        {
+            $select = "SELECT * FROM log";
+            $result = $this->query($select);
+            return $result;
         }
     }
 ?>
