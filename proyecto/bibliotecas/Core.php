@@ -32,7 +32,6 @@
                 unset($url[0]);
             }
 
-            //var_dump($url);
             require_once '../proyecto/controladores/'.$this->controladorDefecto.'.php';
             $this->controladorDefecto = new $this->controladorDefecto;
 

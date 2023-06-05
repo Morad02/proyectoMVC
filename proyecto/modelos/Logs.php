@@ -32,7 +32,7 @@
 
         public function obtenerLogs()
         {
-            $select = "SELECT * FROM log";
+            $select = "SELECT * FROM log ORDER BY fecha DESC";
             $result = $this->query($select);
             return $result;
         }
