@@ -6,6 +6,8 @@
         public function __construct() 
         {
             $this->logModelo = $this->cargarModelo('Logs');
+            $this->usuarioModelo = $this->cargarModelo('Usuario');
+            $this->incidenciasModelo = $this->cargarModelo('Incidencias');
             $this->request = new Request();
             $this->datos = [];
             

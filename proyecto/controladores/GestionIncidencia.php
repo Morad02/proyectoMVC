@@ -9,6 +9,7 @@
             $this->valoracionesModelo = $this->cargarModelo('Valoraciones');
             $this->fotosModelo = $this->cargarModelo('Fotos');
             $this->logModelo = $this->cargarModelo('Logs');
+            $this->usuarioModelo = $this->cargarModelo('Usuario');
             $this->controladorInicio = $this->cargarControladorInicio();
             $this->request = new Request();
             $this->datos = [];
