@@ -51,11 +51,13 @@
                     $this->datos['sesion']['email'] = $query['email'];
                     $descripcion = "El usuario {$_SESSION['email']} ha iniciado sesión";
                     $this->logModelo->nuevoLog($descripcion);
+                    $this->datos['exito'] = "Inicio de sesión exitoso";
                 }
                 else
                 {
                     $descripcion = "Un usuario anónimo ha intentado iniciar sesión";
                     $this->logModelo->nuevoLog($descripcion);
+                    $this->datos['error'] = "Usuario o contraseña incorrectos";
                 }
             }
             

@@ -25,7 +25,7 @@
                                 PRIMARY KEY(`email`));";
             
             $this->query($q,[],[],false);
-            
+
         }
 
         public function nuevoUsuario($email, $nombre, $apellidos, $password, $telefono, $direccion, $foto, $estado, $rol)
@@ -94,7 +94,7 @@
             $params = [$email];
             $result = $this->query($select,$params);
             
-            if( $result[0]['P'] !== null)
+            if( isset($result[0]) && $result[0]['P'] !== null)
             {
                 $hash = $result[0]['P'];
                 return password_verify($password,$hash);

@@ -44,7 +44,7 @@
                         setcookie('idIncidencias', serialize($idIncidenciasVotadas), time() + (3600 * 24 * 365));
 
                         $this->valoracionesModelo->votar($idUsuario, $_POST['idIncidencia'], $_POST['voto']);
-                        $descripcion = "El usuario $idUsuario ha votado en la incidencia $_POST[idIncidencia]";
+                        $descripcion = "El usuario $idUsuario ha añadido una valoración";
                         $this->logModelo->nuevoLog($descripcion);
 
                     } else {
@@ -55,7 +55,7 @@
 
                     if (!$this->valoracionesModelo->haVotado($idUsuario, $_POST['idIncidencia'])) {
                         $this->valoracionesModelo->votar($idUsuario, $_POST['idIncidencia'], $_POST['voto']);
-                        $descripcion = "El usuario $idUsuario ha votado en la incidencia $_POST[idIncidencia]";
+                        $descripcion = "El usuario $idUsuario ha añadido una valoración";
                         $this->logModelo->nuevoLog($descripcion);
                     } else {
                         // El usuario ya ha votado esta idIncidencia
@@ -76,7 +76,7 @@
                 }
                 $comentario = $this->request->get_Dato('comentario');
                 $this->comentariosModelo->comentar($idUsuario, $_POST['idIncidencia'], $comentario);
-                $descripcion = "El usuario $idUsuario ha comentado en la incidencia $_POST[idIncidencia]";
+                $descripcion = "El usuario $idUsuario ha comentado";
                 $this->logModelo->nuevoLog($descripcion);
                 $this->getIncidencia();
             }
@@ -86,7 +86,7 @@
         {
             if (isset($_POST['idIncidencia']) && isset($_POST['idComentario'])) {
                 $this->comentariosModelo->eliminarComentarios($_POST['idIncidencia'], $_POST['idComentario']);
-                $descripcion = "El usuario $idUsuario ha eliminado un comentario en la incidencia $_POST[idIncidencia]";
+                $descripcion = "El usuario {$this->datos['sesion']['email']} ha eliminado un comentario";
                 $this->logModelo->nuevoLog($descripcion);
                 $this->getIncidencia();
             }
