@@ -227,14 +227,19 @@ class Modelo
     
         $salida = '';
     
-        foreach ($tablas as $tab) {
-            $result = $this->db->query('SHOW CREATE TABLE '.$tab);
-            $row2 = $result->fetch_array(MYSQLI_NUM);
-            $salida .= 'DROP TABLE IF EXISTS '.$tab.';';
-            $salida .= "\n\n".$row2[1].";\n\n";
-        }
+        // foreach ($tablas as $tab) {
+        //     $result = $this->db->query('SHOW CREATE TABLE '.$tab);
+        //     $row2 = $result->fetch_array(MYSQLI_NUM);
+        //     $salida .= 'DROP TABLE IF EXISTS '.$tab.';';
+        //     $salida .= "\n\n".$row2[1].";\n\n";
+        // }
     
         foreach ($tablas as $tab) {
+            $result = $this->db->query('SHOW CREATE TABLE '.$tab);//nuevo
+            $row2 = $result->fetch_array(MYSQLI_NUM);//nuevo
+            $salida = 'DROP TABLE IF EXISTS '.$tab.';';//nuevo
+            $salida .= "\n\n".$row2[1].";\n\n";//nuevo
+
             fwrite($archivo, $salida);
     
             $result = $this->db->query('SELECT * FROM '.$tab);
