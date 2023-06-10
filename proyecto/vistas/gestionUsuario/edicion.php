@@ -141,7 +141,7 @@
             ?>  
         </form>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
         <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
     </div> 

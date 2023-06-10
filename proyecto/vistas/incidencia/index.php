@@ -1,8 +1,8 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/header.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <?php $incidencia = $datos['incidencia'];?>
-<div class="row container-fluid">
-    <div class="col-md-8 mt-5 mx-auto pl-5">
+<div class="row">
+    <div class="col-md-8 mx-auto">
         <div id="Incidencia">
             <div class="row w-100">
                 <h2 class="w-100 text-center h2 py-5" style="background-color: #f5f6f7;"><?php echo $incidencia['titulo']?></h2>
@@ -130,7 +130,7 @@
                 } ?>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
         <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
     </div>

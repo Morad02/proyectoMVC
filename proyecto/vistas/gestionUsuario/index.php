@@ -1,7 +1,7 @@
 <?php require_once RUTA_PROYECTO.'/vistas/inc/header.php'?>
 <?php require_once RUTA_PROYECTO.'/vistas/inc/navBar.php'?>
 <div class="row">
-    <div class="col-md-9 mt-4 mx-auto">
+    <div class="col-md-10 mt-4 mx-auto">
         <div class="row">
             <div class="d-flex justify-content-end mt-4 pb-2">
                 <form action="<?php echo RUTA_URL.'/gestionUsuario/agregar'?>" method="POST">
@@ -73,7 +73,7 @@
             }   
         ?>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
         <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
     </div>  

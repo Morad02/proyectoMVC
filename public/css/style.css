@@ -70,10 +70,15 @@
 }
 
 .image-container {
-  width: 200px;
-  height: 200px;
+  max-height: 200px;
 }
 
+.button-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+  
 /*Botones incidencia*/
 .btn-round {
     background-color: transparent;

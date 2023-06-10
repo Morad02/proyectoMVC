@@ -50,18 +50,18 @@
             <div class="form-group m-3">
                 <h5>Datos principales:</h5>
                 <div class="m-3">
-                    <div class="form-group">
+                    <div class="form-group pb-2">
                       <label for="inputTitulo">Título</label>
                       <input type="text" class="form-control <?php echo (isset($datos['edicion']['errores']['titulo'])) ? 'is-invalid' : ''; ?>" id="inputTitulo" name="titulo"
                         value="<?php echo isset($datos['edicion']['titulo']) ? $datos['edicion']['titulo'] : ''; ?>" <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "readonly" : ''?>>
                       <div class="invalid-feedback"><?php echo $datos['edicion']['errores']['titulo']?></div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group pb-2">
                       <label for="inputDescripcion">Descripción</label>
                       <textarea class="form-control <?php echo (isset($datos['edicion']['errores']['descripcion'])) ? 'is-invalid' : ''; ?>" id="inputDescripcion" rows="3" name="descripcion" <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "readonly" : ''?>><?php echo isset($datos['edicion']['descripcion']) ? $datos['edicion']['descripcion'] : ''; ?></textarea>
                       <div class="invalid-feedback"><?php echo $datos['edicion']['errores']['descripcion']?></div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group pb-2">
                       <label for="inputLugar">Lugar</label>
                       <input type="text" class="form-control <?php echo (isset($datos['edicion']['errores']['lugar'])) ? 'is-invalid' : ''; ?>" id="inputLugar" name="lugar"
                         value="<?php echo isset($datos['edicion']['lugar']) ? $datos['edicion']['lugar'] : ''; ?>" <?php echo isset($datos['edicion']['valido']) && $datos['edicion']['valido'] ? "readonly" : ''?>>
@@ -93,7 +93,7 @@
             <button class="btn btn-round" type="submit"><i class="fas fa-upload"></i></button>
           </div>
         </form>
-        <div class="form-group">
+        <div class="form-group pb-3">
             <label class="m-2">Imágenes:</label>
             <div id="previewImagenes" class="d-flex flex-wrap border">
               <?php
@@ -116,22 +116,24 @@
               ?>
             </div>
         </div>
-        <?php
-          if(isset($datos['edicion']['valido'] ) && $datos['edicion']['valido'] )
-          {
-          ?>
-          <button type="submit" class="btn btn-primary" id="confirmSubmit" form="estadoIncidencia">Confirmar</button>
+        <div class="pl-2 mb-5">
           <?php
-            }
-            else
+            if(isset($datos['edicion']['valido'] ) && $datos['edicion']['valido'] )
             {
-          ?>
-          <button type="submit" class="btn btn-primary" form="estadoIncidencia">Enviar</button>
-          <?php
-            }
-          ?>
+            ?>
+            <button type="submit" class="btn btn-primary" id="confirmSubmit" form="estadoIncidencia">Confirmar</button>
+            <?php
+              }
+              else
+              {
+            ?>
+            <button type="submit" class="btn btn-primary" form="estadoIncidencia">Enviar</button>
+            <?php
+              }
+            ?>
+        </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-2">
         <?php require_once RUTA_PROYECTO.'/vistas/inc/sesion.php'?>
         <?php require_once RUTA_PROYECTO.'/vistas/inc/adicional.php'?>
     </div>
