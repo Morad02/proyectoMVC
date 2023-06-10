@@ -104,6 +104,68 @@
 
         }
 
+        
 
+        public function filtrar($cOrdenacion,$texto=null,$lugar=null,$idusuario=null,$estados = [])
+        {
+            $conditions = [];
+            $params = [];   
+
+
+            //criterio de filtrado 
+
+            if($texto != null)
+            {
+                $conditions[] = "titulo LIKE ? OR descripcion LIKE ? OR keywords LIKE ?";
+                $params[] = "%$texto%";
+                $params[] = "%$texto%";
+                $params[] = "%$texto%";
+            }
+
+            if($lugar != null)
+            {
+                $conditions[] = "lugar = ?";
+                $params[] = $lugar;
+            }
+
+            if($idusuario != null)
+            {
+                $conditions[] = "idusuario = ?";
+                $params[] = $idusuario;
+            }
+
+            if(!empty($estados))
+            {
+                $conditions[] = "estado IN (".implode(',',array_fill(0,count($estados),'?')).")";
+                $params = array_merge($params,$estados);
+
+
+            }
+
+            //criterios de ordenacion
+            switch($cOrdenacion)
+            {
+                case 'antiguedad':
+                    $orderBy = "fecha DESC";
+                    break;
+                case 'positivos':
+                    $orderBy = "(SELECT COUNT(*) FROM valoraciones WHERE valoraciones.idincidencia = incidencias.id AND valoraciones.valoraciones = 1) DESC";
+                    break;
+                case 'netos':
+                    $orderBy = "(SELECT SUM(valoraciones.valoraciones) FROM valoraciones WHERE valoraciones.idincidencia = incidencias.id) DESC";
+                    break;
+            }
+
+            $query = "SELECT * FROM incidencias";
+
+            if(!empty($conditions))
+                $query .= " WHERE ".implode(' AND ',$conditions);
+            
+
+            
+            $query .= " ORDER BY $orderBy";
+
+            return $this->query($query,$params);
+        }
     }
 ?>

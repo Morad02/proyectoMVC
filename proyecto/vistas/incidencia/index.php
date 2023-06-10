@@ -12,6 +12,7 @@
                     <li class="pt-2">Lugar: <?php echo $incidencia['lugar']?></li>
                     <li class="pt-2">Fecha: <?php echo $incidencia['fecha']?></li>
                     <li class="pt-2">Creado por: <?php echo $incidencia['idusuario']?></li>
+                    <li class="pt-2">Estado: <?php echo $incidencia['estado']?></li>
                     <li class="pt-2">Descripción: <?php echo $incidencia['descripcion']?></li>
                 </ul>
             </div>

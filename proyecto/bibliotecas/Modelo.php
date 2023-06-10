@@ -209,8 +209,56 @@ class Modelo
         return $this->db->insert_id;
     }
 
-
-
-
+    public function DB_backup() {
+        $select = "SHOW TABLES";
+        $result = $this->db->query($select);
+    
+        if ($result === false) {
+            throw new Exception("Error executing query: " . $this->db->error);
+        }
+    
+        $tablas = [];
+        while ($row = $result->fetch_array(MYSQLI_NUM)) {
+            $tablas[] = $row[0];
+        }
+    
+        $nombreArchivo = '/tmp/db_backup_'.date('Ymd_His').'.sql';
+        $archivo = fopen($nombreArchivo, 'w');
+    
+        $salida = '';
+    
+        foreach ($tablas as $tab) {
+            $result = $this->db->query('SHOW CREATE TABLE '.$tab);
+            $row2 = $result->fetch_array(MYSQLI_NUM);
+            $salida .= 'DROP TABLE IF EXISTS '.$tab.';';
+            $salida .= "\n\n".$row2[1].";\n\n";
+        }
+    
+        foreach ($tablas as $tab) {
+            fwrite($archivo, $salida);
+    
+            $result = $this->db->query('SELECT * FROM '.$tab);
+            $num_fields = $result->field_count;
+    
+            while ($row = $result->fetch_array(MYSQLI_NUM)) {
+                $salida = 'INSERT INTO '.$tab.' VALUES(';
+                for ($j = 0; $j < $num_fields; $j++) {
+                    $row[$j] = addslashes($row[$j]);
+                    $row[$j] = preg_replace("/\n/","\\n",$row[$j]);
+                    if (isset($row[$j])) $salida .= '"'.$row[$j].'"';
+                    else $salida .= '""';
+                    if ($j < ($num_fields - 1)) $salida .= ',';
+                }
+                $salida .= ");\n";
+                fwrite($archivo, $salida);
+            }
+            fwrite($archivo, "\n\n\n");
+        }
+    
+        fclose($archivo);
+    
+        return $nombreArchivo;
+    }
+    
 }
 ?>

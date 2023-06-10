@@ -18,7 +18,17 @@
 <div class="card mt-4">
     <div class="card-body">
         <h5 class="card-title">Los que más opinan</h5>
-        <p class="card-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut auctor, quam nec
-        convallis faucibus, mauris turpis gravida lacus, ut congue mi est eu erat.</p>
+        <ul>
+            <?php if (isset($datos['opinan']))
+            {
+                foreach($datos['opinan'] as $opinan)
+                {
+            ?>
+                <li>(<?php echo $opinan['total_comentarios']?>) <?php echo ' '.$opinan['nombre'].' '.$aniaden['apellidos']?></li>
+            <?php
+                }
+            }
+            ?>
+        </ul>
     </div>
 </div>

@@ -25,6 +25,7 @@
                                 PRIMARY KEY(`email`));";
             
             $this->query($q,[],[],false);
+            $this->nuevoUsuario('admin@admin.com', 'admin', 'admin', password_hash('admin', PASSWORD_DEFAULT), '000000000', 'admin', NULL, 'activo', 'admin');
 
         }
 

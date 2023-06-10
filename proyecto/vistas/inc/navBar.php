@@ -38,7 +38,7 @@
                 <a class="nav-link" href="<?php echo RUTA_URL?>/log">Ver log</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Gestión de BBDD</a>
+                <a class="nav-link" href="<?php echo RUTA_URL?>/gestionBD">Gestión de BBDD</a>
             </li>
             <?php
                 }

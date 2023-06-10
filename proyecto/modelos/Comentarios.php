@@ -55,7 +55,7 @@
 
         public function top()
         {
-            $select = "SELECT idusuario COUNT(*) AS numComentarios FROM comentarios GROUP BY idusuario ORDER BY numComentarios DESC LIMIT 3";
+            $select = "SELECT idusuario, COUNT(*) AS total_comentarios FROM comentarios GROUP BY idusuario ORDER BY total_comentarios DESC LIMIT 3";
             $result = $this->query($select);
             return $result;
         }

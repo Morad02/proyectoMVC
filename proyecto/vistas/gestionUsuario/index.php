@@ -27,7 +27,7 @@
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-md-2 mb-2 pt-4">
-                                        <img src="<?php echo isset($usuario['foto']) ? 'data:image/jpeg;base64,'. $usuario['foto']: RUTA_URL.'/img/usuario.svg';?>" alt="Imagen Usuario" class="img-fluid w-50 h-50">
+                                        <img src="<?php echo isset($usuario['foto']) && $usuario['foto'] != null ? 'data:image/jpeg;base64,'. $usuario['foto']: RUTA_URL.'/img/usuario.svg';?>" alt="Imagen Usuario" class="img-fluid w-50 h-50">
                                     </div>
                                     <div class="col-md-10 mb-10">
                                         <div class="row">
