@@ -19,6 +19,7 @@
                 $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
                 $this->datos['sesion']['rol'] = $_SESSION['rol'];
                 $this->datos['sesion']['email'] = $_SESSION['email'];
+                $this->datos['sesion']['foto'] = $_SESSION['foto'];
             }
 
             $topv = $this->incidenciasModelo->top();
@@ -91,9 +92,11 @@
                     $_SESSION['nombre'] = $query['nombre'];
                     $_SESSION['rol'] = $query['rol'];
                     $_SESSION['email'] = $query['email'];
+                    $_SESSION['foto'] = $query['foto'];
                     $this->datos['sesion']['nombre'] = $query['nombre'];
                     $this->datos['sesion']['rol'] = $query['rol'];
                     $this->datos['sesion']['email'] = $query['email'];
+                    $this->datos['sesion']['foto'] = $query['foto'];
                     $descripcion = "El usuario {$_SESSION['email']} ha iniciado sesión";
                     $this->logModelo->nuevoLog($descripcion);
                     $this->datos['exito'] = "Inicio de sesión exitoso";

@@ -16,7 +16,9 @@
                     if(isset($incidencia['imagenes'][0]))
                     {
                 ?>
-                    <img src="<?php echo 'data:image/jpeg;base64,'.$incidencia['imagenes'][0]['fotografia']?>" class="card-img-top" alt="Imagen Incidencia">
+                    <div class="image-container">
+                        <img src="<?php echo 'data:image/jpeg;base64,'.$incidencia['imagenes'][0]['fotografia']?>" class="" alt="Imagen Incidencia">
+                    </div>
                     <?php
                     }else{
                 ?>

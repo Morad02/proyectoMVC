@@ -32,7 +32,7 @@
                         <p class="mb-0"><?php echo $datos['sesion']['nombre']?></p>
                         <p class="text-muted small"><?php echo $datos['sesion']['rol']?></p>
                     </div>
-                    <img src="<?php echo RUTA_URL?>/img/usuario.svg" alt="Foto de perfil" class="img-fluid mb-3">
+                    <img src="<?php echo 'data:image/jpeg;base64,'.$datos['sesion']['foto']?>" alt="Foto de perfil" class="img-fluid rounded-circle pb-5">
                     <div>
                         <form action="<?php echo RUTA_URL.'/gestionUsuario/editar'?>" method="POST">
                             <input type="hidden" name="email" value="<?php echo $datos['sesion']['email']?>">

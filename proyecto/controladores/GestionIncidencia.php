@@ -19,6 +19,7 @@
                 $this->datos['sesion']['nombre'] = $_SESSION['nombre'];
                 $this->datos['sesion']['rol'] = $_SESSION['rol'];
                 $this->datos['sesion']['email'] = $_SESSION['email'];
+                $this->datos['sesion']['foto'] = $_SESSION['foto'];
             }
 
             $topv = $this->incidenciasModelo->top();
