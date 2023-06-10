@@ -220,27 +220,34 @@ class Modelo
         $tablas = [];
         while ($row = $result->fetch_array(MYSQLI_NUM)) {
             $tablas[] = $row[0];
+
+            $resultCreate = $this->db->query('SHOW CREATE TABLE '.$row[0]);//nuevo2
+            $rowCreate = $resultCreate->fetch_array(MYSQLI_NUM);//nuevo2
+            $tablasCreates[$row[0]] = $rowCreate[1];//nuevo2
         }
     
         $nombreArchivo = '/tmp/db_backup_'.date('Ymd_His').'.sql';
         $archivo = fopen($nombreArchivo, 'w');
     
-        $salida = '';
-    
-        // foreach ($tablas as $tab) {
-        //     $result = $this->db->query('SHOW CREATE TABLE '.$tab);
-        //     $row2 = $result->fetch_array(MYSQLI_NUM);
-        //     $salida .= 'DROP TABLE IF EXISTS '.$tab.';';
-        //     $salida .= "\n\n".$row2[1].";\n\n";
-        // }
+        //$salida = '';
     
         foreach ($tablas as $tab) {
-            $result = $this->db->query('SHOW CREATE TABLE '.$tab);//nuevo
-            $row2 = $result->fetch_array(MYSQLI_NUM);//nuevo
-            $salida = 'DROP TABLE IF EXISTS '.$tab.';';//nuevo
-            $salida .= "\n\n".$row2[1].";\n\n";//nuevo
+            //$result = $this->db->query('SHOW CREATE TABLE '.$tab);
+            //$row2 = $result->fetch_array(MYSQLI_NUM);
+            //$salida .= 'DROP TABLE IF EXISTS '.$tab.';';
+            //$salida .= "\n\n".$row2[1].";\n\n";
+            $salida = 'DROP TABLE IF EXISTS '.$tab.';';//nuevo2
+            $salida .= "\n\n".$tablasCreates[$tab].";\n\n";//nuevo2
+            fwrite($archivo, $salida);//nuevo2
+        }
+    
+        foreach ($tablas as $tab) {
+            // $result = $this->db->query('SHOW CREATE TABLE '.$tab);//nuevo
+            // $row2 = $result->fetch_array(MYSQLI_NUM);//nuevo
+            // $salida = 'DROP TABLE IF EXISTS '.$tab.';';//nuevo
+            // $salida .= "\n\n".$row2[1].";\n\n";//nuevo
 
-            fwrite($archivo, $salida);
+            // fwrite($archivo, $salida);
     
             $result = $this->db->query('SELECT * FROM '.$tab);
             $num_fields = $result->field_count;
