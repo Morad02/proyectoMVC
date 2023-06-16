@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <div style="height: 70px;">
                             <h5 class="card-title"><?php echo $incidencia['titulo']?></h5>
-                            <p class="card-text pb-2" style="max-height: 30px;"><?php echo $incidencia['descripcion']?></p>
+                            <p class="card-text pb-2" style="max-height: 30px;"><?php echo $incidencia['keywords']?></p>
                         </div>
                         <form action="<?php echo RUTA_URL.'/Incidencia/getIncidencia'?>" method="POST">
                             <input type="hidden" name="idIncidencia" value="<?php echo $incidencia['id']?>">

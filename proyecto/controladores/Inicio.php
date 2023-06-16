@@ -70,9 +70,6 @@
                 $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidencias();
             }
 
-            if (empty($this->datos['incidencias'])) {
-                echo "No se encontraron incidencias";
-            }
             foreach ($this->datos['incidencias'] as $indice => $incidencia) {
                 $this->datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['id']);
             }
@@ -150,9 +147,7 @@
                 {
                     $this->datos['incidencias'] = $this->incidenciasModelo->obtenerIncidenciasUsuario($_SESSION['email']);
                 }
-                if (empty($this->datos['incidencias'])) {
-                    echo "No se encontraron incidencias";
-                }
+                
                 foreach ($this->datos['incidencias'] as $indice => $incidencia) {
                     $this->datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['id']);
                 }
@@ -207,9 +202,7 @@
 
                 $this->datos['incidencias'] = $this->incidenciasModelo->filtrar($ordenar,$texto,$lugar,$iUsuario,$estado);
                 
-                if (empty($this->datos['incidencias'])) {
-                    echo "No se encontraron incidencias";
-                }
+                
                 foreach ($this->datos['incidencias'] as $indice => $incidencia) {
                     $this->datos['incidencias'][$indice]['imagenes'] = $this->fotosModelo->obtenerFotosIncidencia($incidencia['id']);
                 }
@@ -226,6 +219,32 @@
             
 
 
+        }
+
+        public function borrarFiltro()
+        {
+            if($_SERVER['REQUEST_METHOD'] === 'POST')
+            {
+                if(isset($_POST['misIncidencias']) && isset($_SESSION['mfiltro']))
+                {
+                    unset($_SESSION['mfiltro']);
+                    $this->misIncidencias();
+                }
+                else if(isset($_SESSION['filtro']))
+                {
+                    unset($_SESSION['filtro']);
+                    $this->index();
+                }
+                else if (isset($_POST['misIncidencias']))
+                {
+                    $this->misIncidencias();
+                }
+                else
+                {
+                    $this->index();
+                }
+            }
+            
         }
 
 

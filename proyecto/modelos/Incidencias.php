@@ -162,8 +162,8 @@
                 $query .= " WHERE ".implode(' AND ',$conditions);
             
 
-            
-            $query .= " ORDER BY $orderBy";
+            if(isset($orderBy))
+                $query .= " ORDER BY $orderBy";
 
             return $this->query($query,$params);
         }

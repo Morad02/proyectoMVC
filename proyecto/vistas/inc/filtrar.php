@@ -78,6 +78,20 @@
                         <button type="submit" class="btn btn-primary">Aplicar filtros</button>
                     </div>
                 </form>
+                <div class="d-flex justify-content-end">
+                    <form action="<?php echo RUTA_URL; ?>/inicio/borrarFiltro" method="POST">
+                        <?php
+                            if(isset($datos['misIncidencias'])){
+                        ?>
+                                <input type="hidden" name="misIncidencias" value="true">
+                        <?php    
+                            }
+                        ?>
+                        <button class="btn btn-round" type="submit">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
