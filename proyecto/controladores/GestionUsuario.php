@@ -154,6 +154,10 @@
                     $valido = false;
 
                 }
+                else if($rol == null)
+                {
+                    $rol = 'user';
+                }
                 
                 $estado = $this->request->get_Dato('nuevoEstado');
                 if($estado == null && isset($_POST['estadoConfirm']))

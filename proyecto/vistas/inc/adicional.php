@@ -24,7 +24,7 @@
                 foreach($datos['opinan'] as $opinan)
                 {
             ?>
-                <li>(<?php echo $opinan['total_comentarios']?>) <?php echo ' '.$opinan['nombre'].' '.$aniaden['apellidos']?></li>
+                <li>(<?php echo $opinan['total_comentarios']?>) <?php echo ' '.$opinan['nombre'].' '.$opinan['apellidos']?></li>
             <?php
                 }
             }

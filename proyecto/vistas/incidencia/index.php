@@ -54,7 +54,7 @@
                             {
                         ?>
                             <tr>
-                                <td><?php echo $comentario['idusuario']?><br><?php echo $comentario['fecha']?></td>
+                                <td><?php echo $comentario['idusuario'] != 'visitante@visitante.com' ? $comentario['idusuario'] : 'Anónimo' ?><br><?php echo $comentario['fecha']?></td>
                                 <td><?php echo $comentario['comentario']?></td>
                                 <?php if(isset($datos['sesion'])){
                                         if($comentario['idusuario'] == $datos['sesion']['email'] || $datos['sesion']['email'] == "admin@admin.com"){?>

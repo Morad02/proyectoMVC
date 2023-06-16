@@ -25,7 +25,14 @@
                         $this->controladorDefecto = ucwords($url[0]);
                     else if($_SESSION['rol'] == 'user' && $url[0] != 'log' && $url[0] != 'gestionUsuario' && $url[0] != 'gestionBD')
                         $this->controladorDefecto = ucwords($url[0]);
-                } 
+                    else if($_SESSION['rol'] == 'user' && $url[0] == 'gestionUsuario' && $url[1] == 'editar' &&
+                            isset($_POST['email']) && $_POST['email'] == $_SESSION['email'])
+                        $this->controladorDefecto = ucwords($url[0]);
+                    else if($_SESSION['rol'] == 'user' && $url[0] == 'gestionUsuario' && $url[1] == 'agregar' &&
+                            isset($_POST['nuevoEmail']) && $_POST['nuevoEmail'] == $_SESSION['email'])
+                        $this->controladorDefecto = ucwords($url[0]);
+                }
+                 
                 else if($url[0] == 'Incidencia')
                     $this->controladorDefecto = ucwords($url[0]);
                 

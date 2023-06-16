@@ -55,7 +55,7 @@
 
         public function top()
         {
-            $select = "SELECT idusuario, COUNT(*) AS total_comentarios FROM comentarios GROUP BY idusuario ORDER BY total_comentarios DESC LIMIT 3";
+            $select = "SELECT idusuario, COUNT(*) AS total_comentarios FROM comentarios WHERE idusuario != 'visitante@visitante.com' GROUP BY idusuario ORDER BY total_comentarios DESC LIMIT 3";
             $result = $this->query($select);
             return $result;
         }

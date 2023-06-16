@@ -33,7 +33,7 @@
                         <p class="text-muted small"><?php echo $datos['sesion']['rol']?></p>
                     </div>
                     <img src="<?php echo 'data:image/jpeg;base64,'.$datos['sesion']['foto']?>" alt="Foto de perfil" class="img-fluid rounded-circle pb-5">
-                    <div class="button-container>
+                    <div class="button-container">
                         <form action="<?php echo RUTA_URL.'/gestionUsuario/editar'?>" method="POST">
                             <input type="hidden" name="email" value="<?php echo $datos['sesion']['email']?>">
                             <button class="btn btn-primary" type="submit">Editar usuario</button>
