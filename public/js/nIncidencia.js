@@ -1,6 +1,8 @@
 document.getElementById('inputImagenes').addEventListener('change', function(event) {
     var previewContainer = document.getElementById('previewImagenes');
 
+    previewContainer.innerHTML = '';
+    
     var files = event.target.files;
     for (var i = 0; i < files.length; i++) {
     var file = files[i];

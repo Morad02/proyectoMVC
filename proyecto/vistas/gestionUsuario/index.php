@@ -15,7 +15,7 @@
             {
                 foreach($datos['usuarios'] as $usuario)
                 { 
-                    if(isset($usuario['email']))
+                    if(isset($usuario['email']) && $usuario['email'] != 'visitante@visitante.com')
                     {
         ?>
         <div class="row pt-2">

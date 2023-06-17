@@ -8,6 +8,10 @@ class Modelo
         $this->db = Database::getInstance();
     }
 
+    /**
+     * blobs, las columnas que son de tipo blob. Para poder destinguir su tipo
+     * return_result, para saber si la consulta devuelve un resultado o no.
+     */
     public function query($select, $params = [], $blobs = [], $return_result = true)
     {
         $stmt = $this->db->prepare($select);
@@ -119,6 +123,7 @@ class Modelo
         return $this->query($query['query'], $query['params'], $query['blobs']);
     }
 
+    //Función para construir consultas (Se usa en insert y delete)
     protected function buildQuery($table, $conditions, $params, $queryType)
     {
         $where = [];
@@ -179,6 +184,9 @@ class Modelo
         return $this->query($query, $params);
     }
 
+    /**
+     * Función para comprobar si una columna es de tipo blob
+     */
     protected function isBlobColumn($table, $column)
     {
         $query = "SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = ? AND COLUMN_NAME = ?";
@@ -204,75 +212,17 @@ class Modelo
         return $this->query($queryData['query'], $queryData['params']);
     }
 
+    /**
+     * Función para obtener el último id insertado
+     */
     public function lastId()
     {
         return $this->db->insert_id;
     }
 
-    // public function DB_backup() {
-    //     $select = "SHOW TABLES";
-    //     $result = $this->db->query($select);
     
-    //     if ($result === false) {
-    //         throw new Exception("Error executing query: " . $this->db->error);
-    //     }
-    
-    //     $tablas = [];
-    //     while ($row = $result->fetch_array(MYSQLI_NUM)) {
-    //         $tablas[] = $row[0];
-
-    //         $resultCreate = $this->db->query('SHOW CREATE TABLE '.$row[0]);//nuevo2
-    //         $rowCreate = $resultCreate->fetch_array(MYSQLI_NUM);//nuevo2
-    //         $tablasCreates[$row[0]] = $rowCreate[1];//nuevo2
-    //     }
-    
-    //     $nombreArchivo = '/tmp/db_backup_'.date('Ymd_His').'.sql';
-    //     $archivo = fopen($nombreArchivo, 'w');
-    
-    //     //$salida = '';
-    
-    //     foreach ($tablas as $tab) {
-    //         //$result = $this->db->query('SHOW CREATE TABLE '.$tab);
-    //         //$row2 = $result->fetch_array(MYSQLI_NUM);
-    //         //$salida .= 'DROP TABLE IF EXISTS '.$tab.';';
-    //         //$salida .= "\n\n".$row2[1].";\n\n";
-    //         $salida = 'DROP TABLE IF EXISTS '.$tab.';';//nuevo2
-    //         $salida .= "\n\n".$tablasCreates[$tab].";\n\n";//nuevo2
-    //         fwrite($archivo, $salida);//nuevo2
-    //     }
-    
-    //     foreach ($tablas as $tab) {
-    //         // $result = $this->db->query('SHOW CREATE TABLE '.$tab);//nuevo
-    //         // $row2 = $result->fetch_array(MYSQLI_NUM);//nuevo
-    //         // $salida = 'DROP TABLE IF EXISTS '.$tab.';';//nuevo
-    //         // $salida .= "\n\n".$row2[1].";\n\n";//nuevo
-
-    //         // fwrite($archivo, $salida);
-    
-    //         $result = $this->db->query('SELECT * FROM '.$tab);
-    //         $num_fields = $result->field_count;
-    
-    //         while ($row = $result->fetch_array(MYSQLI_NUM)) {
-    //             $salida = 'INSERT INTO '.$tab.' VALUES(';
-    //             for ($j = 0; $j < $num_fields; $j++) {
-    //                 $row[$j] = addslashes($row[$j]);
-    //                 $row[$j] = preg_replace("/\n/","\\n",$row[$j]);
-    //                 if (isset($row[$j])) $salida .= '"'.$row[$j].'"';
-    //                 else $salida .= '""';
-    //                 if ($j < ($num_fields - 1)) $salida .= ',';
-    //             }
-    //             $salida .= ");\n";
-    //             fwrite($archivo, $salida);
-    //         }
-    //         fwrite($archivo, "\n\n\n");
-    //     }
-    
-    //     fclose($archivo);
-    
-    //     return $nombreArchivo;
-    // }
-
     public function DB_backup() {
+        // Tablas en orden de dependencia (Para que la restauración no de problemas)
         $tablaOrden = ['usuario', 'incidencias', 'fotos', 'comentarios', 'valoraciones', 'log'];
     
         $nombreArchivo = '/tmp/db_backup_'.date('Ymd_His').'.sql';
